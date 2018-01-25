@@ -46,6 +46,11 @@ public class ObjSanPham {
         this.MoTa = MoTa;
     }
 
+    public ObjSanPham(String MaSP, String TenSP) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+    }
+
     public String getMaSP() {
         return MaSP;
     }

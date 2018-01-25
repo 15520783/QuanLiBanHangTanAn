@@ -124,6 +124,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Màn hình chính");
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -828,7 +829,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jBtnThongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThongkeMouseClicked
         // TODO add your handling code here:
-
+        new FormQuanLiSanPham().setVisible(true);
     }//GEN-LAST:event_jBtnThongkeMouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -906,7 +907,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jBtnNguoidungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNguoidungMouseClicked
         // TODO add your handling code here:
-
+        new FormQuanLiLoaiSanPham().setVisible(true);
     }//GEN-LAST:event_jBtnNguoidungMouseClicked
 
 

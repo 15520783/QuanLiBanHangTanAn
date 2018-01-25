@@ -6,6 +6,7 @@
 package Control;
 
 import Connect.Connect;
+import Model.ModLoaiSanPham;
 //import Model.ModLoaiSanPham;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +35,7 @@ public class CtrlQuanLiSanPham {
     }
 
     public String LayMaSP() {
-        String ID = "SP001";
+        String ID = "SP00001";
         ResultSet rs = null;
         String mySQL = "Select * from SANPHAM order by MaSP DESC limit 1";
         try {
@@ -44,12 +45,15 @@ public class CtrlQuanLiSanPham {
                 int STT = Integer.parseInt(ID.substring(3));
                 STT += 1;
                 if (STT < 10) {
-                    ID = "SP00" + STT;
+                    ID = "SP0000" + STT;
                 } else if (STT < 100) {
+                    ID = "SP000" + STT;
+                } else if(STT<1000){
+                    ID = "SP00" + STT;
+                } else if(STT<10000){
                     ID = "SP0" + STT;
-                } else {
-                    ID = "SP" + STT;
                 }
+                else ID="SP"+STT;
             }
         } catch (SQLException ex) {
             System.out.println("Ngoại lệ tại CtrlQuanLiSanPham.LayMaSP:" + ex.getMessage());
@@ -87,8 +91,8 @@ public class CtrlQuanLiSanPham {
     }
 
 
-//    public ResultSet LayDanhSachLoaiSanPham() {
-//        ModLoaiSanPham modLSP = new ModLoaiSanPham();
-//        return modLSP.GetALL();
-//    }
+    public ResultSet LayDanhSachLoaiSanPham() {
+        ModLoaiSanPham modLSP = new ModLoaiSanPham();
+        return modLSP.GetALL();
+    }
 }

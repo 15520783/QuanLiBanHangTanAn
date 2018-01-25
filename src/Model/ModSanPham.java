@@ -40,7 +40,7 @@ public class ModSanPham extends Model{
     
     
     public boolean Insert(ObjSanPham TbSanPham) {
-        String SQL="INSERT INTO SANPHAM (MaSP,TenSP,MaLoaiSP,Giale,GiaSi,GiaNhap,DVT,MoTa) VALUES ( ?, ?, ?, ?, ?, ?, ?);";
+        String SQL="INSERT INTO SANPHAM (MaSP,TenSP,MaLoaiSP,Giale,GiaSi,GiaNhap,DVT,MoTa) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
         try{
             if(DB.Connected()){
                 pstmt=DB.getConDB().prepareStatement(SQL);
