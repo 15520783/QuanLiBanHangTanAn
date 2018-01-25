@@ -31,7 +31,7 @@ public class Connect {
 
 
     private final String servername= "localhost:3307";//
-    private final String databasename="closer_quanlicuahangson";//
+    private final String databasename="QuanLiBanHangTanAn";//
     private final String username="root";//
     private final String password="admin";//
     
@@ -83,10 +83,10 @@ public class Connect {
         return rs;
     }
     
-//     public static void main(String args[]) { 
-//         Connect cn = new Connect();
-//         if(cn.Connected())
-//             System.out.println("Connected");
-//     }
+     public static void main(String args[]) { 
+         Connect cn = new Connect();
+         if(cn.Connected())
+             System.out.println("Connected");
+     }
 
 }

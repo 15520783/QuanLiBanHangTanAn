@@ -9,7 +9,7 @@ package Object;
  *
  * @author ICAFE8
  */
-public class ObjectSanPham {
+public class ObjSanPham {
     private String MaSP;
     private String TenSP;
     private String MaLoaiSP;
@@ -20,10 +20,10 @@ public class ObjectSanPham {
     private String DVT;
     private String MoTa;
     
-    public ObjectSanPham() {
+    public ObjSanPham() {
     }
 
-    public ObjectSanPham(String MaSP, String TenSP, String MaLoaiSP, int GiaLe, int GiaSi, int GiaNhap, String DVT, String MoTa) {
+    public ObjSanPham(String MaSP, String TenSP, String MaLoaiSP, int GiaLe, int GiaSi, int GiaNhap, String DVT, String MoTa) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.MaLoaiSP = MaLoaiSP;
@@ -34,7 +34,7 @@ public class ObjectSanPham {
         this.MoTa = MoTa;
     }
 
-    public ObjectSanPham(String MaSP, String TenSP, String MaLoaiSP, String TenLoaiSP, int GiaLe, int GiaSi, int GiaNhap, String DVT, String MoTa) {
+    public ObjSanPham(String MaSP, String TenSP, String MaLoaiSP, String TenLoaiSP, int GiaLe, int GiaSi, int GiaNhap, String DVT, String MoTa) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.MaLoaiSP = MaLoaiSP;
