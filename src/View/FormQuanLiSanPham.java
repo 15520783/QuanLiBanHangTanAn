@@ -919,7 +919,7 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Giá lẻ", "Giá sỉ", "Giá nhập"
+                "Mã sản phẩm", "Tên sản phẩm", "Giá nhập", "Giá sỉ", "Giá lẻ"
             }
         ) {
             boolean[] canEdit = new boolean [] {

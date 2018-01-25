@@ -31,7 +31,7 @@ public class Connect {
 
 
     private final String servername= "localhost:3307";//
-    private final String databasename="QuanLiBanHangTanAn";//
+    private final String databasename="dbo";//
     private final String username="root";//
     private final String password="admin";//
     
