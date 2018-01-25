@@ -125,6 +125,7 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         Binding();
         LoadComboboxLoaiSP();
         SetVisibleButton(true);
+        Edit(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.

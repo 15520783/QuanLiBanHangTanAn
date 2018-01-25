@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package View;
+
 import Control.CtrlKhachHang;
 import Edit.Edit;
 import Model.ModKhachHang;
@@ -27,28 +28,29 @@ import javax.swing.table.TableModel;
 public class FormQuanLiKhachHang extends javax.swing.JFrame {
 
     Edit editFrm = new Edit();
-    ArrayList<ObjKhachHang> listKH=new ArrayList<>();
-    CtrlKhachHang CtrlKH=new CtrlKhachHang();
-    ObjKhachHang ObjKH=new ObjKhachHang();
-    ModKhachHang ModKH= new ModKhachHang();
-    private int flag=0;
+    ArrayList<ObjKhachHang> listKH = new ArrayList<>();
+    CtrlKhachHang CtrlKH = new CtrlKhachHang();
+    ObjKhachHang ObjKH = new ObjKhachHang();
+    ModKhachHang ModKH = new ModKhachHang();
+    private int flag = 0;
+
     /**
      * Creates new form FormQuanLiKhachHang
      */
     public FormQuanLiKhachHang() {
         initComponents();
         setLocationRelativeTo(null);
-        jPanel1.setBackground(new Color(0,0,0,0));
-        
-        JPanel ListPanel[]=new JPanel[]{jPanel2,jPanel3,jPanel4};
+        jPanel1.setBackground(new Color(0, 0, 0, 0));
+
+        JPanel ListPanel[] = new JPanel[]{jPanel2, jPanel3, jPanel4};
         editFrm.MakeTransparentPanel(ListPanel);
-        
-        JPanel ListTitle[]=new JPanel[]{jPnDSKH,jPnThongtinKH,jPnTracuuKH};
+
+        JPanel ListTitle[] = new JPanel[]{jPnDSKH, jPnThongtinKH, jPnTracuuKH};
         editFrm.MakeTransparentTitle(ListTitle);
-        
-        JPanel ListButton[]=new JPanel[]{jBtnBack,jBtnHuy,jBtnLamMoi,jBtnLuu,jBtnSua,jBtnThem,jBtnTimKiem,jBtnXoa};
+
+        JPanel ListButton[] = new JPanel[]{jBtnBack, jBtnHuy, jBtnLamMoi, jBtnLuu, jBtnSua, jBtnThem, jBtnTimKiem, jBtnXoa};
         editFrm.MakeTransparentButton(ListButton);
-        
+
         editFrm.MakeTransparentTable(jScrDSKH, jtbDSKH);
         jtxtDiaChi.setLineWrap(true);
         LoadForm();
@@ -75,6 +77,16 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         jlblLuu = new javax.swing.JLabel();
         jBtnHuy = new javax.swing.JPanel();
         jlblHuy = new javax.swing.JLabel();
+        jBtnThem1 = new javax.swing.JPanel();
+        jlblThem1 = new javax.swing.JLabel();
+        jBtnXoa1 = new javax.swing.JPanel();
+        jlblXoa1 = new javax.swing.JLabel();
+        jBtnSua1 = new javax.swing.JPanel();
+        jlblSua1 = new javax.swing.JLabel();
+        jBtnLuu1 = new javax.swing.JPanel();
+        jlblLuu1 = new javax.swing.JLabel();
+        jBtnHuy1 = new javax.swing.JPanel();
+        jlblHuy1 = new javax.swing.JLabel();
         jBtnLamMoi = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jBtnTimKiem = new javax.swing.JPanel();
@@ -350,6 +362,216 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
 
         getContentPane().add(jBtnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 640, 100, 70));
 
+        jBtnThem1.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnThem1.setOpaque(false);
+        jBtnThem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnThem1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBtnThem1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBtnThem1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jBtnThem1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jBtnThem1MouseReleased(evt);
+            }
+        });
+
+        jlblThem1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Plus_Math_55px.png"))); // NOI18N
+        jlblThem1.setEnabled(false);
+
+        javax.swing.GroupLayout jBtnThem1Layout = new javax.swing.GroupLayout(jBtnThem1);
+        jBtnThem1.setLayout(jBtnThem1Layout);
+        jBtnThem1Layout.setHorizontalGroup(
+            jBtnThem1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnThem1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jlblThem1)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jBtnThem1Layout.setVerticalGroup(
+            jBtnThem1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnThem1Layout.createSequentialGroup()
+                .addComponent(jlblThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jBtnThem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 100, 70));
+
+        jBtnXoa1.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnXoa1.setOpaque(false);
+        jBtnXoa1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnXoa1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBtnXoa1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBtnXoa1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jBtnXoa1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jBtnXoa1MouseReleased(evt);
+            }
+        });
+
+        jlblXoa1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblXoa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Subtract_55px.png"))); // NOI18N
+        jlblXoa1.setEnabled(false);
+
+        javax.swing.GroupLayout jBtnXoa1Layout = new javax.swing.GroupLayout(jBtnXoa1);
+        jBtnXoa1.setLayout(jBtnXoa1Layout);
+        jBtnXoa1Layout.setHorizontalGroup(
+            jBtnXoa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnXoa1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jlblXoa1)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jBtnXoa1Layout.setVerticalGroup(
+            jBtnXoa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnXoa1Layout.createSequentialGroup()
+                .addComponent(jlblXoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jBtnXoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 640, 100, 70));
+
+        jBtnSua1.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnSua1.setOpaque(false);
+        jBtnSua1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnSua1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBtnSua1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBtnSua1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jBtnSua1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jBtnSua1MouseReleased(evt);
+            }
+        });
+
+        jlblSua1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblSua1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Edit_48px_1.png"))); // NOI18N
+        jlblSua1.setEnabled(false);
+
+        javax.swing.GroupLayout jBtnSua1Layout = new javax.swing.GroupLayout(jBtnSua1);
+        jBtnSua1.setLayout(jBtnSua1Layout);
+        jBtnSua1Layout.setHorizontalGroup(
+            jBtnSua1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnSua1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jlblSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jBtnSua1Layout.setVerticalGroup(
+            jBtnSua1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnSua1Layout.createSequentialGroup()
+                .addComponent(jlblSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jBtnSua1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 640, 100, 70));
+
+        jBtnLuu1.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnLuu1.setOpaque(false);
+        jBtnLuu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnLuu1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBtnLuu1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBtnLuu1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jBtnLuu1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jBtnLuu1MouseReleased(evt);
+            }
+        });
+
+        jlblLuu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblLuu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Save_55px.png"))); // NOI18N
+        jlblLuu1.setEnabled(false);
+
+        javax.swing.GroupLayout jBtnLuu1Layout = new javax.swing.GroupLayout(jBtnLuu1);
+        jBtnLuu1.setLayout(jBtnLuu1Layout);
+        jBtnLuu1Layout.setHorizontalGroup(
+            jBtnLuu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnLuu1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jlblLuu1)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jBtnLuu1Layout.setVerticalGroup(
+            jBtnLuu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnLuu1Layout.createSequentialGroup()
+                .addComponent(jlblLuu1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jBtnLuu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 640, 100, 70));
+
+        jBtnHuy1.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnHuy1.setOpaque(false);
+        jBtnHuy1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnHuy1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBtnHuy1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBtnHuy1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jBtnHuy1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jBtnHuy1MouseReleased(evt);
+            }
+        });
+
+        jlblHuy1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblHuy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Reply_Arrow_64px_1.png"))); // NOI18N
+        jlblHuy1.setEnabled(false);
+
+        javax.swing.GroupLayout jBtnHuy1Layout = new javax.swing.GroupLayout(jBtnHuy1);
+        jBtnHuy1.setLayout(jBtnHuy1Layout);
+        jBtnHuy1Layout.setHorizontalGroup(
+            jBtnHuy1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnHuy1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jlblHuy1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jBtnHuy1Layout.setVerticalGroup(
+            jBtnHuy1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBtnHuy1Layout.createSequentialGroup()
+                .addComponent(jlblHuy1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jBtnHuy1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 640, 100, 70));
+
         jBtnLamMoi.setBackground(new java.awt.Color(204, 204, 204));
         jBtnLamMoi.setPreferredSize(new java.awt.Dimension(105, 50));
         jBtnLamMoi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -486,6 +708,12 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
 
         jLabel11.setText("Từ tìm kiếm :");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 91, -1, -1));
+
+        jtxtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtTimKiemKeyReleased(evt);
+            }
+        });
         jPanel3.add(jtxtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 88, 340, -1));
 
         jPnTracuuKH.setBackground(new java.awt.Color(0, 204, 255));
@@ -723,16 +951,16 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
     private void jBtnLamMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLamMoiMouseClicked
         // TODO add your handling code here:
         //        try {
-            //            // TODO add your handling code here:
-            //            ResultSet rs =BSP.searchByPropertiesWithFulltext(jtxtTimKiemMaSP.getText(),jtxtTimKiemTenSP.getText(),jCbbLoaiSP.getSelectedItem().toString());
-            //            if(rs.getRow()==0){
-                //                rs =BSP.searchByPropertiesNormal(jtxtTimKiemMaSP.getText(),jtxtTimKiemTenSP.getText(),jCbbLoaiSP.getSelectedItem().toString());
-                //            }
-            //            displayData(rs);
-            //            Binding();
-            //        } catch (SQLException ex) {
-            //            Logger.getLogger(FrmQuanLiSanPham.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
+        //            // TODO add your handling code here:
+        //            ResultSet rs =BSP.searchByPropertiesWithFulltext(jtxtTimKiemMaSP.getText(),jtxtTimKiemTenSP.getText(),jCbbLoaiSP.getSelectedItem().toString());
+        //            if(rs.getRow()==0){
+        //                rs =BSP.searchByPropertiesNormal(jtxtTimKiemMaSP.getText(),jtxtTimKiemTenSP.getText(),jCbbLoaiSP.getSelectedItem().toString());
+        //            }
+        //            displayData(rs);
+        //            Binding();
+        //        } catch (SQLException ex) {
+        //            Logger.getLogger(FrmQuanLiSanPham.class.getName()).log(Level.SEVERE, null, ex);
+        //        }
         HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
         jtxtTimKiem.setText("");
     }//GEN-LAST:event_jBtnLamMoiMouseClicked
@@ -758,24 +986,17 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnLamMoiMouseReleased
 
     private void jBtnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnTimKiemMouseClicked
-        if(jcbbTimTheo.getSelectedIndex()==0)
-        {
+        if (jcbbTimTheo.getSelectedIndex() == 0) {
             HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangByName(jtxtTimKiem.getText()));
-        }
-        else if(jcbbTimTheo.getSelectedIndex()==1)
-        {
+        } else if (jcbbTimTheo.getSelectedIndex() == 1) {
             HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangByID(jtxtTimKiem.getText()));
-        }
-        else if(jcbbTimTheo.getSelectedIndex()==2)
-        {
+        } else if (jcbbTimTheo.getSelectedIndex() == 2) {
             HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangByDiaChi(jtxtTimKiem.getText()));
-        }
-        else if(jcbbTimTheo.getSelectedIndex()==3)
-        {
+        } else if (jcbbTimTheo.getSelectedIndex() == 3) {
+            HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangBySDT(jtxtTimKiem.getText()));
+        } else {
             HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangBySDT(jtxtTimKiem.getText()));
         }
-        else
-            HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangBySDT(jtxtTimKiem.getText()));
         Binding();
     }//GEN-LAST:event_jBtnTimKiemMouseClicked
 
@@ -901,26 +1122,24 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
 
     private void jtbDSKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbDSKHMouseClicked
         // TODO add your handling code here:
-        if(jtbDSKH.isEnabled()){
+        if (jtbDSKH.isEnabled()) {
             Binding();
         }
     }//GEN-LAST:event_jtbDSKHMouseClicked
 
     private void jBtnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoaMouseClicked
         // TODO add your handling code here:
-        if(jBtnXoa.isEnabled()){
-            ObjKH=new ObjKhachHang(jtxtMaKH.getText(),jtxtTenKH.getText(),jtxtSDT.getText(),jtxtDiaChi.getText(),jtxtEmail.getText(),Integer.parseInt(jtxtTienNo.getText()));
-            int i = JOptionPane.showConfirmDialog(this, "Bạn muốn xóa khách hàng \""+ ObjKH.getTenKH()+ "\"", "Xác nhận", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-            if(i==0){
-                try{
-                    if(ModKH.Delete(ObjKH.getMaKH()))
-                    {
-                        EnableComponent(false);
-                        JOptionPane.showMessageDialog(this, "Xóa khách hàng \"" + ObjKH.getTenKH()+ "\" thành công." , "Thông báo", JOptionPane.INFORMATION_MESSAGE );
+        if (jBtnXoa.isEnabled()) {
+            ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(), Integer.parseInt(jtxtTienNo.getText().replace(",", "")));
+            int i = JOptionPane.showConfirmDialog(this, "Bạn muốn xóa khách hàng ?", "Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (i == 0) {
+                try {
+                    if (ModKH.Delete(ObjKH.getMaKH())) {
+                        JOptionPane.showMessageDialog(this, "Xóa khách hàng thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
                     }
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(this, "Xóa khách hàng \"" + ObjKH.getTenKH()+ "\" thất bại. Mã lỗi: " + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Xóa khách hàng thất bại. Lỗi: " + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
@@ -928,92 +1147,75 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
 
     private void jBtnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThemMouseClicked
         // TODO add your handling code here:
-        if(jBtnThem.isEnabled()){
+        if (jBtnThem.isEnabled()) {
             jtxtMaKH.setText(CtrlKH.TaoMaKH());
             jtxtTenKH.setText("");
             jtxtSDT.setText("");
             jtxtDiaChi.setText("");
             jtxtEmail.setText("");
-            EnableComponent(true);
-            flag=1;
+            jtxtTienNo.setText("");
+            jtxtTienNo.setText("0");
+            EnableComponent(false);
+            flag = 1;
         }
     }//GEN-LAST:event_jBtnThemMouseClicked
 
     private void jBtnHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnHuyMouseClicked
         // TODO add your handling code here:
-            if(jBtnHuy.isEnabled()){
+        if (jBtnHuy.isEnabled()) {
             jtxtMaKH.setText("");
             jtxtTenKH.setText("");
             jtxtSDT.setText("");
             jtxtDiaChi.setText("");
             jtxtEmail.setText("");
-            EnableComponent(false);
-            flag=0;
+            EnableComponent(true);
+            flag = 0;
         }
     }//GEN-LAST:event_jBtnHuyMouseClicked
 
     private void jBtnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLuuMouseClicked
         // TODO add your handling code here:
-        if(jBtnLuu.isEnabled()){
-            if(flag==1){ 
-                ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(),Integer.parseInt(jtxtTienNo.getText()));
-                if (!ObjKH.getMaKH().equals("")) {
-                    if (!ObjKH.getTenKH().equals("")) {
-                        if(!ObjKH.getSDT().equals("")||!ObjKH.getDiaChi().equals("")||!ObjKH.getEmail().equals("")) {
-                            try {
-                                if (ModKH.Insert(ObjKH)) {
-                                    EnableComponent(false);
-                                    JOptionPane.showMessageDialog(this, "Thêm khách hàng \"" + ObjKH.getTenKH() + "\" thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                                    HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
-                                }
-                            } catch (Exception e) {
-                                JOptionPane.showMessageDialog(this, "Thêm khách hàng \"" + ObjKH.getTenKH() + "\" thất bại. Mã: " + e.getMessage(), "Thông báo ", JOptionPane.ERROR_MESSAGE);
-                            }
-                        }else{
-                            JOptionPane.showMessageDialog(this, "Vui lòng nhập một trong ba thông tin liên lạc" , "Thông báo", JOptionPane.ERROR_MESSAGE);
+        if (jBtnLuu.isEnabled()) {
+            try {
+                ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(), Integer.parseInt(jtxtTienNo.getText()));
+                if (!ObjKH.getTenKH().equals("")) {
+                    if (flag == 1) {
+                        if (ModKH.Insert(ObjKH)) {
+                            EnableComponent(true);
+                            JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Thêm khách thất bại.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         }
-                    }else{
-                        JOptionPane.showMessageDialog(this, "Vui lòng nhập tên khách hàng", "Thông báo", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else{
-                    JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng", "Thông báo", JOptionPane.ERROR_MESSAGE);
-                }   
-                flag=0;
-            }else if(flag==2){
-                ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(),Integer.parseInt(jtxtTienNo.getText()));
-                if (!ObjKH.getMaKH().equals("")) {
-                    if (!ObjKH.getTenKH().equals("")) {
-                        try {
-                            if (ModKH.Update(ObjKH)) {
-                                EnableComponent(false);
-                                JOptionPane.showMessageDialog(this, "Cập nhật khách hàng \"" + ObjKH.getTenKH() + "\" thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                                HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
-                            }
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(this, "Cập nhật khách hàng \"" + ObjKH.getTenKH() + "\" thất bại. Mã: " + e.getMessage(), "Thông báo ", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        if (ModKH.Update(ObjKH)) {
+                            EnableComponent(true);
+                            JOptionPane.showMessageDialog(this, "Cập nhật thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Cập nhật thất bại.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
-                   } else {
-                    JOptionPane.showMessageDialog(this, "Vui lòng nhập tên khách hàng", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tên khách hàng không được để trống.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                System.out.println("Ngoại lệ tại FormQuanLiKhachHang.jBtnLuuMouseClicked:" + ex.getMessage());
             }
-            flag = 0;
         }
-        
     }//GEN-LAST:event_jBtnLuuMouseClicked
-       
+
     private void jBtnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSuaMouseClicked
         // TODO add your handling code here:
-        if(jBtnSua.isEnabled()){
-            EnableComponent(true);
-            flag=2;
+        if (jBtnSua.isEnabled()) {
+            EnableComponent(false);
+            flag = 0;
+            jtxtTienNo.setText(jtxtTienNo.getText().replace(",", ""));
         }
     }//GEN-LAST:event_jBtnSuaMouseClicked
 
-    int xx,yy;
-    
+    int xx, yy;
+
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         // TODO add your handling code here:
         xx = evt.getX();
@@ -1027,22 +1229,139 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         this.setLocation(x - xx, y - yy);
     }//GEN-LAST:event_jPanel1MouseDragged
 
+    private void jBtnThem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThem1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnThem1MouseClicked
+
+    private void jBtnThem1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThem1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnThem1MouseEntered
+
+    private void jBtnThem1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThem1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnThem1MouseExited
+
+    private void jBtnThem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThem1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnThem1MousePressed
+
+    private void jBtnThem1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThem1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnThem1MouseReleased
+
+    private void jBtnXoa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoa1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnXoa1MouseClicked
+
+    private void jBtnXoa1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoa1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnXoa1MouseEntered
+
+    private void jBtnXoa1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoa1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnXoa1MouseExited
+
+    private void jBtnXoa1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoa1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnXoa1MousePressed
+
+    private void jBtnXoa1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoa1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnXoa1MouseReleased
+
+    private void jBtnSua1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSua1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnSua1MouseClicked
+
+    private void jBtnSua1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSua1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnSua1MouseEntered
+
+    private void jBtnSua1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSua1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnSua1MouseExited
+
+    private void jBtnSua1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSua1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnSua1MousePressed
+
+    private void jBtnSua1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSua1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnSua1MouseReleased
+
+    private void jBtnLuu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLuu1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnLuu1MouseClicked
+
+    private void jBtnLuu1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLuu1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnLuu1MouseEntered
+
+    private void jBtnLuu1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLuu1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnLuu1MouseExited
+
+    private void jBtnLuu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLuu1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnLuu1MousePressed
+
+    private void jBtnLuu1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLuu1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnLuu1MouseReleased
+
+    private void jBtnHuy1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnHuy1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnHuy1MouseClicked
+
+    private void jBtnHuy1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnHuy1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnHuy1MouseEntered
+
+    private void jBtnHuy1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnHuy1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnHuy1MouseExited
+
+    private void jBtnHuy1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnHuy1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnHuy1MousePressed
+
+    private void jBtnHuy1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnHuy1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnHuy1MouseReleased
+
+    private void jtxtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTimKiemKeyReleased
+        // TODO add your handling code here:
+        if (jcbbTimTheo.getSelectedIndex() == 0) {
+            HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangByName(jtxtTimKiem.getText()));
+        } else if (jcbbTimTheo.getSelectedIndex() == 1) {
+            HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangByID(jtxtTimKiem.getText()));
+        } else if (jcbbTimTheo.getSelectedIndex() == 2) {
+            HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangByDiaChi(jtxtTimKiem.getText()));
+        } else if (jcbbTimTheo.getSelectedIndex() == 3) {
+            HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangBySDT(jtxtTimKiem.getText()));
+        } else {
+            HienThiDanhSachKhachHang(CtrlKH.SearchKhachHangBySDT(jtxtTimKiem.getText()));
+        }
+        Binding();
+    }//GEN-LAST:event_jtxtTimKiemKeyReleased
+
     /**
      * @param args the command line arguments
      */
-    
-    public void setColor(JPanel pn){
-        if(pn.isEnabled()){
-        pn.setSize(pn.getWidth()+1, pn.getHeight()+1);
-        pn.setBackground(new Color(60,209,127,50));
+    public void setColor(JPanel pn) {
+        if (pn.isEnabled()) {
+            pn.setSize(pn.getWidth() + 1, pn.getHeight() + 1);
+            pn.setBackground(new Color(60, 209, 127, 50));
         }
     }
-    public void resetColor(JPanel pn){
-        if(pn.isEnabled()){
-        pn.setSize(pn.getWidth()-1, pn.getHeight()-1);
-        pn.setBackground(new Color(153,153,153,180));
+
+    public void resetColor(JPanel pn) {
+        if (pn.isEnabled()) {
+            pn.setSize(pn.getWidth() - 1, pn.getHeight() - 1);
+            pn.setBackground(new Color(153, 153, 153, 180));
         }
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1081,12 +1400,17 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jBtnBack;
     private javax.swing.JPanel jBtnHuy;
+    private javax.swing.JPanel jBtnHuy1;
     private javax.swing.JPanel jBtnLamMoi;
     private javax.swing.JPanel jBtnLuu;
+    private javax.swing.JPanel jBtnLuu1;
     private javax.swing.JPanel jBtnSua;
+    private javax.swing.JPanel jBtnSua1;
     private javax.swing.JPanel jBtnThem;
+    private javax.swing.JPanel jBtnThem1;
     private javax.swing.JPanel jBtnTimKiem;
     private javax.swing.JPanel jBtnXoa;
+    private javax.swing.JPanel jBtnXoa1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1113,10 +1437,15 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbbTimTheo;
     private javax.swing.JLabel jlblHuy;
+    private javax.swing.JLabel jlblHuy1;
     private javax.swing.JLabel jlblLuu;
+    private javax.swing.JLabel jlblLuu1;
     private javax.swing.JLabel jlblSua;
+    private javax.swing.JLabel jlblSua1;
     private javax.swing.JLabel jlblThem;
+    private javax.swing.JLabel jlblThem1;
     private javax.swing.JLabel jlblXoa;
+    private javax.swing.JLabel jlblXoa1;
     private javax.swing.JTable jtbDSKH;
     private javax.swing.JTextArea jtxtDiaChi;
     private javax.swing.JTextField jtxtEmail;
@@ -1130,62 +1459,57 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
     public void LoadForm() {
         HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
         Binding();
+        EnableComponent(true);
     }
 
     private void HienThiDanhSachKhachHang(ResultSet rs) {
         listKH.clear();
         DefaultTableModel model;
-        model=(DefaultTableModel) jtbDSKH.getModel();
+        model = (DefaultTableModel) jtbDSKH.getModel();
         model.getDataVector().removeAllElements(); //remove data in table
-        try{
-            while(rs.next()){
+        try {
+            while (rs.next()) {
                 ObjKhachHang itemKH;
-                itemKH=new ObjKhachHang(rs.getString("MaKH"),rs.getString("TenKH"),rs.getString("SDT"),rs.getString("DiaChi"),rs.getString("Email"),rs.getInt("TienNo"));
+                itemKH = new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo"));
                 listKH.add(itemKH);
-                model.addRow(new Object[]{itemKH.getMaKH(),itemKH.getTenKH(),itemKH.getSDT(),String.format("%,d",itemKH.getTienNo())});
+                model.addRow(new Object[]{itemKH.getMaKH(), itemKH.getTenKH(), itemKH.getSDT(), String.format("%,d", itemKH.getTienNo())});
             }
-        } catch(SQLException ex){
-            System.out.println("Ngoại lệ tại FormQuanLiKhachHang.HienThiDanhSachKhachHang: "+ex.getMessage());
-        }
-        finally{
+        } catch (SQLException ex) {
+            System.out.println("Ngoại lệ tại FormQuanLiKhachHang.HienThiDanhSachKhachHang: " + ex.getMessage());
+        } finally {
             CtrlKH.CloseConnection();
         }
         jtbDSKH.changeSelection(0, 0, false, false);
     }
-    public void Binding(){
-        EnableComponent(false);
-        TableModel model=jtbDSKH.getModel();
-        try{
-            int viewRow= jtbDSKH.getSelectedRow();
-            int modelRow=jtbDSKH.convertRowIndexToModel(viewRow);
-            if(viewRow>-1){
+
+    public void Binding() {
+        TableModel model = jtbDSKH.getModel();
+        try {
+            int viewRow = jtbDSKH.getSelectedRow();
+            int modelRow = jtbDSKH.convertRowIndexToModel(viewRow);
+            if (viewRow > -1) {
                 jtxtMaKH.setText(listKH.get(modelRow).getMaKH());
                 jtxtTenKH.setText(listKH.get(modelRow).getTenKH());
                 jtxtSDT.setText(listKH.get(modelRow).getSDT());
                 jtxtDiaChi.setText(listKH.get(modelRow).getDiaChi());
                 jtxtEmail.setText(listKH.get(modelRow).getEmail());
-                jtxtTienNo.setText(String.format("%,d",listKH.get(modelRow).getTienNo()));
+                jtxtTienNo.setText(String.format("%,d", listKH.get(modelRow).getTienNo()));
             }
-        }catch(Exception ex){
-            System.out.println("Ngoại lệ tại FormQuanLiKhachHang.Binding: "+ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormQuanLiKhachHang.Binding: " + ex.getMessage());
         }
     }
 
     private void EnableComponent(boolean Active) {
-        jBtnLuu.setEnabled(Active);
-        jlblLuu.setEnabled(Active);
-        jBtnHuy.setEnabled(Active);
-        jlblHuy.setEnabled(Active);
-        jtxtTenKH.setEditable(Active);
-        jtxtSDT.setEditable(Active);
-        jtxtDiaChi.setEditable(Active);
-        jtxtEmail.setEditable(Active);
-        jtxtTienNo.setEditable(Active);
-        jBtnThem.setEnabled(!Active);
-        jlblThem.setEnabled(!Active);
-        jBtnXoa.setEnabled(!Active);
-        jlblXoa.setEnabled(!Active);
-        jBtnSua.setEnabled(!Active);
-        jlblSua.setEnabled(!Active);
+        jBtnThem.setVisible(Active);
+        jBtnXoa.setVisible(Active);
+        jBtnSua.setVisible(Active);
+        jBtnLuu.setVisible(!Active);
+        jBtnHuy.setVisible(!Active);
+        jtxtTenKH.setEditable(!Active);
+        jtxtSDT.setEnabled(!Active);
+        jtxtDiaChi.setEditable(!Active);
+        jtxtEmail.setEditable(!Active);
+        jtxtTienNo.setEditable(!Active);
     }
 }

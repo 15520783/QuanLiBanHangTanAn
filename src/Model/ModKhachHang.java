@@ -86,7 +86,6 @@ public class ModKhachHang extends Model{
             if(DB.Connected()){
                 pstmt=DB.getConDB().prepareStatement(SQL);
                 pstmt.executeUpdate(SQL);
-                
             }
         } catch (SQLException ex) {
             System.out.println("Ngoại lệ tại ModKhachHang.Update: "+ex.getMessage());
@@ -95,7 +94,7 @@ public class ModKhachHang extends Model{
         finally{
             DB.CloseDB();
         }
-        return false;
+        return true;
     }
 
     public boolean Delete(String ObjKH) {

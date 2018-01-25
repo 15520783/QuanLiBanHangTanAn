@@ -824,7 +824,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jBtnKetoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnKetoanMouseClicked
         // TODO add your handling code here:
-
+        new FormQuanLiKhachHang().setVisible(true);
     }//GEN-LAST:event_jBtnKetoanMouseClicked
 
     private void jBtnThongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThongkeMouseClicked
