@@ -829,7 +829,7 @@ public class FormQuanLiLoaiSanPham extends javax.swing.JFrame {
 
         jLabel4.setText("Tên loại sản phẩm:");
 
-        jtxtMaLoaiSanPham.setEnabled(false);
+        jtxtMaLoaiSanPham.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1045,9 +1045,11 @@ public class FormQuanLiLoaiSanPham extends javax.swing.JFrame {
 
     private void jBtnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThemMouseClicked
         if(jBtnThem.isEnabled()){
-            jtxtMaLoaiSanPham.setText(CtrlQLLSP.LayMaLSP());
-            jtxtTenLoaiSanPham.setText("");
+            jtxtMaLoaiSanPham.setText(CtrlQLLSP.LayMaLSP());        
             SetVisibleButton(false);
+            jtxtTenLoaiSanPham.setFocusable(true);
+            jtxtTenLoaiSanPham.setText("");
+            jtxtTenLoaiSanPham.requestFocus();
             flag=1;
         }
     }//GEN-LAST:event_jBtnThemMouseClicked
@@ -1136,6 +1138,8 @@ public class FormQuanLiLoaiSanPham extends javax.swing.JFrame {
     private void jBtnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSuaMouseClicked
         if(jBtnSua.isEnabled()){
             SetVisibleButton(false);
+            jtxtTenLoaiSanPham.setFocusable(true);
+            jtxtTenLoaiSanPham.requestFocus();
             flag=2;
         }
     }//GEN-LAST:event_jBtnSuaMouseClicked

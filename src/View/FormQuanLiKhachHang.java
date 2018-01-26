@@ -1150,6 +1150,7 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         if (jBtnThem.isEnabled()) {
             jtxtMaKH.setText(CtrlKH.TaoMaKH());
             jtxtTenKH.setText("");
+            jtxtTenKH.requestFocus();
             jtxtSDT.setText("");
             jtxtDiaChi.setText("");
             jtxtEmail.setText("");
