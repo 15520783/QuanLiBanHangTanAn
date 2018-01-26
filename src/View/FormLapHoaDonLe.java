@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package View;
+
 import Edit.Edit;
 import Control.CtrlLapHoaDonLe;
 import java.awt.Color;
@@ -14,12 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Object.ObjSanPham;
 import Object.ObjLoaiSanPham;
-import Object.ObjNhaCungCap;
 import Object.ObjChiTietHDL;
+import Object.ObjKhachHang;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+import javafx.beans.binding.Bindings;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
@@ -28,112 +30,145 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 /**
  *
  * @author ThaiNguyen
  */
 public class FormLapHoaDonLe extends javax.swing.JFrame {
 
-    boolean ChinhSua=false;
-    int xx=0,yy=0;
-    Edit editFrm= new Edit();
+    boolean ChinhSua = false;
+    int xx = 0, yy = 0;
+    Edit editFrm = new Edit();
     ArrayList<ObjSanPham> listSP = new ArrayList<>();
-    ArrayList<String>listComboboxLSP = new ArrayList<>();
-    ArrayList<String>listComboboxNCC=new ArrayList<>();
-    ArrayList<ObjChiTietHDL>ListGioHang = new ArrayList<>();
+    ArrayList<String> listComboboxLSP = new ArrayList<>();
+    ArrayList<ObjChiTietHDL> ListGioHang = new ArrayList<>();
     CtrlLapHoaDonLe CtrlHDL = new CtrlLapHoaDonLe();
-    FormDuyetHoaDonLe frmDuyetHDL;
+
+    //FormDuyetHoaDonLe frmDuyetHDL;
     /**
      * Creates new form FormLapHoaDonLe
      */
-    public FormLapHoaDonLe(){
+    public FormLapHoaDonLe() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
-        JPanel ListPn[]=new JPanel[]{jPanel1,jPanel2,jPanel3,jPanel4,jPanel7};
+
+        JPanel ListPn[] = new JPanel[]{jPanel1, jPanel2, jPanel3, jPanel4, jPanel7};
         editFrm.MakeTransparentPanel(ListPn);
-        
-        JPanel ListTitle[]=new JPanel[]{jPnDSSP,jPnGioHang,jPnThongtinHD,jPnThongtinSP,jPnTimkiemSP};
+
+        JPanel ListTitle[] = new JPanel[]{jPnDSSP, jPnGioHang, jPnThongtinHD, jPnThongtinSP, jPnTimkiemSP};
         editFrm.MakeTransparentTitle(ListTitle);
-        
-        JPanel ListButton[]=new JPanel[]{jbtnDuyetGioHang,jBtnBack,jBtnHuy,jBtnLamMoi,jBtnThem,jBtnTimKiem,jBtnXoa,jBtnChinhSua};
+
+        JPanel ListButton[] = new JPanel[]{jbtnDuyetGioHang, jBtnBack, jBtnHuy, jBtnLamMoi, jBtnThem, jBtnTimKiem, jBtnXoa};
         editFrm.MakeTransparentButton(ListButton);
-        
-        jPanel5.setBackground(new Color(0,0,0,0));
-        
+
+        jPanel5.setBackground(new Color(0, 0, 0, 0));
+
         jtxtTenSP.setLineWrap(true);
-        jtxtTenNCC.setLineWrap(true);
-        
+
         editFrm.MakeTransparentTable(jScrGioHang, jtbGioHang);
-        editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP);       
+        editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP);
         
-        jSpSoLuong.addChangeListener(new javax.swing.event.ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                  int dongia = Integer.parseInt(jtxtDonGia.getText().replace(",",""));
-                  int soluong = Integer.parseInt(jSpSoLuong.getValue()+"");
-                  jtxtThanhTien.setText(String.format("%,d",dongia*soluong));
-            }
-        });
         jtxtSoHDL.setText(CtrlHDL.LaySoHDL());
         LoadForm();
-    }
+        
+        TableModel tm = jtbGioHang.getModel();
 
-    public FormLapHoaDonLe(String SoHDL,String TenKH,ArrayList<ObjChiTietHDL> ListCT,Date NgayLap){
-        initComponents();
-        this.setLocationRelativeTo(null);
-        
-        JPanel ListPn[]=new JPanel[]{jPanel1,jPanel2,jPanel3,jPanel4,jPanel7};
-        editFrm.MakeTransparentPanel(ListPn);
-        
-        JPanel ListTitle[]=new JPanel[]{jPnDSSP,jPnGioHang,jPnThongtinHD,jPnThongtinSP,jPnTimkiemSP};
-        editFrm.MakeTransparentTitle(ListTitle);
-        
-        JPanel ListButton[]=new JPanel[]{jbtnDuyetGioHang,jBtnBack,jBtnHuy,jBtnLamMoi,jBtnThem,jBtnTimKiem,jBtnXoa};
-        editFrm.MakeTransparentButton(ListButton);
-        
-        jPanel5.setBackground(new Color(0,0,0,0));
-        
-        jtxtTenSP.setLineWrap(true);
-        jtxtTenNCC.setLineWrap(true);
-        jtxtSoHDL.setText(SoHDL);
-        
-        editFrm.MakeTransparentTable(jScrGioHang, jtbGioHang);
-        editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP); 
-        
-        jSpSoLuong.addChangeListener(new javax.swing.event.ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                  int dongia = Integer.parseInt(jtxtDonGia.getText().replace(",",""));
-                  int soluong = Integer.parseInt(jSpSoLuong.getValue()+"");
-                  jtxtThanhTien.setText(String.valueOf(dongia*soluong));
+        tm.addTableModelListener(new TableModelListener() {
+
+            public void tableChanged(TableModelEvent tme) {
+                try {
+                    if (jtbGioHang.getCellEditor() == null) {
+                        System.out.println("Not Edited");
+                    } else {
+                        int SL = Integer.parseInt(tm.getValueAt(jtbGioHang.getSelectedRow(), 3).toString());
+                        int DonGia = Integer.parseInt(tm.getValueAt(jtbGioHang.getSelectedRow(), 4).toString().replace(",", ""));
+                        int ThanhTien = SL * DonGia;
+                        if (SL != ListGioHang.get(jtbGioHang.getSelectedRow()).getSoLuong()) {
+                            ListGioHang.get(jtbGioHang.getSelectedRow()).setSoLuong(SL);
+                        }
+                        if (DonGia != ListGioHang.get(jtbGioHang.getSelectedRow()).getDonGia()) {
+                            ListGioHang.get(jtbGioHang.getSelectedRow()).setDonGia(DonGia);
+                            tm.setValueAt(String.format("%,d", DonGia), jtbGioHang.getSelectedRow(), 4);
+                        }
+                        if (ThanhTien != ListGioHang.get(jtbGioHang.getSelectedRow()).getThanhTien()) {
+                            ListGioHang.get(jtbGioHang.getSelectedRow()).setThanhTien(ThanhTien);
+                            tm.setValueAt(String.format("%,d", ThanhTien), jtbGioHang.getSelectedRow(), 5);
+                        }
+                        jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
+
+                    }
+                } catch (Exception ex) {
+                    System.out.println("ERROR:" + ex.getMessage());
+                }
             }
         });
-        
-       LoadForm();
-       jtxtTenKH.setText(TenKH);
-       jDateNgayLap.setDate(NgayLap);
-       try{        
-            DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
-            for(int i = 0;i<ListCT.size();i++){
-                 this.ListGioHang.add(ListCT.get(i));
-                 Vector v = new Vector();
-                 v.add(ListCT.get(i).getMaSP());
-                 v.add(ListCT.get(i).getTenSP());
-                 v.add(ListCT.get(i).getDVT());
-                 v.add(ListCT.get(i).getSoLuong());
-                 v.add(String.format("%,d",ListCT.get(i).getDonGia()));
-                 v.add(String.format("%,d",ListCT.get(i).getThanhTien()));
-                 Model.addRow(v);    
-            }
-            jtxtTongTien.setText(String.format("%,d",TinhTongTienGioHang()));
-       }
-       catch(Exception ex){
-           System.out.println("Ngoại lệ tại FormLapHoaDonSi():"+ex.getMessage());
-       }
+
     }
-    
-    
+
+    public FormLapHoaDonLe(String SoHDL, String TenKH, ArrayList<ObjChiTietHDL> ListCT, Date NgayLap) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+
+        JPanel ListPn[] = new JPanel[]{jPanel1, jPanel2, jPanel3, jPanel4, jPanel7};
+        editFrm.MakeTransparentPanel(ListPn);
+
+        JPanel ListTitle[] = new JPanel[]{jPnDSSP, jPnGioHang, jPnThongtinHD, jPnThongtinSP, jPnTimkiemSP};
+        editFrm.MakeTransparentTitle(ListTitle);
+
+        JPanel ListButton[] = new JPanel[]{jbtnDuyetGioHang, jBtnBack, jBtnHuy, jBtnLamMoi, jBtnThem, jBtnTimKiem, jBtnXoa};
+        editFrm.MakeTransparentButton(ListButton);
+
+        jPanel5.setBackground(new Color(0, 0, 0, 0));
+
+        jtxtTenSP.setLineWrap(true);
+        jtxtSoHDL.setText(SoHDL);
+
+        editFrm.MakeTransparentTable(jScrGioHang, jtbGioHang);
+        editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP);
+
+
+        LoadForm();
+        jDateNgayLap.setDate(NgayLap);
+        try {
+            DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
+            for (int i = 0; i < ListCT.size(); i++) {
+                this.ListGioHang.add(ListCT.get(i));
+                Vector v = new Vector();
+                v.add(ListCT.get(i).getMaSP());
+                v.add(ListCT.get(i).getSoLuong());
+                v.add(String.format("%,d", ListCT.get(i).getDonGia()));
+                v.add(String.format("%,d", ListCT.get(i).getThanhTien()));
+                Model.addRow(v);
+            }
+            jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormLapHoaDonSi():" + ex.getMessage());
+        }
+    }
+
+    ArrayList<ObjKhachHang> listComboboxKH = new ArrayList<>();
+
+    public void LoadComboboxKhachHang() {
+        listComboboxKH.clear();
+        jcbbKH.removeAllItems();
+        jcbbKH.addItem("---Chọn khách hàng---");
+        listComboboxKH.add(new ObjKhachHang());
+        ResultSet rs = CtrlHDL.LayDanhSachKhachHang();
+        try {
+            while (rs.next()) {
+                ObjKhachHang itemKH = new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo"));
+                jcbbKH.addItem(itemKH.getTenKH());
+                listComboboxKH.add(itemKH);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Ngoại lệ tại FormLapHoaDonSi.LoadComboboxNhaCungCap: " + ex.getMessage());
+        } finally {
+            CtrlHDL.CloseConnection();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,15 +186,13 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jDateNgayLap = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
-        jtxtTenKH = new javax.swing.JTextField();
         jtxtTongTien = new javax.swing.JTextField();
         jPnThongtinHD = new javax.swing.JPanel();
+        jcbbKH = new javax.swing.JComboBox<>();
         jBtnTimKiem = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jBtnLamMoi = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jBtnChinhSua = new javax.swing.JPanel();
-        jLabel29 = new javax.swing.JLabel();
         jScrGioHang = new javax.swing.JScrollPane();
         jtbGioHang = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -220,7 +253,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 54, -1, -1));
 
         jLabel3.setText("Khách hàng :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 101, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 95, -1, 20));
 
         jtxtSoHDL.setEditable(false);
         jtxtSoHDL.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +271,6 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
 
         jLabel5.setText("Tổng tiền :");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(407, 101, -1, -1));
-        jPanel1.add(jtxtTenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 98, 207, -1));
 
         jtxtTongTien.setEditable(false);
         jtxtTongTien.setText("0");
@@ -258,6 +290,11 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPnThongtinHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 689, 30));
+
+        jcbbKH.setEditable(true);
+        jcbbKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbbKH.setAutoscrolls(true);
+        jPanel1.add(jcbbKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 90, 280, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 689, 150));
 
@@ -337,44 +374,6 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
 
         getContentPane().add(jBtnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 125, 112, 65));
 
-        jBtnChinhSua.setBackground(new java.awt.Color(204, 204, 204));
-        jBtnChinhSua.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBtnChinhSuaMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jBtnChinhSuaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jBtnChinhSuaMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jBtnChinhSuaMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jBtnChinhSuaMouseReleased(evt);
-            }
-        });
-
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Edit_20px_1.png"))); // NOI18N
-
-        javax.swing.GroupLayout jBtnChinhSuaLayout = new javax.swing.GroupLayout(jBtnChinhSua);
-        jBtnChinhSua.setLayout(jBtnChinhSuaLayout);
-        jBtnChinhSuaLayout.setHorizontalGroup(
-            jBtnChinhSuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jBtnChinhSuaLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-        jBtnChinhSuaLayout.setVerticalGroup(
-            jBtnChinhSuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jBtnChinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 69, 30));
-
         jtbGioHang.setAutoCreateRowSorter(true);
         jtbGioHang.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
         jtbGioHang.setModel(new javax.swing.table.DefaultTableModel(
@@ -389,7 +388,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false
+                false, false, false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -407,6 +406,11 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jtbGioHang.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtbGioHang.setShowHorizontalLines(false);
         jtbGioHang.getTableHeader().setReorderingAllowed(false);
+        jtbGioHang.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jtbGioHangPropertyChange(evt);
+            }
+        });
         jScrGioHang.setViewportView(jtbGioHang);
         if (jtbGioHang.getColumnModel().getColumnCount() > 0) {
             jtbGioHang.getColumnModel().getColumn(0).setPreferredWidth(80);
@@ -432,14 +436,14 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jPnGioHang.setLayout(jPnGioHangLayout);
         jPnGioHangLayout.setHorizontalGroup(
             jPnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 690, Short.MAX_VALUE)
         );
         jPnGioHangLayout.setVerticalGroup(
             jPnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPnGioHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 30));
+        jPanel2.add(jPnGioHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 689, 440));
 
@@ -460,12 +464,20 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jCbbLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Chọn loại sản phẩm---" }));
         jCbbLoaiSP.setAutoscrolls(true);
         jCbbLoaiSP.setFocusable(false);
+        jCbbLoaiSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCbbLoaiSPActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Từ tìm kiếm :");
 
         jtxtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtxtTimKiemKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtTimKiemKeyReleased(evt);
             }
         });
 
@@ -534,7 +546,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 600, 150));
 
         jtbDSSP.setAutoCreateRowSorter(true);
-        jtbDSSP.setFont(new java.awt.Font("Palatino Linotype", 1, 14)); // NOI18N
+        jtbDSSP.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
         jtbDSSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -606,7 +618,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel16.setText("Tên sản phẩm :");
-        jPanel7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 30));
+        jPanel7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 30));
 
         jLabel18.setText("Đơn giá :");
         jPanel7.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
@@ -646,6 +658,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jPanel7.add(jPnThongtinSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 30));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         jScrollPane1.setAutoscrolls(true);
         jScrollPane1.setFocusable(false);
 
@@ -655,13 +668,13 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jtxtTenSP.setRows(5);
         jScrollPane1.setViewportView(jtxtTenSP);
 
-        jPanel7.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 195, 30));
+        jPanel7.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 195, 40));
 
         jLabel27.setText("Loại :");
-        jPanel7.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, 20));
+        jPanel7.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, -1, 20));
 
         jtxtTenLoaiSP.setEditable(false);
-        jPanel7.add(jtxtTenLoaiSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 50, 210, -1));
+        jPanel7.add(jtxtTenLoaiSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 210, -1));
 
         jLabel28.setText("ĐVT :");
         jPanel7.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, 20));
@@ -900,135 +913,96 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void LoadForm(){
+    public void LoadForm() {
         HienThiDanhSachSanPham(CtrlHDL.LayDanhSachSanPham());
         LoadComboboxLoaiSP();
-        LoadComboboxNhaCungCap();
+        LoadComboboxKhachHang();
         Binding();
         jDateNgayLap.setDate(new Date());
-        jSpSoLuong.setValue(1);
+        AutoCompleteDecorator.decorate(jcbbKH);
     }
-    
-    public void HienThiDanhSachSanPham(ResultSet rs){
+
+    public void HienThiDanhSachSanPham(ResultSet rs) {
         listSP.clear();
         DefaultTableModel model;
-        model=(DefaultTableModel) jtbDSSP.getModel();
+        model = (DefaultTableModel) jtbDSSP.getModel();
         model.getDataVector().removeAllElements(); // remove data in table
         model.fireTableDataChanged();
-        try{
-            while(rs.next()){
+        try {
+            while (rs.next()) {
                 ObjSanPham itemSP;
-                itemSP=new ObjSanPham(rs.getString("MaSP"),rs.getString("TenSP"),rs.getString("MaLoaiSP"),rs.getString("TenLoaiSP"),rs.getInt("GiaLe"),rs.getInt("GiaSi"),rs.getString("DVT"), rs.getInt("SoLuong"),rs.getString("MaNCC"),rs.getString("TenNCC"));
+                itemSP = new ObjSanPham(rs.getString("MaSP"), rs.getString("TenSP"), rs.getString("MaLoaiSP"), rs.getString("TenLoaiSP"), rs.getInt("GiaLe"), rs.getInt("GiaSi"), rs.getInt("GiaNhap"), rs.getString("DVT"), rs.getString("MoTa"));
                 listSP.add(itemSP);
-                Vector v = new Vector();
-                v.add(itemSP.getMaSP());
-                v.add(itemSP.getTenSP());
-                v.add(itemSP.getSoLuong());
-                model.addRow(v);
+                model.addRow(new Object[]{itemSP.getTenSP(), String.format("%,d", itemSP.getGiaLe()), String.format("%,d", itemSP.getGiaSi()), String.format("%,d", itemSP.getGiaNhap())});
             }
         } catch (SQLException ex) {
-            System.out.println("Ngoại lệ tại FormLapHoaDonLe.HienThiDanhSachSanPham: "+ex.getMessage());
-        }
-        finally{
+            System.out.println("Ngoại lệ tại FormLapHoaDonLe.HienThiDanhSachSanPham: " + ex.getMessage());
+        } finally {
             CtrlHDL.CloseConnection();
         }
-        jtbDSSP.changeSelection(0,0,false,false);
+        jtbDSSP.changeSelection(0, 0, false, false);
     }
-    
-    public void LoadComboboxLoaiSP(){
+
+    public void LoadComboboxLoaiSP() {
         listComboboxLSP.clear();
         jCbbLoaiSP.removeAllItems();
         jCbbLoaiSP.addItem("---Chọn loại sản phẩm---");
         listComboboxLSP.add("");
-        ResultSet rs=CtrlHDL.LayDanhSachLoaiSanPham();
-        try{
-            while(rs.next()){
+        ResultSet rs = CtrlHDL.LayDanhSachLoaiSanPham();
+        try {
+            while (rs.next()) {
                 jCbbLoaiSP.addItem(rs.getString("TenLoaiSP"));
                 listComboboxLSP.add(rs.getString("MaLoaiSP"));
             }
-        }
-        catch(SQLException ex){
-            System.out.println("Ngoại lệ tại FormLapHoaDonLe.LoadComboboxLoaiSP: "+ex.getMessage());
-        }
-        finally{
+        } catch (SQLException ex) {
+            System.out.println("Ngoại lệ tại FormLapHoaDonLe.LoadComboboxLoaiSP: " + ex.getMessage());
+        } finally {
             CtrlHDL.CloseConnection();
         }
     }
-    
-    public void LoadComboboxNhaCungCap(){
-        listComboboxNCC.clear();
-        jCbbTenNCC.removeAllItems();
-        jCbbTenNCC.addItem("---Chọn loại sản phẩm---");
-        listComboboxNCC.add("");
-        ResultSet rs=CtrlHDL.LayDanhSachNhaCungCap();
-        try{
-            while(rs.next()){
-                jCbbTenNCC.addItem(rs.getString("TenNCC"));
-                listComboboxNCC.add(rs.getString("MaNCC"));
-            }
-        }
-        catch(SQLException ex){
-            System.out.println("Ngoại lệ tại FormLapHoaDonLe.LoadComboboxLoaiSP: "+ex.getMessage());
-        }
-        finally{
-            CtrlHDL.CloseConnection();
-        }
-    }
-    
-    public void ReloadForm(){
+
+    public void ReloadForm() {
         HienThiDanhSachSanPham(CtrlHDL.LayDanhSachSanPham());
         ListGioHang.clear();
         LoadComboboxLoaiSP();
-        LoadComboboxNhaCungCap();
+        LoadComboboxKhachHang();
         jtxtTimKiem.setText("");
         jtxtTongTien.setText("0");
-        jtxtTenKH.setText("");
         jtbGioHang.removeAll();
         jtxtSoHDL.setText(CtrlHDL.LaySoHDL());
         jDateNgayLap.setDate(new Date());
         DefaultTableModel model;
-        model=(DefaultTableModel) jtbGioHang.getModel();
-        model.getDataVector().removeAllElements(); 
+        model = (DefaultTableModel) jtbGioHang.getModel();
+        model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
     }
-    
-    public void Binding(){
-        TableModel model =jtbDSSP.getModel();
-        try{
+
+    public void Binding() {
+        TableModel model = jtbDSSP.getModel();
+        try {
             int viewRow = jtbDSSP.getSelectedRow();
-            int modelRow= jtbDSSP.convertRowIndexToModel(viewRow);
-             if(viewRow>-1){
-                  jtxtTenSP.setText(listSP.get(modelRow).getTenSP());
-                  jtxtDVT.setText(listSP.get(modelRow).getDVT());
-                  jtxtDonGia.setText(String.format("%,d",listSP.get(modelRow).getGiaLe()));
-                  jtxtTenSP.setText(listSP.get(modelRow).getTenSP());
-                  jtxtTenLoaiSP.setText(listSP.get(modelRow).getTenLoaiSP());
-                  jtxtTenNCC.setText(listSP.get(modelRow).getTenNCC());
-                  int dongia = Integer.parseInt(jtxtDonGia.getText().replace(",",""));
-                  int soluong = Integer.parseInt(jSpSoLuong.getValue()+"");
-                  jtxtThanhTien.setText(String.format("%,d",dongia*soluong));
-             }
-        }
-        catch(Exception ex){
-            System.out.println("Ngoại lệ tại FormLapHoaDonLe.Binding: "+ex.getMessage());
+            int modelRow = jtbDSSP.convertRowIndexToModel(viewRow);
+            if (viewRow > -1) {
+                jtxtTenSP.setText(listSP.get(modelRow).getTenSP());
+                jtxtDVT.setText(listSP.get(modelRow).getDVT());
+                jtxtDonGia.setText(String.format("%,d", listSP.get(modelRow).getGiaLe()));
+                jtxtTenSP.setText(listSP.get(modelRow).getTenSP());
+                jtxtTenLoaiSP.setText(listSP.get(modelRow).getTenLoaiSP());
+                int dongia = Integer.parseInt(jtxtDonGia.getText().replace(",", ""));
+            }
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormLapHoaDonLe.Binding: " + ex.getMessage());
         }
     }
 
-    public int TinhTongTienGioHang(){
-        int Tong=0;
-        for(int i = 0 ;i<ListGioHang.size();i++){
-            Tong+=ListGioHang.get(i).getThanhTien();
-        }
-        return Tong;
-    }
-    
-    
+
     private void jBtnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnTimKiemMouseClicked
         // TODO add your handling code here:
-        if(jCbbTimTheo.getSelectedIndex()==0)
-            HienThiDanhSachSanPham(CtrlHDL.SearchSanPhamByName(jtxtTimKiem.getText(),listComboboxLSP.get(jCbbLoaiSP.getSelectedIndex()).toString(),listComboboxNCC.get(jCbbTenNCC.getSelectedIndex()).toString()));   
-        else
-            HienThiDanhSachSanPham(CtrlHDL.SearchSanPhamByID(jtxtTimKiem.getText(),listComboboxLSP.get(jCbbLoaiSP.getSelectedIndex()).toString(),listComboboxNCC.get(jCbbTenNCC.getSelectedIndex()).toString()));   
+        if (jCbbTimTheo.getSelectedIndex() == 0) {
+            HienThiDanhSachSanPham(CtrlHDL.SearchByName(jtxtTimKiem.getText(), listComboboxLSP.get(jCbbLoaiSP.getSelectedIndex()).toString()));
+        } else {
+            HienThiDanhSachSanPham(CtrlHDL.SearchSanPhamByID(jtxtTimKiem.getText(), listComboboxLSP.get(jCbbLoaiSP.getSelectedIndex()).toString()));
+        }
         Binding();
         CtrlHDL.CloseConnection();
     }//GEN-LAST:event_jBtnTimKiemMouseClicked
@@ -1057,7 +1031,6 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         // TODO add your handling code here:
         HienThiDanhSachSanPham(CtrlHDL.LayDanhSachSanPham());
         LoadComboboxLoaiSP();
-        LoadComboboxNhaCungCap();
         jtxtTimKiem.setText("");
     }//GEN-LAST:event_jBtnLamMoiMouseClicked
 
@@ -1081,23 +1054,18 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         setColor(jBtnLamMoi);
     }//GEN-LAST:event_jBtnLamMoiMouseReleased
 
-    private void jtxtSoHDLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSoHDLActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtSoHDLActionPerformed
-
     private void jBtnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoaMouseClicked
         // TODO add your handling code here
-        DefaultTableModel Model=(DefaultTableModel) jtbGioHang.getModel() ;
-        try{
-        int viewRow = jtbGioHang.getSelectedRow();
-        int modelRow= jtbGioHang.convertRowIndexToModel(viewRow);
-        ListGioHang.remove(modelRow);
-        Model.removeRow(modelRow);
-        jtxtTongTien.setText(String.format("%,d",TinhTongTienGioHang()));
+        DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
+        try {
+            int viewRow = jtbGioHang.getSelectedRow();
+            int modelRow = jtbGioHang.convertRowIndexToModel(viewRow);
+            ListGioHang.remove(modelRow);
+            Model.removeRow(modelRow);
+            jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Không có sản phẩm được chọn.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
-        catch(Exception ex){
-            JOptionPane.showMessageDialog(this,"Không có sản phẩm được chọn.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        } 
     }//GEN-LAST:event_jBtnXoaMouseClicked
 
     private void jBtnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnBackMouseClicked
@@ -1211,63 +1179,61 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         Binding();
     }//GEN-LAST:event_jtbDSSPMousePressed
 
-    
-    
+    public int TinhTongTienGioHang() {
+        int Tong = 0;
+        for (int i = 0; i < ListGioHang.size(); i++) {
+            Tong += ListGioHang.get(i).getThanhTien();
+        }
+        return Tong;
+    }
+
     private void jBtnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThemMouseClicked
         // TODO add your handling code here:
-        boolean exist=false;
-        
+        boolean exist = false;
         DefaultTableModel Model;
         int viewRow = jtbDSSP.getSelectedRow();
-        int modelRow= jtbDSSP.convertRowIndexToModel(viewRow);
-        Model =(DefaultTableModel) jtbGioHang.getModel();
-        if(Integer.parseInt(jSpSoLuong.getValue()+"")<=listSP.get(modelRow).getSoLuong()){
-            ObjChiTietHDL itemGioHang=new ObjChiTietHDL(jtxtSoHDL.getText(),listSP.get(modelRow).getMaSP(),listSP.get(modelRow).getTenSP(),listSP.get(modelRow).getDVT(),Integer.parseInt(jSpSoLuong.getValue()+""),listSP.get(modelRow).getGiaLe(),Integer.parseInt(jtxtThanhTien.getText().replace(",","")));
-            try{ 
-            for(int i = 0 ;i<Model.getRowCount();i++){
-                if(Model.getValueAt(i,0).toString().equals(itemGioHang.getMaSP())){
-                    exist=true;
-                    int SoLuongTon = CtrlHDL.LaySoLuongSanPham(itemGioHang.getMaSP(), jtxtSoHDL.getText());
-                    int SL =itemGioHang.getSoLuong()+Integer.parseInt(Model.getValueAt(i,3).toString());
-                    if(SL<=listSP.get(modelRow).getSoLuong()||SL<=SoLuongTon){
-                          int ThanhTien = SL*Integer.parseInt(Model.getValueAt(i,4).toString().replace(",",""));
-                          Model.setValueAt(SL,i,3);
-                          Model.setValueAt(String.format("%,d",ThanhTien),i,5);
-                          ListGioHang.get(i).setSoLuong(SL);
-                          ListGioHang.get(i).setThanhTien(ThanhTien);
-                          break;
+        int modelRow = jtbDSSP.convertRowIndexToModel(viewRow);
+        Model = (DefaultTableModel) jtbGioHang.getModel();
+        String inputdialog = JOptionPane.showInputDialog(this, "Nhập số lượng:", "");
+        if (inputdialog != null) {
+            try {
+                int SL = Integer.parseInt(inputdialog);
+                if (!inputdialog.equals("0")) {
+                    ObjChiTietHDL itemGioHang = new ObjChiTietHDL(listSP.get(modelRow).getMaSP(), listSP.get(modelRow).getTenSP(), listSP.get(modelRow).getDVT(), SL, listSP.get(modelRow).getGiaLe());
+                    try {
+                        for (int i = 0; i < Model.getRowCount(); i++) {
+                            if (Model.getValueAt(i, 0).toString().equals(itemGioHang.getMaSP())) {
+                                exist = true;
+                                SL += Integer.parseInt(Model.getValueAt(i, 3).toString());
+                                int ThanhTien = SL * Integer.parseInt(Model.getValueAt(i, 4).toString().replace(",", ""));
+                                Model.setValueAt(SL, i, 3);
+                                Model.setValueAt(String.format("%,d", ThanhTien), i, 5);
+                                ListGioHang.get(i).setSoLuong(SL);
+                                ListGioHang.get(i).setThanhTien(ThanhTien);
+                                break;
+                            }
+                        }
+                        if (!exist) {
+                            ListGioHang.add(itemGioHang);
+                            Model.addRow(new Object[]{itemGioHang.getMaSP(), itemGioHang.getTenSP(), itemGioHang.getDVT(), itemGioHang.getSoLuong(), String.format("%,d", itemGioHang.getDonGia()), String.format("%,d", itemGioHang.getThanhTien())});
+                        }
+                    } catch (NumberFormatException ex) {
+                        System.out.println("Ngoại lệ tại FormLapHoaDonLe.Binding: " + ex.getMessage());
                     }
-                    else {
-                          JOptionPane.showMessageDialog(this,"Số lượng không đủ. Chỉ còn lại "+SoLuongTon, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                          break;
-                    }
+                } else {
+                    jBtnXoaMouseClicked(null);
                 }
-            }
-            if(!exist){
-                ListGioHang.add(itemGioHang);
-                Vector v = new Vector();
-                v.add(itemGioHang.getMaSP());
-                v.add(itemGioHang.getTenSP());
-                v.add(itemGioHang.getDVT());
-                v.add(itemGioHang.getSoLuong());
-                v.add(String.format("%,d",itemGioHang.getDonGia()));
-                v.add(String.format("%,d",itemGioHang.getThanhTien()));
-                Model.addRow(v);
-            }
-            jtxtTongTien.setText(String.format("%,d",TinhTongTienGioHang()));
-            }
-            catch(NumberFormatException ex){
-                 System.out.println("Ngoại lệ tại FormLapHoaDonLe.Binding: "+ex.getMessage());
+                jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Số lượng nhập không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        else{
-            JOptionPane.showMessageDialog(this, "Số lượng không đủ.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        }
+
     }//GEN-LAST:event_jBtnThemMouseClicked
 
     private void jtxtDonGiaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jtxtDonGiaInputMethodTextChanged
         // TODO add your handling code here:
- 
+
     }//GEN-LAST:event_jtxtDonGiaInputMethodTextChanged
 
     private void jCbbTimTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbbTimTheoActionPerformed
@@ -1276,26 +1242,27 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
 
     private void jbtnDuyetGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnDuyetGioHangMouseClicked
         // TODO add your handling code here:
-        try{
-            if(ListGioHang.size()>0){
-                frmDuyetHDL = new FormDuyetHoaDonLe(jtxtSoHDL.getText(),jtxtTenKH.getText(), jDateNgayLap.getDate(),jtxtTongTien.getText(),ListGioHang);
-                if(ChinhSua) frmDuyetHDL.ChinhSua=true;
-                frmDuyetHDL.setVisible(true);
-                this.setVisible(false);
-                this.dispose();
-            }
-            else
-                JOptionPane.showMessageDialog(this, "Giỏ hàng trống.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        }
-        catch(Exception ex){
-            System.out.println("Ngoại lệ tại FormLapHoaDonLe.jbtnDuyetGioHangMouseClicked: "+ex.getMessage());
-        }
+//        try{
+//            if(ListGioHang.size()>0){
+//                frmDuyetHDL = new FormDuyetHoaDonLe(jtxtSoHDL.getText(),jtxtTenKH.getText(), jDateNgayLap.getDate(),jtxtTongTien.getText(),ListGioHang);
+//                if(ChinhSua) frmDuyetHDL.ChinhSua=true;
+//                frmDuyetHDL.setVisible(true);
+//                this.setVisible(false);
+//                this.dispose();
+//            }
+//            else
+//                JOptionPane.showMessageDialog(this, "Giỏ hàng trống.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+//        }
+//        catch(Exception ex){
+//            System.out.println("Ngoại lệ tại FormLapHoaDonLe.jbtnDuyetGioHangMouseClicked: "+ex.getMessage());
+//        }
     }//GEN-LAST:event_jbtnDuyetGioHangMouseClicked
 
     private void jtxtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTimKiemKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jBtnTimKiemMouseClicked(null);
+        }
     }//GEN-LAST:event_jtxtTimKiemKeyPressed
 
     private void jBtnHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnHuyMouseClicked
@@ -1303,61 +1270,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         ReloadForm();
     }//GEN-LAST:event_jBtnHuyMouseClicked
 
-    private void jBtnChinhSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnChinhSuaMouseEntered
-        // TODO add your handling code here:
-        setColor(jBtnChinhSua);
-    }//GEN-LAST:event_jBtnChinhSuaMouseEntered
 
-    private void jBtnChinhSuaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnChinhSuaMouseExited
-        // TODO add your handling code here:
-        resetColor(jBtnChinhSua);
-    }//GEN-LAST:event_jBtnChinhSuaMouseExited
-
-    private void jBtnChinhSuaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnChinhSuaMousePressed
-        // TODO add your handling code here:
-        resetColor(jBtnChinhSua);
-    }//GEN-LAST:event_jBtnChinhSuaMousePressed
-
-    private void jBtnChinhSuaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnChinhSuaMouseReleased
-        // TODO add your handling code here:
-        setColor(jBtnChinhSua);
-    }//GEN-LAST:event_jBtnChinhSuaMouseReleased
-
-    private void jBtnChinhSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnChinhSuaMouseClicked
-        // TODO add your handling code here:
-        if (jtbGioHang.getSelectedRow() >= 0) {
-            DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
-            int viewRow = jtbGioHang.getSelectedRow();
-            int modelRow = jtbGioHang.convertRowIndexToModel(viewRow);
-            int soluongcu = Integer.parseInt(Model.getValueAt(modelRow, 3).toString());
-            int dongia = Integer.parseInt(Model.getValueAt(modelRow, 4).toString().replace(",", ""));
-            String inputdialog = JOptionPane.showInputDialog(this, "Nhập số lượng:", "");
-            int soluongtonkho = CtrlHDL.LaySoLuongSanPham(Model.getValueAt(modelRow, 0).toString(), jtxtSoHDL.getText());
-            if (inputdialog != null) {
-                try {
-                    int SL = Integer.parseInt(inputdialog);
-                    if (!inputdialog.equals("0")) {
-                        if (SL <= soluongtonkho) {
-                            Model.setValueAt(SL, modelRow, 3);
-                            ListGioHang.get(modelRow).setSoLuong(SL);
-                            ListGioHang.get(modelRow).setThanhTien(dongia * SL);
-                            Model.setValueAt(String.format("%,d", dongia * SL), modelRow, 5);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Số lượng không đủ.Hiện chỉ còn " + soluongtonkho + " thôi à.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    } else {
-                        jBtnXoaMouseClicked(null);
-                    }
-                    jtxtTongTien.setText(String.format("%,d",TinhTongTienGioHang()));
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Số lượng nhập không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        }
-    }//GEN-LAST:event_jBtnChinhSuaMouseClicked
-
-   
-    
     private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
         // TODO add your handling code here:
         xx = evt.getX();
@@ -1371,19 +1284,54 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         this.setLocation(x - xx, y - yy);
     }//GEN-LAST:event_jPanel5MouseDragged
 
+    private void jtxtSoHDLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSoHDLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtSoHDLActionPerformed
 
-    public void setColor(JPanel pn){
-        if(pn.isEnabled()){
-        pn.setSize(pn.getWidth()+1, pn.getHeight()+1);
-        pn.setBackground(new Color(60,209,127,50));
+    private void jtxtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTimKiemKeyReleased
+        // TODO add your handling code here:
+        if (jCbbTimTheo.getSelectedIndex() == 0) {
+            HienThiDanhSachSanPham(CtrlHDL.SearchByName(jtxtTimKiem.getText(), listComboboxLSP.get(jCbbLoaiSP.getSelectedIndex()).toString()));
+        } else {
+            HienThiDanhSachSanPham(CtrlHDL.SearchSanPhamByID(jtxtTimKiem.getText(), listComboboxLSP.get(jCbbLoaiSP.getSelectedIndex()).toString()));
+        }
+        Binding();
+        CtrlHDL.CloseConnection();
+    }//GEN-LAST:event_jtxtTimKiemKeyReleased
+
+    private void jCbbLoaiSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbbLoaiSPActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (jCbbTimTheo.getSelectedIndex() == 0) {
+                HienThiDanhSachSanPham(CtrlHDL.SearchByName(jtxtTimKiem.getText(), listComboboxLSP.get(jCbbLoaiSP.getSelectedIndex()).toString()));
+            } else {
+                HienThiDanhSachSanPham(CtrlHDL.SearchSanPhamByID(jtxtTimKiem.getText(), listComboboxLSP.get(jCbbLoaiSP.getSelectedIndex()).toString()));
+            }
+            Binding();
+            CtrlHDL.CloseConnection();
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_jCbbLoaiSPActionPerformed
+
+    private void jtbGioHangPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtbGioHangPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtbGioHangPropertyChange
+
+    public void setColor(JPanel pn) {
+        if (pn.isEnabled()) {
+            pn.setSize(pn.getWidth() + 1, pn.getHeight() + 1);
+            pn.setBackground(new Color(60, 209, 127, 50));
         }
     }
-    public void resetColor(JPanel pn){
-        if(pn.isEnabled()){
-        pn.setSize(pn.getWidth()-1, pn.getHeight()-1);
-        pn.setBackground(new Color(153,153,153,180));
+
+    public void resetColor(JPanel pn) {
+        if (pn.isEnabled()) {
+            pn.setSize(pn.getWidth() - 1, pn.getHeight() - 1);
+            pn.setBackground(new Color(153, 153, 153, 180));
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -1421,14 +1369,13 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               new FormLapHoaDonLe().setVisible(true);
+                new FormLapHoaDonLe().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jBtnBack;
-    private javax.swing.JPanel jBtnChinhSua;
     private javax.swing.JPanel jBtnHuy;
     private javax.swing.JPanel jBtnLamMoi;
     private javax.swing.JPanel jBtnThem;
@@ -1455,7 +1402,6 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1477,12 +1423,12 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrGioHang;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jbtnDuyetGioHang;
+    private javax.swing.JComboBox<String> jcbbKH;
     private javax.swing.JTable jtbDSSP;
     private javax.swing.JTable jtbGioHang;
     private javax.swing.JTextField jtxtDVT;
     private javax.swing.JTextField jtxtDonGia;
     private javax.swing.JTextField jtxtSoHDL;
-    private javax.swing.JTextField jtxtTenKH;
     private javax.swing.JTextField jtxtTenLoaiSP;
     private javax.swing.JTextArea jtxtTenSP;
     private javax.swing.JTextField jtxtTimKiem;

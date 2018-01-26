@@ -12,11 +12,22 @@ package Object;
 public class ObjChiTietHDL {
     private String SoHDL;
     private String MaSP;
+    private String TenSP;
+    private String DVT;
     private int SoLuong;
     private int DonGia;
     private int ThanhTien;
 
     public ObjChiTietHDL() {
+    }
+
+    public ObjChiTietHDL(String MaSP, String TenSP, String DVT, int SoLuong, int DonGia) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.DVT = DVT;
+        this.SoLuong = SoLuong;
+        this.DonGia = DonGia;
+        this.ThanhTien = this.SoLuong*this.DonGia;
     }
 
     public ObjChiTietHDL(String SoHDL, String MaSP, int SoLuong, int DonGia, int ThanhTien) {
@@ -47,6 +58,14 @@ public class ObjChiTietHDL {
         return ThanhTien;
     }
 
+    public String getTenSP() {
+        return TenSP;
+    }
+
+    public String getDVT() {
+        return DVT;
+    }
+
     public void setSoHDL(String SoHDL) {
         this.SoHDL = SoHDL;
     }
@@ -65,6 +84,14 @@ public class ObjChiTietHDL {
 
     public void setThanhTien(int ThanhTien) {
         this.ThanhTien = ThanhTien;
+    }
+
+    public void setTenSP(String TenSP) {
+        this.TenSP = TenSP;
+    }
+
+    public void setDVT(String DVT) {
+        this.DVT = DVT;
     }
     
     
