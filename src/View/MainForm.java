@@ -927,7 +927,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jBtnLapHDLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLapHDLMouseClicked
         // TODO add your handling code here:
-
+        new FormLapHoaDonLe().setVisible(true);
     }//GEN-LAST:event_jBtnLapHDLMouseClicked
 
     private void jBtnLapHDLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLapHDLMouseEntered

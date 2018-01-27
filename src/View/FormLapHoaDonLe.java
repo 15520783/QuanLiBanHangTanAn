@@ -46,7 +46,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
     ArrayList<ObjChiTietHDL> ListGioHang = new ArrayList<>();
     CtrlLapHoaDonLe CtrlHDL = new CtrlLapHoaDonLe();
 
-    //FormDuyetHoaDonLe frmDuyetHDL;
+    FormDuyetHoaDonLe frmDuyetHDL;
     /**
      * Creates new form FormLapHoaDonLe
      */
@@ -54,23 +54,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
 
-        JPanel ListPn[] = new JPanel[]{jPanel1, jPanel2, jPanel3, jPanel4, jPanel7};
-        editFrm.MakeTransparentPanel(ListPn);
-
-        JPanel ListTitle[] = new JPanel[]{jPnDSSP, jPnGioHang, jPnThongtinHD, jPnThongtinSP, jPnTimkiemSP};
-        editFrm.MakeTransparentTitle(ListTitle);
-
-        JPanel ListButton[] = new JPanel[]{jbtnDuyetGioHang, jBtnBack, jBtnHuy, jBtnLamMoi, jBtnThem, jBtnTimKiem, jBtnXoa};
-        editFrm.MakeTransparentButton(ListButton);
-
-        jPanel5.setBackground(new Color(0, 0, 0, 0));
-
-        jtxtTenSP.setLineWrap(true);
-
-        editFrm.MakeTransparentTable(jScrGioHang, jtbGioHang);
-        editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP);
-        
-        jtxtSoHDL.setText(CtrlHDL.LaySoHDL());
+     
         LoadForm();
         
         TableModel tm = jtbGioHang.getModel();
@@ -110,24 +94,6 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
     public FormLapHoaDonLe(String SoHDL, String TenKH, ArrayList<ObjChiTietHDL> ListCT, Date NgayLap) {
         initComponents();
         this.setLocationRelativeTo(null);
-
-        JPanel ListPn[] = new JPanel[]{jPanel1, jPanel2, jPanel3, jPanel4, jPanel7};
-        editFrm.MakeTransparentPanel(ListPn);
-
-        JPanel ListTitle[] = new JPanel[]{jPnDSSP, jPnGioHang, jPnThongtinHD, jPnThongtinSP, jPnTimkiemSP};
-        editFrm.MakeTransparentTitle(ListTitle);
-
-        JPanel ListButton[] = new JPanel[]{jbtnDuyetGioHang, jBtnBack, jBtnHuy, jBtnLamMoi, jBtnThem, jBtnTimKiem, jBtnXoa};
-        editFrm.MakeTransparentButton(ListButton);
-
-        jPanel5.setBackground(new Color(0, 0, 0, 0));
-
-        jtxtTenSP.setLineWrap(true);
-        jtxtSoHDL.setText(SoHDL);
-
-        editFrm.MakeTransparentTable(jScrGioHang, jtbGioHang);
-        editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP);
-
 
         LoadForm();
         jDateNgayLap.setDate(NgayLap);
@@ -920,6 +886,23 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         Binding();
         jDateNgayLap.setDate(new Date());
         AutoCompleteDecorator.decorate(jcbbKH);
+           JPanel ListPn[] = new JPanel[]{jPanel1, jPanel2, jPanel3, jPanel4, jPanel7};
+        editFrm.MakeTransparentPanel(ListPn);
+
+        JPanel ListTitle[] = new JPanel[]{jPnDSSP, jPnGioHang, jPnThongtinHD, jPnThongtinSP, jPnTimkiemSP};
+        editFrm.MakeTransparentTitle(ListTitle);
+
+        JPanel ListButton[] = new JPanel[]{jbtnDuyetGioHang, jBtnBack, jBtnHuy, jBtnLamMoi, jBtnThem, jBtnTimKiem, jBtnXoa};
+        editFrm.MakeTransparentButton(ListButton);
+
+        jPanel5.setBackground(new Color(0, 0, 0, 0));
+
+        jtxtTenSP.setLineWrap(true);
+
+        editFrm.MakeTransparentTable(jScrGioHang, jtbGioHang);
+        editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP);
+        
+        jtxtSoHDL.setText(CtrlHDL.LaySoHDL());
     }
 
     public void HienThiDanhSachSanPham(ResultSet rs) {
@@ -1242,20 +1225,20 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
 
     private void jbtnDuyetGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnDuyetGioHangMouseClicked
         // TODO add your handling code here:
-//        try{
-//            if(ListGioHang.size()>0){
-//                frmDuyetHDL = new FormDuyetHoaDonLe(jtxtSoHDL.getText(),jtxtTenKH.getText(), jDateNgayLap.getDate(),jtxtTongTien.getText(),ListGioHang);
-//                if(ChinhSua) frmDuyetHDL.ChinhSua=true;
-//                frmDuyetHDL.setVisible(true);
-//                this.setVisible(false);
-//                this.dispose();
-//            }
-//            else
-//                JOptionPane.showMessageDialog(this, "Giỏ hàng trống.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//        }
-//        catch(Exception ex){
-//            System.out.println("Ngoại lệ tại FormLapHoaDonLe.jbtnDuyetGioHangMouseClicked: "+ex.getMessage());
-//        }
+        try{
+            if(ListGioHang.size()>0){
+                frmDuyetHDL = new FormDuyetHoaDonLe(jtxtSoHDL.getText(),jtxtTenKH.getText(), jDateNgayLap.getDate(),jtxtTongTien.getText(),ListGioHang);
+                if(ChinhSua) frmDuyetHDL.ChinhSua=true;
+                frmDuyetHDL.setVisible(true);
+                this.setVisible(false);
+                this.dispose();
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Giỏ hàng trống.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(Exception ex){
+            System.out.println("Ngoại lệ tại FormLapHoaDonLe.jbtnDuyetGioHangMouseClicked: "+ex.getMessage());
+        }
     }//GEN-LAST:event_jbtnDuyetGioHangMouseClicked
 
     private void jtxtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTimKiemKeyPressed

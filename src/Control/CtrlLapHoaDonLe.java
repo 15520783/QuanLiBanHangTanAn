@@ -77,6 +77,30 @@ public class CtrlLapHoaDonLe {
         return ID;
     }
     
+    public String LaySoHDS(){
+        String ID="HDS0001";
+        ResultSet rs=null;
+        String SQL="Select * from HOADONSI order by SoHDS DESC limit 1";
+        try{
+            rs=DB.GetData(SQL);
+            if(rs.next()){
+                ID=rs.getString("SoHDS");
+                int STT = Integer.parseInt(ID.substring(3));
+                STT+=1;
+                if(STT<10) ID="HDS000"+STT;
+                else if(STT<100) ID="HDS00"+STT;
+                else ID="HDS0"+STT;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Ngoại lệ tại CtrlLapHoaDonLe.LaySoHDS:"+ex.getMessage());
+        }
+        finally{
+            DB.CloseDB();
+        }
+        return ID;
+    }
+    
+    
     public int LaySoLuongSanPham(String MaSP,String SoHDL){
         int SoLuong=0;
         String SQL = "Select SoLuong from CTHDL where SoHDL='"+SoHDL+"' and MaSP='"+MaSP+"'";
