@@ -484,7 +484,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Get Managed");
+        jLabel14.setText(" Tân An Store");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
@@ -952,7 +952,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jBtnLapHDSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLapHDSMouseClicked
         // TODO add your handling code here:
-
+        new FormLapHoaDonSi().setVisible(true);
     }//GEN-LAST:event_jBtnLapHDSMouseClicked
 
     private void jBtnLapHDSMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLapHDSMouseEntered

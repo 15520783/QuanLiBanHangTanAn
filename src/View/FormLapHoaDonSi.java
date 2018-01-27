@@ -14,19 +14,12 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Object.ObjSanPham;
-import Object.ObjLoaiSanPham;
 import Object.ObjChiTietHDS;
 import Object.ObjKhachHang;
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
-import javafx.beans.binding.Bindings;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -47,14 +40,15 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
     CtrlLapHoaDonLe CtrlHDL = new CtrlLapHoaDonLe();
 
     FormDuyetHoaDonSi frmDuyetHDS;
+
     /**
      * Creates new form FormLapHoaDonLe
      */
     public FormLapHoaDonSi() {
         initComponents();
         this.setLocationRelativeTo(null);
-     
-        LoadForm();       
+
+        LoadForm();
     }
 
     public FormLapHoaDonSi(String SoHDS, String TenKH, ArrayList<ObjChiTietHDS> ListCT, Date NgayLap) {
@@ -856,7 +850,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         Binding();
         jDateNgayLap.setDate(new Date());
         AutoCompleteDecorator.decorate(jcbbKH);
-           JPanel ListPn[] = new JPanel[]{jPanel1, jPanel2, jPanel3, jPanel4, jPanel7};
+        JPanel ListPn[] = new JPanel[]{jPanel1, jPanel2, jPanel3, jPanel4, jPanel7};
         editFrm.MakeTransparentPanel(ListPn);
 
         JPanel ListTitle[] = new JPanel[]{jPnDSSP, jPnGioHang, jPnThongtinHD, jPnThongtinSP, jPnTimkiemSP};
@@ -871,18 +865,16 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
 
         editFrm.MakeTransparentTable(jScrGioHang, jtbGioHang);
         editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP);
-        
+
         jtxtSoHDS.setText(CtrlHDL.LaySoHDS());
-        
+
         TableModel tm = jtbGioHang.getModel();
 
         tm.addTableModelListener(new TableModelListener() {
 
             public void tableChanged(TableModelEvent tme) {
                 try {
-                    if (jtbGioHang.getCellEditor() == null) {
-                        System.out.println("Not Edited");
-                    } else {
+                    if (jtbGioHang.getCellEditor() != null) {
                         int SL = Integer.parseInt(tm.getValueAt(jtbGioHang.getSelectedRow(), 3).toString());
                         int DonGia = Integer.parseInt(tm.getValueAt(jtbGioHang.getSelectedRow(), 4).toString().replace(",", ""));
                         int ThanhTien = SL * DonGia;
@@ -1227,19 +1219,24 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
 
     private void jbtnDuyetGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnDuyetGioHangMouseClicked
         // TODO add your handling code here:
-        try{
-            if(ListGioHang.size()>0){
-                frmDuyetHDS = new FormDuyetHoaDonSi(jtxtSoHDS.getText(),jDateNgayLap.getDate(),jtxtTongTien.getText(),listComboboxKH.get(jcbbKH.getSelectedIndex()),ListGioHang);
-                if(ChinhSua) frmDuyetHDS.ChinhSua=true;
-                frmDuyetHDS.setVisible(true);
-                this.setVisible(false);
-                this.dispose();
+        try {
+            if (jcbbKH.getSelectedIndex() != 0) {
+                if (ListGioHang.size() > 0) {
+                    frmDuyetHDS = new FormDuyetHoaDonSi(jtxtSoHDS.getText(), jDateNgayLap.getDate(), jtxtTongTien.getText(), listComboboxKH.get(jcbbKH.getSelectedIndex()), ListGioHang);
+                    if (ChinhSua) {
+                        frmDuyetHDS.ChinhSua = true;
+                    }
+                    frmDuyetHDS.setVisible(true);
+                    this.setVisible(false);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Giỏ hàng trống.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
-            else
-                JOptionPane.showMessageDialog(this, "Giỏ hàng trống.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        }
-        catch(Exception ex){
-            System.out.println("Ngoại lệ tại FormLapHoaDonLe.jbtnDuyetGioHangMouseClicked: "+ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jbtnDuyetGioHangMouseClicked
 
