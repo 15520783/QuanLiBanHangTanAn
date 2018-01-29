@@ -1227,7 +1227,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             if(ListGioHang.size()>0){
-                frmDuyetHDL = new FormDuyetHoaDonLe(jtxtSoHDL.getText(),jtxtTenKH.getText(), jDateNgayLap.getDate(),jtxtTongTien.getText(),ListGioHang);
+                frmDuyetHDL = new FormDuyetHoaDonLe(jtxtSoHDL.getText(), jDateNgayLap.getDate(),jtxtTongTien.getText(),listComboboxKH.get(jcbbKH.getSelectedIndex()),ListGioHang);
                 if(ChinhSua) frmDuyetHDL.ChinhSua=true;
                 frmDuyetHDL.setVisible(true);
                 this.setVisible(false);

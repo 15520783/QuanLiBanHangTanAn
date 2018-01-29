@@ -888,7 +888,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
                         if (ThanhTien != ListGioHang.get(jtbGioHang.getSelectedRow()).getThanhTien()) {
                             ListGioHang.get(jtbGioHang.getSelectedRow()).setThanhTien(ThanhTien);
                             tm.setValueAt(String.format("%,d", ThanhTien), jtbGioHang.getSelectedRow(), 5);
-                        }
+                        }                        
                         jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
 
                     }
