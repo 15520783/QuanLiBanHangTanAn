@@ -38,6 +38,16 @@ public class ObjChiTietHDS {
         this.ThanhTien=this.DonGia*this.SoLuong;
     }
 
+    public ObjChiTietHDS(String SoHDS, String MaSP, String TenSP, String DVT, int SoLuong, int DonGia, int ThanhTien) {
+        this.SoHDS = SoHDS;
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.DVT = DVT;
+        this.SoLuong = SoLuong;
+        this.DonGia = DonGia;
+        this.ThanhTien = ThanhTien;
+    }
+
     public String getSoHDS() {
         return SoHDS;
     }

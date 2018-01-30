@@ -5,25 +5,21 @@
  */
 package View;
 
-import Connect.Connect;
 import Control.CtrlLapHoaDonLe;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Edit.Edit;
+import Model.ModChiTietHDL;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import Model.ModChiTietHDL;
 import Model.ModChiTietHDS;
-import Model.ModHoaDonSi;
+import Model.ModHoaDonLe;
 import Object.ObjChiTietHDL;
 import Object.ObjChiTietHDS;
-import Object.ObjHoaDonSi;
+import Object.ObjHoaDonLe;
 import Object.ObjKhachHang;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Date;
-import java.util.Hashtable;
 
 import javax.swing.JOptionPane;
 
@@ -34,10 +30,10 @@ import javax.swing.JOptionPane;
 public class FormDuyetHoaDonLe extends javax.swing.JFrame {
 
     boolean ChinhSua = false;
-    ArrayList<ObjChiTietHDS> ListCTHDS = new ArrayList<>();
-    ObjHoaDonSi ObjHDS = new ObjHoaDonSi();
-    ModHoaDonSi modHDS = new ModHoaDonSi();
-    ModChiTietHDS modCTHDS = new ModChiTietHDS();
+    ArrayList<ObjChiTietHDL> ListCTHDL = new ArrayList<>();
+    ObjHoaDonLe ObjHDL = new ObjHoaDonLe();
+    ModHoaDonLe modHDL = new ModHoaDonLe();
+    ModChiTietHDL modCTHDL = new ModChiTietHDL();
     Edit editFrm = new Edit();
     boolean LuuThanhCong = false;
     FormLapHoaDonSi frmLapHDS;
@@ -80,8 +76,8 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
 
         for (int i = 0; i < listGioHang.size(); i++) {
             Vector v = new Vector();
-            ObjChiTietHDS ObjCTHDS = new ObjChiTietHDS(listGioHang.get(i).getMaSP(), listGioHang.get(i).getTenSP(), listGioHang.get(i).getDVT(), listGioHang.get(i).getSoLuong(), listGioHang.get(i).getDonGia());
-            ListCTHDS.add(ObjCTHDS);
+            ObjChiTietHDL ObjCTHDL = new ObjChiTietHDL(listGioHang.get(i).getMaSP(), listGioHang.get(i).getTenSP(), listGioHang.get(i).getDVT(), listGioHang.get(i).getSoLuong(), listGioHang.get(i).getDonGia());
+            ListCTHDL.add(ObjCTHDL);
             v.add(listGioHang.get(i).getMaSP());
             v.add(listGioHang.get(i).getTenSP());
             v.add(listGioHang.get(i).getDVT());
@@ -601,20 +597,19 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
 
     private void jBtnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnBackMouseClicked
         // TODO add your handling code here:
-
         this.setVisible(false);
         this.dispose();
         if (!ChinhSua) {
             if (LuuThanhCong) {
                 new FormLapHoaDonSi().setVisible(true);
             } else {
-                new FormLapHoaDonSi(jtxtSoHDS.getText(), jtxtTenKH.getText(), ListCTHDS, jDateNgayLap.getDate()).setVisible(true);
+                new FormLapHoaDonLe(jtxtSoHDS.getText(), jtxtTenKH.getText(), ListCTHDL, jDateNgayLap.getDate()).setVisible(true);
             }
         } else {
             if (!LuuThanhCong) {
-                FormLapHoaDonSi FrmLapHDS = new FormLapHoaDonSi(jtxtSoHDS.getText(), jtxtTenKH.getText(), ListCTHDS, jDateNgayLap.getDate());
-                FrmLapHDS.ChinhSua = true;
-                FrmLapHDS.setVisible(true);
+                FormLapHoaDonLe FrmLapHDL = new FormLapHoaDonLe(jtxtSoHDS.getText(), jtxtTenKH.getText(), ListCTHDL, jDateNgayLap.getDate());
+                FrmLapHDL.ChinhSua = true;
+                FrmLapHDL.setVisible(true);
             }
         }
     }//GEN-LAST:event_jBtnBackMouseClicked
@@ -681,17 +676,17 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
 
     private void jBtnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLuuMouseClicked
         // TODO add your handling code here:
-        CtrlLapHoaDonLe ctrlLHDS = new CtrlLapHoaDonLe();
-        String SoHDS = ctrlLHDS.LaySoHDS();
+        CtrlLapHoaDonLe ctrlLHDL = new CtrlLapHoaDonLe();
+        String SoHDL = ctrlLHDL.LaySoHDL();
         if (!ChinhSua) {
-            ObjHDS = new ObjHoaDonSi(SoHDS, jtxtMaKH.getText(), jDateNgayLap.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), Integer.parseInt(jtxtSoTienDaThanhToan.getText().replace(",", "")), Integer.parseInt(jtxtSoTienNo.getText().replace(",", "")));
+            ObjHDL= new ObjHoaDonLe(SoHDL, jtxtMaKH.getText(), jDateNgayLap.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), Integer.parseInt(jtxtSoTienDaThanhToan.getText().replace(",", "")), Integer.parseInt(jtxtSoTienNo.getText().replace(",", "")));
 
             try {
-                if (modHDS.Insert(ObjHDS)) {
-                    for (int i = 0; i < ListCTHDS.size(); i++) {
-                        ListCTHDS.get(i).setSoHDS(SoHDS);
-                        if (!modCTHDS.Insert(ListCTHDS.get(i))) {
-                            JOptionPane.showMessageDialog(this, "Sản phẩm có mã " + ListCTHDS.get(i).getMaSP() + " lưu không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                if (modHDL.Insert(ObjHDL)) {
+                    for (int i = 0; i < ListCTHDL.size(); i++) {
+                        ListCTHDL.get(i).setSoHDL(SoHDL);
+                        if (!modCTHDL.Insert(ListCTHDL.get(i))) {
+                            JOptionPane.showMessageDialog(this, "Sản phẩm có mã " + ListCTHDL.get(i).getMaSP() + " lưu không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                     EnableComponent(false);

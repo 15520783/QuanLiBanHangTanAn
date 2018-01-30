@@ -601,7 +601,6 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
 
     private void jBtnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnBackMouseClicked
         // TODO add your handling code here:
-
         this.setVisible(false);
         this.dispose();
         if (!ChinhSua) {
@@ -685,7 +684,6 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
         String SoHDS = ctrlLHDS.LaySoHDS();
         if (!ChinhSua) {
             ObjHDS = new ObjHoaDonSi(SoHDS, jtxtMaKH.getText(), jDateNgayLap.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), Integer.parseInt(jtxtSoTienDaThanhToan.getText().replace(",", "")), Integer.parseInt(jtxtSoTienNo.getText().replace(",", "")));
-
             try {
                 if (modHDS.Insert(ObjHDS)) {
                     for (int i = 0; i < ListCTHDS.size(); i++) {

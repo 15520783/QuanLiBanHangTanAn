@@ -14,6 +14,9 @@ import java.util.Date;
 public class ObjHoaDonSi {
     private String SoHDS;
     private String MaKH;
+    private String TenKH;
+    private String DiaChi;
+    private String SDT;
     private Date NgayDat;
     private int TongTien;
     private int SoTienDaThanhToan;
@@ -30,6 +33,20 @@ public class ObjHoaDonSi {
         this.SoTienDaThanhToan = SoTienDaThanhToan;
         this.SoNoHienTai = SoNoHienTai;
     }
+
+    public ObjHoaDonSi(String SoHDS, String MaKH, String TenKH, String DiaChi, String SDT, Date NgayDat, int TongTien, int SoTienDaThanhToan, int SoNoHienTai) {
+        this.SoHDS = SoHDS;
+        this.MaKH = MaKH;
+        this.TenKH = TenKH;
+        this.DiaChi = DiaChi;
+        this.SDT = SDT;
+        this.NgayDat = NgayDat;
+        this.TongTien = TongTien;
+        this.SoTienDaThanhToan = SoTienDaThanhToan;
+        this.SoNoHienTai = SoNoHienTai;
+    }
+
+    
 
     public String getSoHDS() {
         return SoHDS;
@@ -55,6 +72,18 @@ public class ObjHoaDonSi {
         return SoNoHienTai;
     }
 
+    public String getTenKH() {
+        return TenKH;
+    }
+
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public String getSDT() {
+        return SDT;
+    }
+
     public void setSoHDS(String SoHDS) {
         this.SoHDS = SoHDS;
     }
@@ -77,6 +106,18 @@ public class ObjHoaDonSi {
 
     public void setSoNoHienTai(int SoNoHienTai) {
         this.SoNoHienTai = SoNoHienTai;
+    }
+
+    public void setTenKH(String TenKH) {
+        this.TenKH = TenKH;
+    }
+
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
+    }
+
+    public void setSDT(String SDT) {
+        this.SDT = SDT;
     }
     
     

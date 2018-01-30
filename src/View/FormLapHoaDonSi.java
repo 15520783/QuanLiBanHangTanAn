@@ -893,7 +893,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
 
                     }
                 } catch (Exception ex) {
-                    System.out.println("ERROR:" + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Nhập không hợp lệ.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

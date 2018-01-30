@@ -38,6 +38,16 @@ public class ObjChiTietHDL {
         this.ThanhTien = ThanhTien;
     }
 
+    public ObjChiTietHDL(String SoHDL, String MaSP, String TenSP, String DVT, int SoLuong, int DonGia, int ThanhTien) {
+        this.SoHDL = SoHDL;
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.DVT = DVT;
+        this.SoLuong = SoLuong;
+        this.DonGia = DonGia;
+        this.ThanhTien = ThanhTien;
+    }
+
     public String getSoHDL() {
         return SoHDL;
     }

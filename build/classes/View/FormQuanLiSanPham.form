@@ -850,6 +850,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxtGiaNhapActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtGiaNhapKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
@@ -949,6 +950,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxtGiaLeActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtGiaLeKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">

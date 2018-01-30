@@ -751,6 +751,11 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                 jtxtGiaNhapActionPerformed(evt);
             }
         });
+        jtxtGiaNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtGiaNhapKeyReleased(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Đơn vị tính :");
@@ -796,6 +801,11 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         jtxtGiaLe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtGiaLeActionPerformed(evt);
+            }
+        });
+        jtxtGiaLe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtGiaLeKeyReleased(evt);
             }
         });
 
@@ -1532,8 +1542,37 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbbTimTheoLoaiSPActionPerformed
 
     private void jtxtGiaSiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtGiaSiKeyReleased
-        // TODO add your handling code here:    
+        // TODO add your handling code here:
+        if (!jtxtGiaSi.getText().equals("")) {
+            try {
+                jtxtGiaSi.setText(String.format("%,d", Integer.parseInt(jtxtGiaSi.getText().replace(",", ""))));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jtxtGiaSiKeyReleased
+
+    private void jtxtGiaNhapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtGiaNhapKeyReleased
+        // TODO add your handling code here:
+        if (!jtxtGiaNhap.getText().equals("")) {
+            try {
+                jtxtGiaNhap.setText(String.format("%,d", Integer.parseInt(jtxtGiaNhap.getText().replace(",", ""))));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jtxtGiaNhapKeyReleased
+
+    private void jtxtGiaLeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtGiaLeKeyReleased
+        // TODO add your handling code here:
+        if (!jtxtGiaLe.getText().equals("")) {
+            try {
+                jtxtGiaLe.setText(String.format("%,d", Integer.parseInt(jtxtGiaLe.getText().replace(",", ""))));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jtxtGiaLeKeyReleased
 
     public void setColor(JPanel pn){
         if(pn.isEnabled()){

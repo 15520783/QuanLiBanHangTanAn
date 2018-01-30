@@ -829,6 +829,11 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         jLabel14.setText("Tiền nợ :");
 
         jtxtTienNo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jtxtTienNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtTienNoKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1346,6 +1351,17 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         Binding();
     }//GEN-LAST:event_jtxtTimKiemKeyReleased
 
+    private void jtxtTienNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTienNoKeyReleased
+        // TODO add your handling code here:
+        if (!jtxtTienNo.getText().equals("")) {
+            try {
+                jtxtTienNo.setText(String.format("%,d", Integer.parseInt(jtxtTienNo.getText().replace(",", ""))));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jtxtTienNoKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1512,5 +1528,6 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         jtxtDiaChi.setEditable(!Active);
         jtxtEmail.setEditable(!Active);
         jtxtTienNo.setEditable(!Active);
+        jtbDSKH.setEnabled(Active);
     }
 }

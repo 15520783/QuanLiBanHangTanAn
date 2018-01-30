@@ -14,6 +14,9 @@ import java.util.Date;
 public class ObjHoaDonLe {
     private String SoHDL;
     private String MaKH;
+    private String TenKH;
+    private String DiaChi;
+    private String SDT;
     private Date NgayDat;
     private int SoTienDaThanhToan;
     private int TongTien;
@@ -22,7 +25,7 @@ public class ObjHoaDonLe {
     public ObjHoaDonLe() {
     }
 
-    public ObjHoaDonLe(String SoHDL, String MaKH, Date NgayDat, int SoTienDaThanhToan, int TongTien, int SoNoHienTai) {
+    public ObjHoaDonLe(String SoHDL, String MaKH, Date NgayDat, int TongTien, int SoTienDaThanhToan, int SoNoHienTai) {
         this.SoHDL = SoHDL;
         this.MaKH = MaKH;
         this.NgayDat = NgayDat;
@@ -30,6 +33,20 @@ public class ObjHoaDonLe {
         this.TongTien = TongTien;
         this.SoNoHienTai = SoNoHienTai;
     }
+
+    public ObjHoaDonLe(String SoHDL, String MaKH, String TenKH, String DiaChi, String SDT, Date NgayDat, int SoTienDaThanhToan, int TongTien, int SoNoHienTai) {
+        this.SoHDL = SoHDL;
+        this.MaKH = MaKH;
+        this.TenKH = TenKH;
+        this.DiaChi = DiaChi;
+        this.SDT = SDT;
+        this.NgayDat = NgayDat;
+        this.SoTienDaThanhToan = SoTienDaThanhToan;
+        this.TongTien = TongTien;
+        this.SoNoHienTai = SoNoHienTai;
+    }
+
+   
 
     public String getSoHDL() {
         return SoHDL;
@@ -59,6 +76,18 @@ public class ObjHoaDonLe {
         this.SoHDL = SoHDL;
     }
 
+    public String getTenKH() {
+        return TenKH;
+    }
+
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public String getSDT() {
+        return SDT;
+    }
+
     public void setMaKH(String MaKH) {
         this.MaKH = MaKH;
     }
@@ -77,6 +106,18 @@ public class ObjHoaDonLe {
 
     public void setSoNoHienTai(int SoNoHienTai) {
         this.SoNoHienTai = SoNoHienTai;
+    }
+
+    public void setTenKH(String TenKH) {
+        this.TenKH = TenKH;
+    }
+
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
+    }
+
+    public void setSDT(String SDT) {
+        this.SDT = SDT;
     }
     
     
