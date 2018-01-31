@@ -14,19 +14,13 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Object.ObjSanPham;
-import Object.ObjLoaiSanPham;
 import Object.ObjChiTietHDL;
+import Object.ObjHoaDonLe;
 import Object.ObjKhachHang;
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
-import javafx.beans.binding.Bindings;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -45,8 +39,8 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
     ArrayList<String> listComboboxLSP = new ArrayList<>();
     ArrayList<ObjChiTietHDL> ListGioHang = new ArrayList<>();
     CtrlLapHoaDonLe CtrlHDL = new CtrlLapHoaDonLe();
-
     FormDuyetHoaDonLe frmDuyetHDL;
+    ObjHoaDonLe objectHDL = new ObjHoaDonLe();
 
     /**
      * Creates new form FormLapHoaDonLe
@@ -54,47 +48,43 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
     public FormLapHoaDonLe() {
         initComponents();
         this.setLocationRelativeTo(null);
+        LoadForm();              
+    }
 
+    public FormLapHoaDonLe(ObjHoaDonLe objHDL, ArrayList<ObjChiTietHDL> ListCT, Date NgayLap) {
+        initComponents();
         LoadForm();
-
-        TableModel tm = jtbGioHang.getModel();
-
-        tm.addTableModelListener(new TableModelListener() {
-
-            public void tableChanged(TableModelEvent tme) {
-                try {
-                    if (jtbGioHang.getCellEditor() == null) {
-                        System.out.println("Not Edited");
-                    } else {
-                        int SL = Integer.parseInt(tm.getValueAt(jtbGioHang.getSelectedRow(), 3).toString());
-                        int DonGia = Integer.parseInt(tm.getValueAt(jtbGioHang.getSelectedRow(), 4).toString().replace(",", ""));
-                        int ThanhTien = SL * DonGia;
-                        if (SL != ListGioHang.get(jtbGioHang.getSelectedRow()).getSoLuong()) {
-                            ListGioHang.get(jtbGioHang.getSelectedRow()).setSoLuong(SL);
-                        }
-                        if (DonGia != ListGioHang.get(jtbGioHang.getSelectedRow()).getDonGia()) {
-                            ListGioHang.get(jtbGioHang.getSelectedRow()).setDonGia(DonGia);
-                            tm.setValueAt(String.format("%,d", DonGia), jtbGioHang.getSelectedRow(), 4);
-                        }
-                        if (ThanhTien != ListGioHang.get(jtbGioHang.getSelectedRow()).getThanhTien()) {
-                            ListGioHang.get(jtbGioHang.getSelectedRow()).setThanhTien(ThanhTien);
-                            tm.setValueAt(String.format("%,d", ThanhTien), jtbGioHang.getSelectedRow(), 5);
-                        }
-                        jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
-                    }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Nhập không hợp lệ.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                }
+        this.setLocationRelativeTo(null);
+        objectHDL = objHDL;
+        jtxtSoHDL.setText(objHDL.getSoHDL());
+        jDateNgayLap.setDate(objHDL.getNgayDat());
+        jcbbKH.setSelectedItem(objHDL.getTenKH());
+        try {
+            DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
+            for (int i = 0; i < ListCT.size(); i++) {
+                this.ListGioHang.add(ListCT.get(i));
+                Vector v = new Vector();
+                v.add(ListCT.get(i).getMaSP());
+                v.add(ListCT.get(i).getTenSP());
+                v.add(ListCT.get(i).getDVT());
+                v.add(ListCT.get(i).getSoLuong());
+                v.add(String.format("%,d", ListCT.get(i).getDonGia()));
+                v.add(String.format("%,d", ListCT.get(i).getThanhTien()));
+                Model.addRow(v);
             }
-        });
-
+            jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormLapHoaDonSi():" + ex.getMessage());
+        }
+        
+        jBtnHuy.setVisible(false);
     }
 
     public FormLapHoaDonLe(String SoHDL, String TenKH, ArrayList<ObjChiTietHDL> ListCT, Date NgayLap) {
-       initComponents();
+        initComponents();
+        LoadForm();
         this.setLocationRelativeTo(null);
 
-        LoadForm();
         jtxtSoHDL.setText(SoHDL);
         jDateNgayLap.setDate(NgayLap);
         jcbbKH.setSelectedItem(TenKH);
@@ -114,9 +104,9 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
             jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
         } catch (Exception ex) {
             System.out.println("Ngoại lệ tại FormLapHoaDonSi():" + ex.getMessage());
-        }
+        }        
+        jBtnHuy.setVisible(false);
     }
-
     ArrayList<ObjKhachHang> listComboboxKH = new ArrayList<>();
 
     public void LoadComboboxKhachHang() {
@@ -906,6 +896,37 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         editFrm.MakeTransparentTable(jScrDSSP, jtbDSSP);
 
         jtxtSoHDL.setText(CtrlHDL.LaySoHDL());
+        
+        TableModel tm = jtbGioHang.getModel();
+
+        tm.addTableModelListener(new TableModelListener() {
+
+            public void tableChanged(TableModelEvent tme) {
+                try {
+                    if (jtbGioHang.getCellEditor() == null) {
+                        System.out.println("Not Edited");
+                    } else {
+                        int SL = Integer.parseInt(tm.getValueAt(jtbGioHang.getSelectedRow(), 3).toString());
+                        int DonGia = Integer.parseInt(tm.getValueAt(jtbGioHang.getSelectedRow(), 4).toString().replace(",", ""));
+                        int ThanhTien = SL * DonGia;
+                        if (SL != ListGioHang.get(jtbGioHang.getSelectedRow()).getSoLuong()) {
+                            ListGioHang.get(jtbGioHang.getSelectedRow()).setSoLuong(SL);
+                        }
+                        if (DonGia != ListGioHang.get(jtbGioHang.getSelectedRow()).getDonGia()) {
+                            ListGioHang.get(jtbGioHang.getSelectedRow()).setDonGia(DonGia);
+                            tm.setValueAt(String.format("%,d", DonGia), jtbGioHang.getSelectedRow(), 4);
+                        }
+                        if (ThanhTien != ListGioHang.get(jtbGioHang.getSelectedRow()).getThanhTien()) {
+                            ListGioHang.get(jtbGioHang.getSelectedRow()).setThanhTien(ThanhTien);
+                            tm.setValueAt(String.format("%,d", ThanhTien), jtbGioHang.getSelectedRow(), 5);
+                        }
+                        jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Nhập không hợp lệ.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
     }
 
     public void HienThiDanhSachSanPham(ResultSet rs) {
@@ -1231,9 +1252,12 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         try {
             if (jcbbKH.getSelectedIndex() != 0) {
                 if (ListGioHang.size() > 0) {
-                    frmDuyetHDL = new FormDuyetHoaDonLe(jtxtSoHDL.getText(), jDateNgayLap.getDate(), jtxtTongTien.getText(), listComboboxKH.get(jcbbKH.getSelectedIndex()), ListGioHang);
+
                     if (ChinhSua) {
+                        frmDuyetHDL = new FormDuyetHoaDonLe(objectHDL,listComboboxKH.get(jcbbKH.getSelectedIndex()),ListGioHang,jtxtTongTien.getText());
                         frmDuyetHDL.ChinhSua = true;
+                    } else {
+                        frmDuyetHDL = new FormDuyetHoaDonLe(jtxtSoHDL.getText(), jDateNgayLap.getDate(), jtxtTongTien.getText(), listComboboxKH.get(jcbbKH.getSelectedIndex()), ListGioHang);
                     }
                     frmDuyetHDL.setVisible(true);
                     this.setVisible(false);
@@ -1245,7 +1269,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error:"+ ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jbtnDuyetGioHangMouseClicked
 
@@ -1258,7 +1282,9 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
 
     private void jBtnHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnHuyMouseClicked
         // TODO add your handling code here:
-        ReloadForm();
+        if (jBtnHuy.isEnabled()) {
+            ReloadForm();
+        }
     }//GEN-LAST:event_jBtnHuyMouseClicked
 
 

@@ -1176,6 +1176,7 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
             jtxtEmail.setText("");
             EnableComponent(true);
             flag = 0;
+            Binding();
         }
     }//GEN-LAST:event_jBtnHuyMouseClicked
 
@@ -1183,7 +1184,7 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jBtnLuu.isEnabled()) {
             try {
-                ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(), Integer.parseInt(jtxtTienNo.getText()));
+                ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(), Integer.parseInt(jtxtTienNo.getText().replace(",","")));
                 if (!ObjKH.getTenKH().equals("")) {
                     if (flag == 1) {
                         if (ModKH.Insert(ObjKH)) {

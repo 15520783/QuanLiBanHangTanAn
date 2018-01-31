@@ -34,7 +34,7 @@ public class ObjHoaDonLe {
         this.SoNoHienTai = SoNoHienTai;
     }
 
-    public ObjHoaDonLe(String SoHDL, String MaKH, String TenKH, String DiaChi, String SDT, Date NgayDat, int SoTienDaThanhToan, int TongTien, int SoNoHienTai) {
+    public ObjHoaDonLe(String SoHDL, String MaKH, String TenKH, String DiaChi, String SDT, Date NgayDat, int TongTien, int SoTienDaThanhToan,int SoNoHienTai) {
         this.SoHDL = SoHDL;
         this.MaKH = MaKH;
         this.TenKH = TenKH;

@@ -5,7 +5,6 @@
  */
 package View;
 
-import Connect.Connect;
 import Control.CtrlDanhSachHoaDon;
 import Edit.Edit;
 import Model.ModChiTietHDL;
@@ -16,31 +15,17 @@ import Object.ObjHoaDonLe;
 import Object.ObjHoaDonSi;
 import Object.ObjChiTietHDL;
 import Object.ObjChiTietHDS;
-import Object.ObjKhachHang;
 import java.awt.Color;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 
 /**
@@ -443,7 +428,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jBtnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 265, 120, 65));
+        getContentPane().add(jBtnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 272, 120, 65));
 
         jBtnLamMoi.setBackground(new java.awt.Color(153, 153, 153));
         jBtnLamMoi.setPreferredSize(new java.awt.Dimension(105, 50));
@@ -482,7 +467,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jBtnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 265, 120, 65));
+        getContentPane().add(jBtnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 272, 120, 65));
 
         jBtnXemPhieuIn.setBackground(new java.awt.Color(153, 153, 153));
         jBtnXemPhieuIn.setPreferredSize(new java.awt.Dimension(102, 50));
@@ -603,6 +588,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
         getContentPane().add(jBtnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 593, 58, 108));
 
+        jcbbKhachHang.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jcbbKhachHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Chọn khách hàng---" }));
         jcbbKhachHang.setFocusable(false);
         getContentPane().add(jcbbKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 192, 270, -1));
@@ -661,13 +647,15 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jPnTraCuuThongTinHDL.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 98, -1, 20));
 
         jLabel36.setText("Số hóa đơn :");
-        jPnTraCuuThongTinHDL.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 144, -1, -1));
+        jPnTraCuuThongTinHDL.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 142, -1, 20));
+
+        jtxtTimKiemSoHDS1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jPnTraCuuThongTinHDL.add(jtxtTimKiemSoHDS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 141, 270, -1));
 
         jPnHDL.add(jPnTraCuuThongTinHDL, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 257));
 
         jTbDSHDL.setAutoCreateRowSorter(true);
-        jTbDSHDL.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        jTbDSHDL.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         jTbDSHDL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -825,7 +813,8 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
         jPnHDL.add(jPnThongTinHDL, new org.netbeans.lib.awtextra.AbsoluteConstraints(523, 11, 768, 257));
 
-        jTbCTHDL.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        jTbCTHDL.setAutoCreateRowSorter(true);
+        jTbCTHDL.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         jTbCTHDL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -919,7 +908,9 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jPnTraCuuThongTinHDS.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 98, -1, 20));
 
         jLabel8.setText("Số hóa đơn :");
-        jPnTraCuuThongTinHDS.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 144, -1, -1));
+        jPnTraCuuThongTinHDS.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 142, -1, 20));
+
+        jtxtTimKiemSoHDS.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jPnTraCuuThongTinHDS.add(jtxtTimKiemSoHDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 141, 270, -1));
 
         jPnTracuuthongtinHDS.setBackground(new java.awt.Color(0, 204, 204));
@@ -946,7 +937,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jPnHDS.add(jPnTraCuuThongTinHDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 257));
 
         jTbDSHDS.setAutoCreateRowSorter(true);
-        jTbDSHDS.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        jTbDSHDS.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         jTbDSHDS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -986,7 +977,8 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
         jPnHDS.add(jScrDSHDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 313, 490, 300));
 
-        jTbCTHDS.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        jTbCTHDS.setAutoCreateRowSorter(true);
+        jTbCTHDS.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         jTbCTHDS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1404,11 +1396,11 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
         ChinhSua = true;
         if (jTabbedPane1.getSelectedIndex() == 0) {
-            FormLapHoaDonLe FrmLapHDL = new FormLapHoaDonLe(jtxtSoHDL.getText(), jtxtTenKHHDL.getText(), ListCTHDL, jDateNgayLapHDL.getDate());
+            FormLapHoaDonLe FrmLapHDL = new FormLapHoaDonLe(ListHDL.get(jTbDSHDL.getSelectedRow()), ListCTHDL, jDateNgayLapHDL.getDate());
             FrmLapHDL.ChinhSua = true;
             FrmLapHDL.setVisible(true);
         } else {
-            FormLapHoaDonSi FrmLapHDS = new FormLapHoaDonSi(jtxtSoHDS.getText(), jtxtTenKHHDS.getText(), ListCTHDS, jDateNgayLapHDS.getDate());
+            FormLapHoaDonSi FrmLapHDS = new FormLapHoaDonSi(ListHDS.get(jTbDSHDS.getSelectedRow()), ListCTHDS, jDateNgayLapHDS.getDate());
             FrmLapHDS.ChinhSua = true;
             FrmLapHDS.setVisible(true);
         }

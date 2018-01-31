@@ -46,7 +46,7 @@ public class CtrlDanhSachHoaDon {
     
     public ResultSet LayThongTinChiTietHoaDonLe(String SoHDL){
         try{
-        String SQL = "Select CT.*,SP.TenSP,SP.DVT from SANPHAM SP, CTHDL CT where SP.MaSP=CT.MaSP and CT.SoHDL='"+SoHDL+"'";
+        String SQL = "Select CT.*,SP.TenSP,SP.DVT from SANPHAM SP, CTHDL CT where SP.MaSP=CT.MaSP and CT.SoHDL='"+SoHDL+"' order by SP.TenSP ASC";
         return DB.GetData(SQL);
         }
         catch(Exception ex){
@@ -57,7 +57,7 @@ public class CtrlDanhSachHoaDon {
     
     public ResultSet LayThongTinChiTietHoaDonSi(String SoHDS){
         try{
-        String SQL = "Select CT.*,SP.TenSP,SP.DVT from SANPHAM SP, CTHDS CT where SP.MaSP=CT.MaSP and CT.SoHDS='"+SoHDS+"'";
+        String SQL = "Select CT.*,SP.TenSP,SP.DVT from SANPHAM SP, CTHDS CT where SP.MaSP=CT.MaSP and CT.SoHDS='"+SoHDS+"' order by SP.TenSP ASC";
         return DB.GetData(SQL);
         }
         catch(Exception ex){

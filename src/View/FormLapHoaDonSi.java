@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Object.ObjSanPham;
 import Object.ObjChiTietHDS;
+import Object.ObjHoaDonSi;
 import Object.ObjKhachHang;
 import java.awt.event.KeyEvent;
 import java.util.Date;
@@ -38,7 +39,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
     ArrayList<String> listComboboxLSP = new ArrayList<>();
     ArrayList<ObjChiTietHDS> ListGioHang = new ArrayList<>();
     CtrlLapHoaDonLe CtrlHDL = new CtrlLapHoaDonLe();
-
+    ObjHoaDonSi objectHDS=new ObjHoaDonSi();
     FormDuyetHoaDonSi frmDuyetHDS;
 
     /**
@@ -51,11 +52,40 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         LoadForm();
     }
 
+    public FormLapHoaDonSi(ObjHoaDonSi objHDS, ArrayList<ObjChiTietHDS> ListCT, Date NgayLap) {
+        initComponents();
+        LoadForm();
+        this.setLocationRelativeTo(null);
+        objectHDS = objHDS;
+        jtxtSoHDS.setText(objHDS.getSoHDS());
+        jDateNgayLap.setDate(objHDS.getNgayDat());
+        jcbbKH.setSelectedItem(objHDS.getTenKH());
+        try {
+            DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
+            for (int i = 0; i < ListCT.size(); i++) {
+                this.ListGioHang.add(ListCT.get(i));
+                Vector v = new Vector();
+                v.add(ListCT.get(i).getMaSP());
+                v.add(ListCT.get(i).getTenSP());
+                v.add(ListCT.get(i).getDVT());
+                v.add(ListCT.get(i).getSoLuong());
+                v.add(String.format("%,d", ListCT.get(i).getDonGia()));
+                v.add(String.format("%,d", ListCT.get(i).getThanhTien()));
+                Model.addRow(v);
+            }
+            jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormLapHoaDonSi():" + ex.getMessage());
+        }
+        
+        jBtnHuy.setVisible(false);
+    }
+
     public FormLapHoaDonSi(String SoHDS, String TenKH, ArrayList<ObjChiTietHDS> ListCT, Date NgayLap) {
         initComponents();
+        LoadForm();
         this.setLocationRelativeTo(null);
 
-        LoadForm();
         jtxtSoHDS.setText(SoHDS);
         jDateNgayLap.setDate(NgayLap);
         jcbbKH.setSelectedItem(TenKH);
@@ -75,7 +105,8 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
             jtxtTongTien.setText(String.format("%,d", TinhTongTienGioHang()));
         } catch (Exception ex) {
             System.out.println("Ngoại lệ tại FormLapHoaDonSi():" + ex.getMessage());
-        }
+        }        
+        jBtnHuy.setVisible(false);
     }
 
     ArrayList<ObjKhachHang> listComboboxKH = new ArrayList<>();
@@ -1222,9 +1253,11 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         try {
             if (jcbbKH.getSelectedIndex() != 0) {
                 if (ListGioHang.size() > 0) {
-                    frmDuyetHDS = new FormDuyetHoaDonSi(jtxtSoHDS.getText(), jDateNgayLap.getDate(), jtxtTongTien.getText(), listComboboxKH.get(jcbbKH.getSelectedIndex()), ListGioHang);
-                    if (ChinhSua) {
+                     if (ChinhSua) {
+                        frmDuyetHDS = new FormDuyetHoaDonSi(objectHDS,listComboboxKH.get(jcbbKH.getSelectedIndex()),ListGioHang,jtxtTongTien.getText());
                         frmDuyetHDS.ChinhSua = true;
+                    } else {
+                        frmDuyetHDS = new FormDuyetHoaDonSi(jtxtSoHDS.getText(), jDateNgayLap.getDate(), jtxtTongTien.getText(), listComboboxKH.get(jcbbKH.getSelectedIndex()), ListGioHang);
                     }
                     frmDuyetHDS.setVisible(true);
                     this.setVisible(false);
