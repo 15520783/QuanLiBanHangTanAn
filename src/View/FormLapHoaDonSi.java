@@ -48,7 +48,6 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
     public FormLapHoaDonSi() {
         initComponents();
         this.setLocationRelativeTo(null);
-
         LoadForm();
     }
 
@@ -60,6 +59,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jtxtSoHDS.setText(objHDS.getSoHDS());
         jDateNgayLap.setDate(objHDS.getNgayDat());
         jcbbKH.setSelectedItem(objHDS.getTenKH());
+        jcbbKH.setEnabled(false);
         try {
             DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
             for (int i = 0; i < ListCT.size(); i++) {
@@ -89,6 +89,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jtxtSoHDS.setText(SoHDS);
         jDateNgayLap.setDate(NgayLap);
         jcbbKH.setSelectedItem(TenKH);
+        jcbbKH.setEnabled(false);
         try {
             DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
             for (int i = 0; i < ListCT.size(); i++) {
@@ -199,6 +200,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Lập hoá đơn sỉ");
         setFocusable(false);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -59,6 +59,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jtxtSoHDL.setText(objHDL.getSoHDL());
         jDateNgayLap.setDate(objHDL.getNgayDat());
         jcbbKH.setSelectedItem(objHDL.getTenKH());
+        jcbbKH.setEnabled(false);
         try {
             DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
             for (int i = 0; i < ListCT.size(); i++) {
@@ -88,6 +89,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jtxtSoHDL.setText(SoHDL);
         jDateNgayLap.setDate(NgayLap);
         jcbbKH.setSelectedItem(TenKH);
+        jcbbKH.setEnabled(false);
         try {
             DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
             for (int i = 0; i < ListCT.size(); i++) {
@@ -197,6 +199,7 @@ public class FormLapHoaDonLe extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Lập hoá đơn lẻ");
         setFocusable(false);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -26,7 +26,7 @@ public class ObjKhachHang {
         this.SDT = SDT;
         this.DiaChi = DiaChi;
         this.Email = Email;
-        this.TienNo = TienNo;
+        this.TienNo = TienNo;       
     }
 
     public String getMaKH() {

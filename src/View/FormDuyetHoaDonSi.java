@@ -77,11 +77,11 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
             Model.addRow(v);
         }
     }
-    
-     public FormDuyetHoaDonSi(ObjHoaDonSi objectHDS, ObjKhachHang ObjKH, ArrayList<ObjChiTietHDS> listGioHang,String TongTien) {
+
+    public FormDuyetHoaDonSi(ObjHoaDonSi objectHDS, ObjKhachHang ObjKH, ArrayList<ObjChiTietHDS> listGioHang, String TongTien) {
         initComponents();
         LoadForm();
-        ObjHDS=objectHDS;
+        ObjHDS = objectHDS;
         jtxtDiaChi.setLineWrap(true);
         EnableComponent(true);
         jtxtSoHDS.setText(objectHDS.getSoHDS());
@@ -111,6 +111,7 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
     }
 
     public void LoadForm() {
+        this.setLocationRelativeTo(null);
         jPanel1.setBackground(new Color(0, 0, 0, 0));
 
         JPanel ListPn[] = new JPanel[]{jPanel2, jPanel3};
@@ -185,6 +186,7 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Duyệt hoá đơn sỉ");
         setUndecorated(true);
         setSize(new java.awt.Dimension(1200, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -439,6 +441,7 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 436, -1, -1));
 
         jtxtSoTienDaThanhToan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jtxtSoTienDaThanhToan.setText("0");
         jtxtSoTienDaThanhToan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtxtSoTienDaThanhToanKeyReleased(evt);
@@ -646,6 +649,10 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
         String SoHDS = ctrlLHDS.LaySoHDS();
         if (!ChinhSua) {
             ObjHDS = new ObjHoaDonSi(SoHDS, jtxtMaKH.getText(), jDateNgayLap.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), Integer.parseInt(jtxtSoTienDaThanhToan.getText().replace(",", "")), Integer.parseInt(jtxtSoTienNo.getText().replace(",", "")));
+            if (jtxtSoTienDaThanhToan.getText() == "") {
+                ObjHDS.setSoTienDaThanhToan(0);
+            }
+
             try {
                 if (modHDS.Insert(ObjHDS)) {
                     for (int i = 0; i < ListCTHDS.size(); i++) {
@@ -661,30 +668,30 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Hóa đơn lưu thất bại.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (Exception ex) {
-                System.out.println("Ngoại lệ tại FormDuyetHoaDonSi.jBtnLuuMouseClicked:" + ex.getMessage());
+                JOptionPane.showMessageDialog(this, "Hóa đơn lưu thất bại.Error:" + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-//            ObjHDS = new ObjHoaDonSi(jtxtSoHDS.getText(), jtxtMaKH.getText(), jDateNgayLap.getDate(), jDateNgayGiao.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), "");            
-//            if (!ObjHDS.getMaKH().equals("")) {
-//                try {
-//                    if (modHDS.Update(ObjHDS) && modCTHDS.Delete(ObjHDS.getSoHDS())) {
-//                        for (int i = 0; i < ListCTHDS.size(); i++) {
-//                            if (!modCTHDS.Insert(ListCTHDS.get(i))) {
-//                                JOptionPane.showMessageDialog(this, "Sản phẩm có mã " + ListCTHDS.get(i).getMaSP() + " cập nhật không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//                            }
-//                        }
-//                        EnableComponent(false);
-//                        JOptionPane.showMessageDialog(this, "Hóa đơn " + ObjHDS.getSoHDS() + " cập nhật thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//                        LuuThanhCong = true;
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Hóa đơn " + ObjHDS.getSoHDS() + " cập nhật không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//                    }
-//                } catch (Exception ex) {
-//                    System.out.println("Ngoại lệ tại FormDuyetHoaDonSi.jBtnLuuMouseClicked:" + ex.getMessage());
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//            }
+            ObjHDS = new ObjHoaDonSi(ObjHDS.getSoHDS(), jtxtMaKH.getText(), jDateNgayLap.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), Integer.parseInt(jtxtSoTienDaThanhToan.getText().replace(",", "")), Integer.parseInt(jtxtSoTienNo.getText().replace(",", "")));
+            if (jtxtSoTienDaThanhToan.getText() == "") {
+                ObjHDS.setSoTienDaThanhToan(0);
+            }
+            try {
+                if (modHDS.Update(ObjHDS) && modCTHDS.Delete(ObjHDS.getSoHDS())) {
+                    for (int i = 0; i < ListCTHDS.size(); i++) {
+                        ListCTHDS.get(i).setSoHDS(ObjHDS.getSoHDS());
+                        if (!modCTHDS.Insert(ListCTHDS.get(i))) {
+                            JOptionPane.showMessageDialog(this, "Sản phẩm có mã " + ListCTHDS.get(i).getMaSP() + " cập nhật không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    EnableComponent(false);
+                    JOptionPane.showMessageDialog(this, "Hóa đơn " + ObjHDS.getSoHDS() + " cập nhật thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LuuThanhCong = true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hóa đơn " + ObjHDS.getSoHDS() + " cập nhật không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Hóa đơn lưu thất bại.Error:" + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jBtnLuuMouseClicked
 

@@ -13,11 +13,8 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -123,6 +120,7 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản lí khách hàng");
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1184,13 +1182,16 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jBtnLuu.isEnabled()) {
             try {
+                int index =jtbDSKH.getSelectedRow();
                 ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(), Integer.parseInt(jtxtTienNo.getText().replace(",","")));
+                if(jtxtTienNo.equals("")) ObjKH.setTienNo(0);
                 if (!ObjKH.getTenKH().equals("")) {
                     if (flag == 1) {
                         if (ModKH.Insert(ObjKH)) {
                             EnableComponent(true);
                             JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                             HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
+                            jtbDSKH.changeSelection(jtbDSKH.getRowCount()-1,0, false,false);
                         } else {
                             JOptionPane.showMessageDialog(this, "Thêm khách thất bại.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -1199,6 +1200,7 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
                             EnableComponent(true);
                             JOptionPane.showMessageDialog(this, "Cập nhật thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                             HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
+                            jtbDSKH.changeSelection(index,0,false,false);                          
                         } else {
                             JOptionPane.showMessageDialog(this, "Cập nhật thất bại.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -1217,7 +1219,6 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         if (jBtnSua.isEnabled()) {
             EnableComponent(false);
             flag = 0;
-            jtxtTienNo.setText(jtxtTienNo.getText().replace(",", ""));
         }
     }//GEN-LAST:event_jBtnSuaMouseClicked
 

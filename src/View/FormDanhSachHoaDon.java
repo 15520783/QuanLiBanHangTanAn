@@ -27,14 +27,13 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author ThaiNguyen
  */
 public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
-    boolean ChinhSua = false;
+    public static boolean ChinhSuaHD = false;
     Edit editFrm = new Edit();
     ArrayList<ObjHoaDonLe> ListHDL = new ArrayList<>();
     ArrayList<ObjHoaDonSi> ListHDS = new ArrayList<>();
@@ -47,6 +46,8 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     ModHoaDonSi modHDS = new ModHoaDonSi();
     CtrlDanhSachHoaDon CtrlDSHD = new CtrlDanhSachHoaDon();
     SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy      hh:mm:ss a");
+    FormLapHoaDonLe FrmLapHDL;
+    FormLapHoaDonSi FrmLapHDS;
 
     /**
      * Creates new form FormDanhSachHoaDon
@@ -89,7 +90,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         ((DefaultTableCellRenderer) jTbDSHDS.getDefaultRenderer(Object.class)).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 
         jtxtDiaChi.setLineWrap(true);
-        
+
         LoadForm();
     }
 
@@ -111,7 +112,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         try {
 
             while (rs.next()) {
-                ObjHoaDonLe itemHDL = new ObjHoaDonLe(rs.getString("SoHDL"), rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("DiaChi"), rs.getString("SDT"), rs.getTimestamp("NgayDat"), rs.getInt("TongTien"),rs.getInt("SoTienDaThanhToan"),rs.getInt("SoNoHienTai"));
+                ObjHoaDonLe itemHDL = new ObjHoaDonLe(rs.getString("SoHDL"), rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("DiaChi"), rs.getString("SDT"), rs.getTimestamp("NgayDat"), rs.getInt("TongTien"), rs.getInt("SoTienDaThanhToan"), rs.getInt("SoNoHienTai"));
                 ListHDL.add(itemHDL);
                 Vector v = new Vector();
                 v.add(itemHDL.getSoHDL());
@@ -136,7 +137,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             model.getDataVector().removeAllElements();
             model.fireTableDataChanged();
             while (rs.next()) {
-                ObjHoaDonSi itemHDS = new ObjHoaDonSi(rs.getString("SoHDS"), rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("DiaChi"), rs.getString("SDT"), rs.getTimestamp("NgayDat"), rs.getInt("TongTien"),rs.getInt("SoTienDaThanhToan"),rs.getInt("SoNoHienTai"));
+                ObjHoaDonSi itemHDS = new ObjHoaDonSi(rs.getString("SoHDS"), rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("DiaChi"), rs.getString("SDT"), rs.getTimestamp("NgayDat"), rs.getInt("TongTien"), rs.getInt("SoTienDaThanhToan"), rs.getInt("SoNoHienTai"));
                 ListHDS.add(itemHDS);
                 Vector v = new Vector();
                 v.add(itemHDS.getSoHDS());
@@ -163,7 +164,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
                 model.getDataVector().removeAllElements();
                 model.fireTableDataChanged();
                 while (rs.next()) {
-                    ObjChiTietHDL itemCTHDL = new ObjChiTietHDL(rs.getString("SoHDL"), rs.getString("MaSP"), rs.getString("TenSP"), rs.getString("DVT"),rs.getInt("SoLuong"), rs.getInt("DonGia"), rs.getInt("ThanhTien"));
+                    ObjChiTietHDL itemCTHDL = new ObjChiTietHDL(rs.getString("SoHDL"), rs.getString("MaSP"), rs.getString("TenSP"), rs.getString("DVT"), rs.getInt("SoLuong"), rs.getInt("DonGia"), rs.getInt("ThanhTien"));
                     ListCTHDL.add(itemCTHDL);
                     Vector v = new Vector();
                     v.add(itemCTHDL.getMaSP());
@@ -269,7 +270,6 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         }
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1394,15 +1394,25 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
     private void jBtnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSuaMouseClicked
         // TODO add your handling code here:
-        ChinhSua = true;
+
         if (jTabbedPane1.getSelectedIndex() == 0) {
-            FormLapHoaDonLe FrmLapHDL = new FormLapHoaDonLe(ListHDL.get(jTbDSHDL.getSelectedRow()), ListCTHDL, jDateNgayLapHDL.getDate());
-            FrmLapHDL.ChinhSua = true;
-            FrmLapHDL.setVisible(true);
+            if (CtrlDSHD.KiemTraSoHDL(jtxtSoHDL.getText(), jtxtMaKHHDL.getText())) {
+                ChinhSuaHD = true;
+                FrmLapHDL = new FormLapHoaDonLe(ListHDL.get(jTbDSHDL.getSelectedRow()), ListCTHDL, jDateNgayLapHDL.getDate());
+                FrmLapHDL.ChinhSua = true;
+                FrmLapHDL.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh sửa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
         } else {
-            FormLapHoaDonSi FrmLapHDS = new FormLapHoaDonSi(ListHDS.get(jTbDSHDS.getSelectedRow()), ListCTHDS, jDateNgayLapHDS.getDate());
-            FrmLapHDS.ChinhSua = true;
-            FrmLapHDS.setVisible(true);
+            if (CtrlDSHD.KiemTraSoHDS(jtxtSoHDS.getText(), jtxtMaKH.getText())) {
+                ChinhSuaHD = true;
+                FrmLapHDS = new FormLapHoaDonSi(ListHDS.get(jTbDSHDS.getSelectedRow()), ListCTHDS, jDateNgayLapHDS.getDate());
+                FrmLapHDS.ChinhSua = true;
+                FrmLapHDS.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh sửa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jBtnSuaMouseClicked
 
@@ -1431,18 +1441,26 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         int dialogButton = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
         if (dialogButton == JOptionPane.YES_OPTION) {
             if (jTabbedPane1.getSelectedIndex() == 0) {
-                if (modCTHDL.Delete(jtxtSoHDL.getText()) && modHDL.Delete(jtxtSoHDL.getText())) {
-                    JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDL.getText() + " đã xóa thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
+                if (CtrlDSHD.KiemTraSoHDL(jtxtSoHDL.getText(), jtxtMaKHHDL.getText())) {
+                    if (modCTHDL.Delete(jtxtSoHDL.getText()) && modHDL.Delete(jtxtSoHDL.getText())) {
+                        JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDL.getText() + " đã xóa thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDL.getText() + " xóa không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDL.getText() + " xóa không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh xoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
-                if (modCTHDS.Delete(jtxtSoHDS.getText()) && modHDS.Delete(jtxtSoHDS.getText())) {
-                    JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDS.getText() + " đã xóa thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    HienThiDanhSachHoaDonSi(CtrlDSHD.LayDanhSachHoaDonSi());
+                if (CtrlDSHD.KiemTraSoHDS(jtxtSoHDS.getText(), jtxtMaKH.getText())) {
+                    if (modCTHDS.Delete(jtxtSoHDS.getText()) && modHDS.Delete(jtxtSoHDS.getText())) {
+                        JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDS.getText() + " đã xóa thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        HienThiDanhSachHoaDonSi(CtrlDSHD.LayDanhSachHoaDonSi());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDS.getText() + " xóa không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDS.getText() + " xóa không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh xoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
@@ -1470,7 +1488,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        if (ChinhSua) {
+        if (ChinhSuaHD) {
             if (jTabbedPane1.getSelectedIndex() == 0) {
                 HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
                 BindingHDL();
@@ -1480,7 +1498,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
                 BindingHDS();
                 HienThiThongTinChiTietHDS(jtxtSoHDS.getText());
             }
-            ChinhSua = false;
+            ChinhSuaHD = false;
         }
     }//GEN-LAST:event_formWindowActivated
 
@@ -1488,7 +1506,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    int xx,yy;
+    int xx, yy;
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         // TODO add your handling code here:
         xx = evt.getX();
@@ -1519,7 +1537,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jTbDSHDL.getSelectedRow() != -1) {
             BindingHDL();
-            HienThiThongTinChiTietHDL(ListHDL.get(jTbDSHDS.getSelectedRow()).getSoHDL());
+            HienThiThongTinChiTietHDL(ListHDL.get(jTbDSHDL.getSelectedRow()).getSoHDL());
         }
     }//GEN-LAST:event_jTbDSHDLMouseClicked
 

@@ -37,6 +37,7 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
     Edit editFrm = new Edit();
     boolean LuuThanhCong = false;
     FormLapHoaDonSi frmLapHDS;
+
     /**
      * Creates new form FormDuyetHoaDon
      */
@@ -72,11 +73,11 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
             Model.addRow(v);
         }
     }
-    
-     public FormDuyetHoaDonLe(ObjHoaDonLe objectHDL, ObjKhachHang ObjKH, ArrayList<ObjChiTietHDL> listGioHang,String TongTien) {
+
+    public FormDuyetHoaDonLe(ObjHoaDonLe objectHDL, ObjKhachHang ObjKH, ArrayList<ObjChiTietHDL> listGioHang, String TongTien) {
         initComponents();
         LoadForm();
-        ObjHDL=objectHDL;
+        ObjHDL = objectHDL;
         jtxtDiaChi.setLineWrap(true);
         EnableComponent(true);
         jtxtSoHDL.setText(objectHDL.getSoHDL());
@@ -104,8 +105,8 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
             Model.addRow(v);
         }
     }
-    
-    public void LoadForm(){
+
+    public void LoadForm() {
         setLocationRelativeTo(null);
         jPanel1.setBackground(new Color(0, 0, 0, 0));
 
@@ -120,6 +121,7 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
 
         editFrm.MakeTransparentTable(jScrCTHDS, jTbCTHDS);
     }
+
     public void EnableComponent(boolean Active) {
         jBtnLuu.setVisible(Active);
         jlbLuu.setEnabled(Active);
@@ -180,6 +182,7 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Duyệt hoá đơn lẻ");
         setUndecorated(true);
         setSize(new java.awt.Dimension(1200, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -434,6 +437,7 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 436, -1, -1));
 
         jtxtSoTienDaThanhToan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jtxtSoTienDaThanhToan.setText("0");
         jtxtSoTienDaThanhToan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtxtSoTienDaThanhToanKeyReleased(evt);
@@ -640,8 +644,10 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
         CtrlLapHoaDonLe ctrlLHDL = new CtrlLapHoaDonLe();
         String SoHDL = ctrlLHDL.LaySoHDL();
         if (!ChinhSua) {
-            ObjHDL= new ObjHoaDonLe(SoHDL, jtxtMaKH.getText(), jDateNgayLap.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), Integer.parseInt(jtxtSoTienDaThanhToan.getText().replace(",", "")), Integer.parseInt(jtxtSoTienNo.getText().replace(",", "")));
-
+            ObjHDL = new ObjHoaDonLe(SoHDL, jtxtMaKH.getText(), jDateNgayLap.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), Integer.parseInt(jtxtSoTienDaThanhToan.getText().replace(",", "")), Integer.parseInt(jtxtSoTienNo.getText().replace(",", "")));
+            if (jtxtSoTienDaThanhToan.getText() == "") {
+                ObjHDL.setSoTienDaThanhToan(0);
+            }
             try {
                 if (modHDL.Insert(ObjHDL)) {
                     for (int i = 0; i < ListCTHDL.size(); i++) {
@@ -657,30 +663,31 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Hóa đơn lưu thất bại.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (Exception ex) {
-                System.out.println("Ngoại lệ tại FormDuyetHoaDonSi.jBtnLuuMouseClicked:" + ex.getMessage());
+                JOptionPane.showMessageDialog(this, "Hóa đơn lưu thất bại.Error:" + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-//            ObjHDS = new ObjHoaDonSi(jtxtSoHDS.getText(), jtxtMaKH.getText(), jDateNgayLap.getDate(), jDateNgayGiao.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), "");            
-//            if (!ObjHDS.getMaKH().equals("")) {
-//                try {
-//                    if (modHDS.Update(ObjHDS) && modCTHDS.Delete(ObjHDS.getSoHDS())) {
-//                        for (int i = 0; i < ListCTHDS.size(); i++) {
-//                            if (!modCTHDS.Insert(ListCTHDS.get(i))) {
-//                                JOptionPane.showMessageDialog(this, "Sản phẩm có mã " + ListCTHDS.get(i).getMaSP() + " cập nhật không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//                            }
-//                        }
-//                        EnableComponent(false);
-//                        JOptionPane.showMessageDialog(this, "Hóa đơn " + ObjHDS.getSoHDS() + " cập nhật thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//                        LuuThanhCong = true;
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Hóa đơn " + ObjHDS.getSoHDS() + " cập nhật không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//                    }
-//                } catch (Exception ex) {
-//                    System.out.println("Ngoại lệ tại FormDuyetHoaDonSi.jBtnLuuMouseClicked:" + ex.getMessage());
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//            }
+            ObjHDL = new ObjHoaDonLe(ObjHDL.getSoHDL(), jtxtMaKH.getText(), jDateNgayLap.getDate(), Integer.parseInt(jtxtTongTien.getText().replace(",", "")), Integer.parseInt(jtxtSoTienDaThanhToan.getText().replace(",", "")), Integer.parseInt(jtxtSoTienNo.getText().replace(",", "")));
+            if (jtxtSoTienDaThanhToan.getText() == "") {
+                ObjHDL.setSoTienDaThanhToan(0);
+            }
+            try {
+                if (modHDL.Update(ObjHDL) && modCTHDL.Delete(ObjHDL.getSoHDL())) {
+                    for (int i = 0; i < ListCTHDL.size(); i++) {
+                        ListCTHDL.get(i).setSoHDL(ObjHDL.getSoHDL());
+                        if (!modCTHDL.Insert(ListCTHDL.get(i))) {
+                            JOptionPane.showMessageDialog(this, "Sản phẩm có mã " + ListCTHDL.get(i).getMaSP() + " cập nhật không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    EnableComponent(false);
+                    JOptionPane.showMessageDialog(this, "Hóa đơn " + ObjHDL.getSoHDL() + " cập nhật thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    LuuThanhCong = true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hóa đơn " + ObjHDL.getSoHDL() + " cập nhật không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Hóa đơn lưu thất bại.Error:" + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         }
     }//GEN-LAST:event_jBtnLuuMouseClicked
 
