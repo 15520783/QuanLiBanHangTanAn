@@ -1443,10 +1443,10 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             if (jTabbedPane1.getSelectedIndex() == 0) {
                 if (CtrlDSHD.KiemTraSoHDL(jtxtSoHDL.getText(), jtxtMaKHHDL.getText())) {
                     if (modCTHDL.Delete(jtxtSoHDL.getText()) && modHDL.Delete(jtxtSoHDL.getText())) {
-                        JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDL.getText() + " đã xóa thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Đã xoá.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
                     } else {
-                        JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDL.getText() + " xóa không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Đã xoá.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh xoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -1454,10 +1454,10 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             } else {
                 if (CtrlDSHD.KiemTraSoHDS(jtxtSoHDS.getText(), jtxtMaKH.getText())) {
                     if (modCTHDS.Delete(jtxtSoHDS.getText()) && modHDS.Delete(jtxtSoHDS.getText())) {
-                        JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDS.getText() + " đã xóa thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Đã xoá.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         HienThiDanhSachHoaDonSi(CtrlDSHD.LayDanhSachHoaDonSi());
                     } else {
-                        JOptionPane.showMessageDialog(this, "Hóa đơn" + jtxtSoHDS.getText() + " xóa không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Đã xoá.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh xoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
