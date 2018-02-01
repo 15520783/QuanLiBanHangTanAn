@@ -819,7 +819,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jBtnKhohangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnKhohangMouseClicked
         // TODO add your handling code here:
-
+        new FormQuanLiPhieuThu().setVisible(true);
     }//GEN-LAST:event_jBtnKhohangMouseClicked
 
     private void jBtnKetoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnKetoanMouseClicked

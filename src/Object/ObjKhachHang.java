@@ -18,6 +18,7 @@ public class ObjKhachHang {
     private int TienNo;
 
     public ObjKhachHang() {
+        this.MaKH="";
     }
 
     public ObjKhachHang(String MaKH, String TenKH, String SDT, String DiaChi, String Email, int TienNo) {

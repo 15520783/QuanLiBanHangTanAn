@@ -676,9 +676,19 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         jtbDSKH.setRowHeight(25);
         jtbDSKH.setSelectionForeground(new java.awt.Color(255, 51, 0));
         jtbDSKH.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jtbDSKH.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jtbDSKHMouseDragged(evt);
+            }
+        });
         jtbDSKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtbDSKHMouseClicked(evt);
+            }
+        });
+        jtbDSKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtbDSKHKeyReleased(evt);
             }
         });
         jScrDSKH.setViewportView(jtbDSKH);
@@ -919,7 +929,7 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 720));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pexels-photo-459654.jpeg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pexels-photo-530024.jpeg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 720));
 
         pack();
@@ -1182,16 +1192,18 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jBtnLuu.isEnabled()) {
             try {
-                int index =jtbDSKH.getSelectedRow();
-                ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(), Integer.parseInt(jtxtTienNo.getText().replace(",","")));
-                if(jtxtTienNo.equals("")) ObjKH.setTienNo(0);
+                int index = jtbDSKH.getSelectedRow();
+                ObjKH = new ObjKhachHang(jtxtMaKH.getText(), jtxtTenKH.getText(), jtxtSDT.getText(), jtxtDiaChi.getText(), jtxtEmail.getText(), Integer.parseInt(jtxtTienNo.getText().replace(",", "")));
+                if (jtxtTienNo.equals("")) {
+                    ObjKH.setTienNo(0);
+                }
                 if (!ObjKH.getTenKH().equals("")) {
                     if (flag == 1) {
                         if (ModKH.Insert(ObjKH)) {
                             EnableComponent(true);
                             JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                             HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
-                            jtbDSKH.changeSelection(jtbDSKH.getRowCount()-1,0, false,false);
+                            jtbDSKH.changeSelection(jtbDSKH.getRowCount() - 1, 0, false, false);
                         } else {
                             JOptionPane.showMessageDialog(this, "Thêm khách thất bại.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -1199,8 +1211,8 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
                         if (ModKH.Update(ObjKH)) {
                             EnableComponent(true);
                             JOptionPane.showMessageDialog(this, "Cập nhật thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                            HienThiDanhSachKhachHang(CtrlKH.LayDanhSachKhachHang());
-                            jtbDSKH.changeSelection(index,0,false,false);                          
+                            jBtnTimKiemMouseClicked(null);
+                            jtbDSKH.changeSelection(index, 0, false, false);
                         } else {
                             JOptionPane.showMessageDialog(this, "Cập nhật thất bại.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -1364,6 +1376,17 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtxtTienNoKeyReleased
 
+    private void jtbDSKHMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbDSKHMouseDragged
+        // TODO add your handling code here:
+        if (jtbDSKH.isEnabled()) {
+            Binding();
+        }
+    }//GEN-LAST:event_jtbDSKHMouseDragged
+
+    private void jtbDSKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtbDSKHKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtbDSKHKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1502,20 +1525,22 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
     }
 
     public void Binding() {
-        TableModel model = jtbDSKH.getModel();
-        try {
-            int viewRow = jtbDSKH.getSelectedRow();
-            int modelRow = jtbDSKH.convertRowIndexToModel(viewRow);
-            if (viewRow > -1) {
-                jtxtMaKH.setText(listKH.get(modelRow).getMaKH());
-                jtxtTenKH.setText(listKH.get(modelRow).getTenKH());
-                jtxtSDT.setText(listKH.get(modelRow).getSDT());
-                jtxtDiaChi.setText(listKH.get(modelRow).getDiaChi());
-                jtxtEmail.setText(listKH.get(modelRow).getEmail());
-                jtxtTienNo.setText(String.format("%,d", listKH.get(modelRow).getTienNo()));
+        if (jtbDSKH.isEnabled()) {
+            TableModel model = jtbDSKH.getModel();
+            try {
+                int viewRow = jtbDSKH.getSelectedRow();
+                int modelRow = jtbDSKH.convertRowIndexToModel(viewRow);
+                if (viewRow > -1) {
+                    jtxtMaKH.setText(listKH.get(modelRow).getMaKH());
+                    jtxtTenKH.setText(listKH.get(modelRow).getTenKH());
+                    jtxtSDT.setText(listKH.get(modelRow).getSDT());
+                    jtxtDiaChi.setText(listKH.get(modelRow).getDiaChi());
+                    jtxtEmail.setText(listKH.get(modelRow).getEmail());
+                    jtxtTienNo.setText(String.format("%,d", listKH.get(modelRow).getTienNo()));
+                }
+            } catch (Exception ex) {
+                System.out.println("Ngoại lệ tại FormQuanLiKhachHang.Binding: " + ex.getMessage());
             }
-        } catch (Exception ex) {
-            System.out.println("Ngoại lệ tại FormQuanLiKhachHang.Binding: " + ex.getMessage());
         }
     }
 

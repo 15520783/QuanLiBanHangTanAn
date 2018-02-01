@@ -678,6 +678,11 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jTbDSHDL.setSelectionForeground(new java.awt.Color(255, 51, 0));
         jTbDSHDL.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTbDSHDL.getTableHeader().setReorderingAllowed(false);
+        jTbDSHDL.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jTbDSHDLMouseDragged(evt);
+            }
+        });
         jTbDSHDL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTbDSHDLMouseClicked(evt);
@@ -960,6 +965,11 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jTbDSHDS.setSelectionForeground(new java.awt.Color(255, 51, 0));
         jTbDSHDS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTbDSHDS.getTableHeader().setReorderingAllowed(false);
+        jTbDSHDS.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jTbDSHDSMouseDragged(evt);
+            }
+        });
         jTbDSHDS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTbDSHDSMouseClicked(evt);
@@ -1544,6 +1554,22 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     private void jTbDSHDSPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTbDSHDSPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbDSHDSPropertyChange
+
+    private void jTbDSHDLMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbDSHDLMouseDragged
+        // TODO add your handling code here:
+         if (jTbDSHDL.getSelectedRow() != -1) {
+            BindingHDL();
+            HienThiThongTinChiTietHDL(ListHDL.get(jTbDSHDL.getSelectedRow()).getSoHDL());
+        }
+    }//GEN-LAST:event_jTbDSHDLMouseDragged
+
+    private void jTbDSHDSMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbDSHDSMouseDragged
+        // TODO add your handling code here:
+        if (jTbDSHDS.getSelectedRow() != -1) {
+            BindingHDS();
+            HienThiThongTinChiTietHDS(ListHDS.get(jTbDSHDS.getSelectedRow()).getSoHDS());
+        }
+    }//GEN-LAST:event_jTbDSHDSMouseDragged
 
     public void setColor(JPanel pn) {
         if (pn.isEnabled()) {

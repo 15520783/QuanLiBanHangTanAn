@@ -927,7 +927,7 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 50, 540, 590));
 
         jTbDSSP.setAutoCreateRowSorter(true);
-        jTbDSSP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jTbDSSP.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
         jTbDSSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -948,6 +948,11 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         jTbDSSP.setRowHeight(25);
         jTbDSSP.setSelectionForeground(new java.awt.Color(255, 51, 0));
         jTbDSSP.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTbDSSP.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jTbDSSPMouseDragged(evt);
+            }
+        });
         jTbDSSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTbDSSPMouseClicked(evt);
@@ -1081,7 +1086,7 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 728));
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pexels-photo 1234.jpg"))); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pexels-photo-530024.jpeg"))); // NOI18N
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 728));
 
         pack();
@@ -1300,11 +1305,17 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
     public void Edit(boolean active){
         //jtxtMaSP.setEditable(active);
         jtxtTenSP.setEditable(active);
+        jtxtTenSP.setFocusable(active);
         jtxtGiaSi.setEditable(active);
+        jtxtGiaSi.setFocusable(active);
         jtxtGiaLe.setEditable(active);
+        jtxtGiaLe.setFocusable(active);
         jtxtGiaNhap.setEditable(active);
+        jtxtGiaNhap.setFocusable(active);
         jtxtDVT.setEditable(active);
+        jtxtDVT.setFocusable(active);
         jtxtMoTa.setEditable(active);
+        jtxtMoTa.setFocusable(active);
         jcbbPhanLoai.setEnabled(active);
         jTbDSSP.setEnabled(!active);
     }
@@ -1325,6 +1336,9 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
             Edit(true);
             SetVisibleButton(false);
             jtxtTenSP.setText("");
+            jtxtGiaLe.setText("0");
+            jtxtGiaNhap.setText("0");
+            jtxtGiaSi.setText("0");
             jtxtTenSP.requestFocus();
         }                 // TODO add your handling code here:
     }//GEN-LAST:event_jBtnThemMouseClicked
@@ -1468,12 +1482,14 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                     Edit(false);
                     SetVisibleButton(true);
                     HienThiDanhSachSanPham(CtrlQLSP.LayDSSanPham());
+                    jTbDSSP.changeSelection(jTbDSSP.getRowCount()-1,0, false, false);
                     Binding();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Thêm thất bại. Lỗi: " + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         } else {
+            int index=jTbDSSP.getSelectedRow();
             if (jtxtTenSP.getText().equals("") ||  jcbbPhanLoai.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin bao gồm : Tên sản phẩm, Nhà cung cấp, Loại sản phẩm.", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -1483,7 +1499,8 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Cập nhật thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     Edit(false);
                     SetVisibleButton(true);
-                    HienThiDanhSachSanPham(CtrlQLSP.LayDSSanPham());
+                    jBtnTimKiemMouseClicked(null);
+                    jTbDSSP.changeSelection(index, 0, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
                     Binding();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Cập nhật thất bại. Lỗi :" + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -1548,8 +1565,10 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                 jtxtGiaSi.setText(String.format("%,d", Integer.parseInt(jtxtGiaSi.getText().replace(",", ""))));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                jtxtGiaSi.setText("0");
             }
         }
+        else jtxtGiaSi.setText("0");
     }//GEN-LAST:event_jtxtGiaSiKeyReleased
 
     private void jtxtGiaNhapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtGiaNhapKeyReleased
@@ -1559,8 +1578,10 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                 jtxtGiaNhap.setText(String.format("%,d", Integer.parseInt(jtxtGiaNhap.getText().replace(",", ""))));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                jtxtGiaNhap.setText("0");
             }
         }
+        else jtxtGiaNhap.setText("0");
     }//GEN-LAST:event_jtxtGiaNhapKeyReleased
 
     private void jtxtGiaLeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtGiaLeKeyReleased
@@ -1570,9 +1591,17 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                 jtxtGiaLe.setText(String.format("%,d", Integer.parseInt(jtxtGiaLe.getText().replace(",", ""))));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                jtxtGiaLe.setText("0");
             }
         }
+        else jtxtGiaLe.setText("0");
     }//GEN-LAST:event_jtxtGiaLeKeyReleased
+
+    private void jTbDSSPMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbDSSPMouseDragged
+        // TODO add your handling code here:
+        if(jTbDSSP.getSelectedRow()>=0&&jTbDSSP.isEnabled())
+            Binding();
+    }//GEN-LAST:event_jTbDSSPMouseDragged
 
     public void setColor(JPanel pn){
         if(pn.isEnabled()){
