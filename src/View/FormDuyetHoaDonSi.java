@@ -764,6 +764,7 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         }
+        else jtxtSoTienDaThanhToan.setText("0");
     }//GEN-LAST:event_jtxtSoTienDaThanhToanKeyReleased
 
     public void setColor(JPanel pn) {
