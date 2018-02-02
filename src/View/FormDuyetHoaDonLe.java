@@ -181,7 +181,7 @@ public class FormDuyetHoaDonLe extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Duyệt hoá đơn lẻ");
         setUndecorated(true);
         setSize(new java.awt.Dimension(1200, 600));

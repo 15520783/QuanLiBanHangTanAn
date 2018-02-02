@@ -48,7 +48,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy   hh:mm:ss a");
     FormLapHoaDonLe FrmLapHDL;
     FormLapHoaDonSi FrmLapHDS;
-
+    int index =0;
     /**
      * Creates new form FormDanhSachHoaDon
      */
@@ -291,6 +291,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jBtnXoa = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
+        jCheckBoxTimTheoNgay = new javax.swing.JCheckBox();
         jcbbKhachHang = new javax.swing.JComboBox<>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPnHDL = new javax.swing.JPanel();
@@ -303,7 +304,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        jtxtTimKiemSoHDS1 = new javax.swing.JTextField();
+        jtxtTimKiemSoHDL = new javax.swing.JTextField();
         jScrDSHDL = new javax.swing.JScrollPane();
         jTbDSHDL = new javax.swing.JTable();
         jPnDSHDL = new javax.swing.JPanel();
@@ -384,7 +385,8 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản lí hoá đơn");
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -590,10 +592,19 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
         getContentPane().add(jBtnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 593, 58, 108));
 
+        jCheckBoxTimTheoNgay.setText("Tìm theo ngày");
+        jCheckBoxTimTheoNgay.setOpaque(false);
+        getContentPane().add(jCheckBoxTimTheoNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 166, -1, -1));
+
         jcbbKhachHang.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jcbbKhachHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Chọn khách hàng---" }));
         jcbbKhachHang.setFocusable(false);
-        getContentPane().add(jcbbKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 192, 270, -1));
+        jcbbKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbbKhachHangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jcbbKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 194, 270, -1));
 
         jTabbedPane1.setFocusable(false);
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -646,13 +657,13 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jPnTraCuuThongTinHDL.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 48, -1, 20));
 
         jLabel35.setText("Khách hàng :");
-        jPnTraCuuThongTinHDL.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 98, -1, 20));
+        jPnTraCuuThongTinHDL.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
         jLabel36.setText("Số hóa đơn :");
         jPnTraCuuThongTinHDL.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 142, -1, 20));
 
-        jtxtTimKiemSoHDS1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        jPnTraCuuThongTinHDL.add(jtxtTimKiemSoHDS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 141, 270, -1));
+        jtxtTimKiemSoHDL.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jPnTraCuuThongTinHDL.add(jtxtTimKiemSoHDL, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 141, 270, -1));
 
         jPnHDL.add(jPnTraCuuThongTinHDL, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 257));
 
@@ -913,7 +924,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jPnTraCuuThongTinHDS.add(jDateDenNgayHDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 48, 137, -1));
 
         jLabel7.setText("Khách hàng :");
-        jPnTraCuuThongTinHDS.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 98, -1, 20));
+        jPnTraCuuThongTinHDS.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
         jLabel8.setText("Số hóa đơn :");
         jPnTraCuuThongTinHDS.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 142, -1, 20));
@@ -1286,23 +1297,25 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
     private void jBtnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnTimKiemMouseClicked
         // TODO add your handling code here:
-//        try {
-//            if (jTabbedPane1.getSelectedIndex() == 0) {
-//                HienThiDanhSachHoaDonLe(CtrlDSHD.TimKiemHDL(jtxtTimKiemKhachHang.getText(), jtxtTimKiemSoHDL.getText(), jDateTuNgayHDL.getDate(), jDateDenNgayHDL.getDate()));
-//            } else {
-//                String TinhTrang = "";
-//                if (jcbbPhanLoai.getSelectedIndex() == 0) {
-//                    TinhTrang = "";
-//                } else if (jcbbPhanLoai.getSelectedIndex() == 1) {
-//                    TinhTrang = "Đã giao";
-//                } else {
-//                    TinhTrang = "Chưa giao";
-//                }
-//                HienThiDanhSachHoaDonSi(CtrlDSHD.TimKiemHDS(ListKH.get(jcbbKhachHang.getSelectedIndex()), jtxtTimKiemSoHDS.getText(), TinhTrang, jDateTuNgayHDS.getDate(), jDateDenNgayHDS.getDate()));
-//            }
-//        } catch (Exception ex) {
-//            System.out.println("Ngoại lệ tại FormDanhSachHoaDon.jBtnTimKiemMouseClicked: " + ex.getMessage());
-//        }
+        try {
+            if (jCheckBoxTimTheoNgay.isSelected()) {
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    HienThiDanhSachHoaDonLe(CtrlDSHD.TimKiemHDL(ListKH.get(jcbbKhachHang.getSelectedIndex()), jtxtTimKiemSoHDL.getText(), jDateTuNgayHDL.getDate(), jDateDenNgayHDL.getDate()));
+                } else {
+                    HienThiDanhSachHoaDonSi(CtrlDSHD.TimKiemHDS(ListKH.get(jcbbKhachHang.getSelectedIndex()), jtxtTimKiemSoHDS.getText(), jDateTuNgayHDS.getDate(), jDateDenNgayHDS.getDate()));
+                }
+            }
+            else{
+                 if (jTabbedPane1.getSelectedIndex() == 0) {
+                    HienThiDanhSachHoaDonLe(CtrlDSHD.TimKiemHDL(ListKH.get(jcbbKhachHang.getSelectedIndex()), jtxtTimKiemSoHDL.getText()));
+                } else {
+                    HienThiDanhSachHoaDonSi(CtrlDSHD.TimKiemHDS(ListKH.get(jcbbKhachHang.getSelectedIndex()), jtxtTimKiemSoHDS.getText()));
+                }
+            }
+                
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormDanhSachHoaDon.jBtnTimKiemMouseClicked: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jBtnTimKiemMouseClicked
 
     private void jBtnTimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnTimKiemMouseEntered
@@ -1347,19 +1360,19 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
     private void jBtnLamMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLamMoiMouseClicked
         // TODO add your handling code here:
-//        if (jTabbedPane1.getSelectedIndex() == 0) {
-//            jDateTuNgayHDL.setDate(new Date());
-//            jDateDenNgayHDL.setDate(new Date());
-//            jtxtTimKiemKhachHang.setText("");
-//            jtxtTimKiemSoHDL.setText("");
-//            HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
-//        } else {
-//            jDateTuNgayHDS.setDate(new Date());
-//            jDateDenNgayHDS.setDate(new Date());            
-//            jtxtTimKiemSoHDS.setText("");
-//            HienThiDanhSachHoaDonSi(CtrlDSHD.LayDanhSachHoaDonSi());
-//            LoadComboboxKhachHang();
-//        }
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            jDateTuNgayHDL.setDate(new Date());
+            jDateDenNgayHDL.setDate(new Date());
+            jcbbKhachHang.setSelectedIndex(0);
+            jtxtTimKiemSoHDL.setText("");
+            //HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
+        } else {
+            jDateTuNgayHDS.setDate(new Date());
+            jDateDenNgayHDS.setDate(new Date()); 
+            jcbbKhachHang.setSelectedIndex(0);
+            jtxtTimKiemSoHDS.setText("");
+            //HienThiDanhSachHoaDonSi(CtrlDSHD.LayDanhSachHoaDonSi());
+        }
     }//GEN-LAST:event_jBtnLamMoiMouseClicked
 
     private void jBtnXemPhieuInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXemPhieuInMouseClicked
@@ -1407,9 +1420,9 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnXemPhieuInMouseReleased
 
     private void jBtnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSuaMouseClicked
-        // TODO add your handling code here:
-
+        // TODO add your handling code here:      
         if (jTabbedPane1.getSelectedIndex() == 0) {
+            index=jTbDSHDL.getSelectedRow();
             if (CtrlDSHD.KiemTraSoHDL(jtxtSoHDL.getText(), jtxtMaKHHDL.getText())) {
                 ChinhSuaHD = true;
                 FrmLapHDL = new FormLapHoaDonLe(ListHDL.get(jTbDSHDL.getSelectedRow()), ListCTHDL, jDateNgayLapHDL.getDate());
@@ -1419,6 +1432,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh sửa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
+            index=jTbDSHDS.getSelectedRow();
             if (CtrlDSHD.KiemTraSoHDS(jtxtSoHDS.getText(), jtxtMaKH.getText())) {
                 ChinhSuaHD = true;
                 FrmLapHDS = new FormLapHoaDonSi(ListHDS.get(jTbDSHDS.getSelectedRow()), ListCTHDS, jDateNgayLapHDS.getDate());
@@ -1504,13 +1518,13 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (ChinhSuaHD) {
             if (jTabbedPane1.getSelectedIndex() == 0) {
-                HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
+                jBtnTimKiemMouseClicked(null);
+                jTbDSHDL.changeSelection(index, 0, false, false);
                 BindingHDL();
-                HienThiThongTinChiTietHDL(jtxtSoHDL.getText());
             } else {
-                HienThiDanhSachHoaDonSi(CtrlDSHD.LayDanhSachHoaDonSi());
+                jBtnTimKiemMouseClicked(null);
+                jTbDSHDS.changeSelection(index, 0, false, false);
                 BindingHDS();
-                HienThiThongTinChiTietHDS(jtxtSoHDS.getText());
             }
             ChinhSuaHD = false;
         }
@@ -1561,7 +1575,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
     private void jTbDSHDLMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbDSHDLMouseDragged
         // TODO add your handling code here:
-         if (jTbDSHDL.getSelectedRow() != -1) {
+        if (jTbDSHDL.getSelectedRow() != -1) {
             BindingHDL();
             HienThiThongTinChiTietHDL(ListHDL.get(jTbDSHDL.getSelectedRow()).getSoHDL());
         }
@@ -1574,6 +1588,11 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             HienThiThongTinChiTietHDS(ListHDS.get(jTbDSHDS.getSelectedRow()).getSoHDS());
         }
     }//GEN-LAST:event_jTbDSHDSMouseDragged
+
+    private void jcbbKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbKhachHangActionPerformed
+        // TODO add your handling code here:
+        jBtnTimKiemMouseClicked(null);
+    }//GEN-LAST:event_jcbbKhachHangActionPerformed
 
     public void setColor(JPanel pn) {
         if (pn.isEnabled()) {
@@ -1662,6 +1681,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     private javax.swing.JPanel jBtnTimKiem;
     private javax.swing.JPanel jBtnXemPhieuIn;
     private javax.swing.JPanel jBtnXoa;
+    private javax.swing.JCheckBox jCheckBoxTimTheoNgay;
     private com.toedter.calendar.JDateChooser jDateDenNgayHDL;
     private com.toedter.calendar.JDateChooser jDateDenNgayHDS;
     private com.toedter.calendar.JDateChooser jDateNgayLapHDL;
@@ -1754,8 +1774,8 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtSoTienDaThanhToanHDS;
     private javax.swing.JTextField jtxtTenKHHDL;
     private javax.swing.JTextField jtxtTenKHHDS;
+    private javax.swing.JTextField jtxtTimKiemSoHDL;
     private javax.swing.JTextField jtxtTimKiemSoHDS;
-    private javax.swing.JTextField jtxtTimKiemSoHDS1;
     private javax.swing.JTextField jtxtTongTienHDL;
     private javax.swing.JTextField jtxtTongTienHDS;
     // End of variables declaration//GEN-END:variables

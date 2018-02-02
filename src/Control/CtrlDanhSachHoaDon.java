@@ -68,7 +68,7 @@ public class CtrlDanhSachHoaDon {
 
     public ResultSet LayDanhSachKhachHang() {
         try {
-            String SQL = "Select MaKH,TenKH from KHACHHANG";
+            String SQL = "Select MaKH,TenKH from KHACHHANG order by TenKH ASC";
             return DB.GetData(SQL);
         } catch (Exception ex) {
             System.out.println("Ngoại lệ tại CtrlDanhSachHoaDon.LayDanhSachKhachHang:" + ex.getMessage());
@@ -76,9 +76,19 @@ public class CtrlDanhSachHoaDon {
         return null;
     }
 
-    public ResultSet TimKiemHDL(String TenKH, String SoHDL, Date tungay, Date denngay) {
+    public ResultSet TimKiemHDL(String MaKH, String SoHDL, Date tungay, Date denngay) {
         try {
-            String SQL = "Select * from HOADONLE where TenKH like '%" + TenKH + "%' and SoHDL like '%" + SoHDL + "%' and NgayLap between ('" + dt1.format(tungay) + "') and ('" + dt1.format(denngay) + "  23:59:59')";
+            String SQL = "Select * from HOADONLE HDL,KHACHHANG KH where KH.MaKH=HDL.MaKH and KH.MaKH like '%" + MaKH + "%' and HDL.SoHDL like '%" + SoHDL + "%' and HDL.NgayDat between ('" + dt1.format(tungay) + "') and ('" + dt1.format(denngay) + "  23:59:59') order by HDL.SoHDL DESC";
+            return DB.GetData(SQL);
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại CtrlDanhSachHoaDon.TimKiemHDL:" + ex.getMessage());
+        }
+        return null;
+    }
+    
+    public ResultSet TimKiemHDL(String MaKH, String SoHDL) {
+        try {
+            String SQL = "Select * from HOADONLE HDL,KHACHHANG KH where KH.MaKH=HDL.MaKH and KH.MaKH like '%" + MaKH + "%' and HDL.SoHDL like '%" + SoHDL + "%' order by HDL.SoHDL DESC";
             return DB.GetData(SQL);
         } catch (Exception ex) {
             System.out.println("Ngoại lệ tại CtrlDanhSachHoaDon.TimKiemHDL:" + ex.getMessage());
@@ -86,11 +96,22 @@ public class CtrlDanhSachHoaDon {
         return null;
     }
 
-    public ResultSet TimKiemHDS(String MaKH, String SoHDS, String TinhTrang, Date tungay, Date denngay) {
+    public ResultSet TimKiemHDS(String MaKH, String SoHDS,Date tungay, Date denngay) {
         try {
             String SQL = "Select HDS.*,KH.TenKH,KH.DiaChi,KH.SDT from KHACHHANG KH,HOADONSI HDS where KH.MaKH=HDS.MaKH and "
-                    + "HDS.MaKH like '%" + MaKH + "%' and HDS.SoHDS like '%" + SoHDS + "%' and HDS.TinhTrangGiaoHang like '%" + TinhTrang + "%'"
-                    + " and HDS.NgayLap between ('" + dt1.format(tungay) + "') and ('" + dt1.format(denngay) + " 23:59:59')";
+                    + "HDS.MaKH like '%" + MaKH + "%' and HDS.SoHDS like '%" + SoHDS + "%' "
+                    + " and HDS.NgayDat between ('" + dt1.format(tungay) + "') and ('" + dt1.format(denngay) + " 23:59:59') order by HDS.SoHDS DESC";
+            return DB.GetData(SQL);
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại CtrlDanhSachHoaDon.TimKiemHDS: " + ex.getMessage());
+        }
+        return null;
+    }
+    
+     public ResultSet TimKiemHDS(String MaKH, String SoHDS) {
+        try {
+            String SQL = "Select HDS.*,KH.TenKH,KH.DiaChi,KH.SDT from KHACHHANG KH,HOADONSI HDS where KH.MaKH=HDS.MaKH and "
+                    + "HDS.MaKH like '%" + MaKH + "%' and HDS.SoHDS like '%" + SoHDS + "%' order by HDS.SoHDS DESC";
             return DB.GetData(SQL);
         } catch (Exception ex) {
             System.out.println("Ngoại lệ tại CtrlDanhSachHoaDon.TimKiemHDS: " + ex.getMessage());

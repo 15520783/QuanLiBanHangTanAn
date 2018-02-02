@@ -153,6 +153,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản lí phiếu thu");
         setUndecorated(true);
         setSize(new java.awt.Dimension(1366, 728));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

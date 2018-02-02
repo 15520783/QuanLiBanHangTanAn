@@ -123,7 +123,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Màn hình chính");
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -340,14 +340,14 @@ public class MainForm extends javax.swing.JFrame {
         jBtnThietlap.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlbIconThietLap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlbIconThietLap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Settings_64px.png"))); // NOI18N
+        jlbIconThietLap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_Statistics_64px.png"))); // NOI18N
         jBtnThietlap.add(jlbIconThietLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 20, 70, 60));
 
         jlbThietLap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jlbThietLap.setForeground(new java.awt.Color(255, 255, 255));
         jlbThietLap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlbThietLap.setText("Thiết lập");
-        jBtnThietlap.add(jlbThietLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 120, -1));
+        jlbThietLap.setText("Thống kê doanh thu");
+        jBtnThietlap.add(jlbThietLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 90, 150, -1));
 
         getContentPane().add(jBtnThietlap, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, 180, 120));
 
@@ -913,7 +913,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jBtnThietlapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThietlapMouseClicked
         // TODO add your handling code here:
-
+        new FormThongKeDoanhThu().setVisible(true);
     }//GEN-LAST:event_jBtnThietlapMouseClicked
 
     private void jBtnDoiMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnDoiMKMouseClicked

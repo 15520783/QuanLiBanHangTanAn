@@ -199,7 +199,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lập hoá đơn sỉ");
         setFocusable(false);
         setUndecorated(true);
