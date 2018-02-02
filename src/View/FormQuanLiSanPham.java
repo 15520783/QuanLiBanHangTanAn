@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package View;
+
 import Control.CtrlQuanLiSanPham;
 import Edit.Edit;
 import Model.ModSanPham;
@@ -25,108 +26,108 @@ import javax.swing.table.TableModel;
  */
 public class FormQuanLiSanPham extends javax.swing.JFrame {
 
-    Edit editFrm=new Edit();
+    Edit editFrm = new Edit();
     ArrayList<ObjSanPham> ListSP = new ArrayList<>();
     ObjSanPham ObjSP = new ObjSanPham();
     CtrlQuanLiSanPham CtrlQLSP = new CtrlQuanLiSanPham();
     ModSanPham ModSP = new ModSanPham();
     ArrayList<String> ListComboboxNCC = new ArrayList();
     ArrayList<String> ListComboboxLoaiSP = new ArrayList();
-    private int flag=0;
+    private int flag = 0;
+
     /**
      * Creates new form FormQuanLiSanPham
      */
     public FormQuanLiSanPham() {
         initComponents();
         setLocationRelativeTo(null);
-        
-        jPanel9.setBackground((new Color(0,0,0,0)));
-        JPanel ListPanel[]=new JPanel[]{jPanel3,jPanel5,jPanel8};
+
+        jPanel9.setBackground((new Color(0, 0, 0, 0)));
+        JPanel ListPanel[] = new JPanel[]{jPanel3, jPanel5, jPanel8};
         editFrm.MakeTransparentPanel(ListPanel);
-        
-        JPanel ListTitle[]=new JPanel[]{jPnDSSP,jPnThongtinSP,jPnTracuuSP};
+
+        JPanel ListTitle[] = new JPanel[]{jPnDSSP, jPnThongtinSP, jPnTracuuSP};
         editFrm.MakeTransparentTitle(ListTitle);
-        
-        JPanel ListButton[]=new JPanel[]{jBtnBack,jBtnHuy,jBtnLamMoi,jBtnLuu,jBtnSua,jBtnThem,jBtnTimKiem,jBtnXoa};
+
+        JPanel ListButton[] = new JPanel[]{jBtnBack, jBtnHuy, jBtnLamMoi, jBtnLuu, jBtnSua, jBtnThem, jBtnTimKiem, jBtnXoa};
         editFrm.MakeTransparentButton(ListButton);
-        
+
         editFrm.MakeTransparentTable(jScrDSSP, jTbDSSP);
         jtxtMoTa.setLineWrap(true);
         jtxtTenSP.setLineWrap(true);
         LoadForm();
     }
-    public void HienThiDanhSachSanPham(ResultSet rs){
+
+    public void HienThiDanhSachSanPham(ResultSet rs) {
         ListSP.clear();
         DefaultTableModel model;
-        model=(DefaultTableModel) jTbDSSP.getModel();
-        model.getDataVector().removeAllElements(); 
+        model = (DefaultTableModel) jTbDSSP.getModel();
+        model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
-        try{
-            while(rs.next()){
+        try {
+            while (rs.next()) {
                 ObjSanPham itemSP;
-                itemSP =new ObjSanPham(rs.getString("MaSP"),rs.getString("TenSP"),rs.getString("MaLoaiSP"),rs.getString("TenLoaiSP"),rs.getInt("GiaLe"),rs.getInt("GiaSi"),rs.getInt("GiaNhap"),rs.getString("DVT"),rs.getString("MoTa"));
+                itemSP = new ObjSanPham(rs.getString("MaSP"), rs.getString("TenSP"), rs.getString("MaLoaiSP"), rs.getString("TenLoaiSP"), rs.getInt("GiaLe"), rs.getInt("GiaSi"), rs.getInt("GiaNhap"), rs.getString("DVT"), rs.getString("MoTa"));
                 ListSP.add(itemSP);
-                model.addRow(new Object[]{itemSP.getMaSP(),itemSP.getTenSP(),String.format("%,d",itemSP.getGiaLe()),String.format("%,d",itemSP.getGiaSi()),String.format("%,d",itemSP.getGiaNhap())});
+                model.addRow(new Object[]{itemSP.getMaSP(), itemSP.getTenSP(), String.format("%,d", itemSP.getGiaLe()), String.format("%,d", itemSP.getGiaSi()), String.format("%,d", itemSP.getGiaNhap())});
             }
         } catch (SQLException ex) {
-            System.out.println("Ngoại lệ tại FormQuanLiDonDatHang.HienThiDanhSachDonDatHang: "+ex.getMessage());
-        }
-        finally{
+            System.out.println("Ngoại lệ tại FormQuanLiDonDatHang.HienThiDanhSachDonDatHang: " + ex.getMessage());
+        } finally {
             CtrlQLSP.CloseConnection();
         }
-        jTbDSSP.changeSelection(0,0,false,false);
+        jTbDSSP.changeSelection(0, 0, false, false);
     }
-    
-    public void LoadComboboxLoaiSP(){
+
+    public void LoadComboboxLoaiSP() {
         ListComboboxLoaiSP.clear();
         jcbbTimTheoLoaiSP.removeAllItems();
         jcbbPhanLoai.removeAllItems();
         jcbbTimTheoLoaiSP.addItem("---Chọn loại sản phẩm---");
         jcbbPhanLoai.addItem("---Chọn loại sản phẩm---");
         ListComboboxLoaiSP.add("");
-        ResultSet rs=CtrlQLSP.LayDanhSachLoaiSanPham();
-        try{
-            while(rs.next()){
+        ResultSet rs = CtrlQLSP.LayDanhSachLoaiSanPham();
+        try {
+            while (rs.next()) {
                 jcbbTimTheoLoaiSP.addItem(rs.getString("TenLoaiSP"));
                 jcbbPhanLoai.addItem(rs.getString("TenLoaiSP"));
                 ListComboboxLoaiSP.add(rs.getString("MaLoaiSP"));
             }
-        }
-        catch(SQLException ex){
-            System.out.println("Ngoại lệ tại FormQuanLiSanPham.LoadComboboxLoaiSP: "+ex.getMessage());
-        }
-        finally{
+        } catch (SQLException ex) {
+            System.out.println("Ngoại lệ tại FormQuanLiSanPham.LoadComboboxLoaiSP: " + ex.getMessage());
+        } finally {
             CtrlQLSP.CloseConnection();
         }
     }
-    public void Binding(){
-        TableModel model =jTbDSSP.getModel();
-        try{
+
+    public void Binding() {
+        TableModel model = jTbDSSP.getModel();
+        try {
             int viewRow = jTbDSSP.getSelectedRow();
-            int modelRow= jTbDSSP.convertRowIndexToModel(viewRow);
-             if(viewRow>-1){
+            int modelRow = jTbDSSP.convertRowIndexToModel(viewRow);
+            if (viewRow > -1) {
                 jtxtMaSP.setText(ListSP.get(modelRow).getMaSP());
                 jtxtTenSP.setText(ListSP.get(modelRow).getTenSP());
-                jtxtGiaSi.setText(String.format("%,d",ListSP.get(modelRow).getGiaSi()));
-                jtxtGiaLe.setText(String.format("%,d",ListSP.get(modelRow).getGiaLe()));   
-                jtxtGiaNhap.setText(String.format("%,d",ListSP.get(modelRow).getGiaNhap()));
+                jtxtGiaSi.setText(String.format("%,d", ListSP.get(modelRow).getGiaSi()));
+                jtxtGiaLe.setText(String.format("%,d", ListSP.get(modelRow).getGiaLe()));
+                jtxtGiaNhap.setText(String.format("%,d", ListSP.get(modelRow).getGiaNhap()));
                 jtxtDVT.setText(ListSP.get(modelRow).getDVT());
                 jtxtMoTa.setText(ListSP.get(modelRow).getMoTa());
                 jcbbPhanLoai.setSelectedItem(ListSP.get(modelRow).getTenLoaiSP());
-             }
-        }
-        catch(Exception ex){
-            System.out.println("Ngoại lệ tại FormQuanLiDonDatHang.Binding: "+ex.getMessage());
+            }
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormQuanLiDonDatHang.Binding: " + ex.getMessage());
         }
     }
-    public void LoadForm()
-    {
+
+    public void LoadForm() {
         HienThiDanhSachSanPham(CtrlQLSP.LayDSSanPham());
         Binding();
         LoadComboboxLoaiSP();
         SetVisibleButton(true);
         Edit(false);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1092,7 +1093,7 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+
     private void jtxtGiaNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtGiaNhapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtGiaNhapActionPerformed
@@ -1153,11 +1154,7 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
 
     private void jBtnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnTimKiemMouseClicked
 
-//        if (jcbbTimtheo.getSelectedIndex() == 1) {
-//            HienThiDanhSachSanPham(CtrlQLSP.SearchByID(jtxtTimKiem.getText(), ListComboboxNCC.get(jcbbTimTheoNCC.getSelectedIndex()), ListComboboxLoaiSP.get(jcbbTimTheoLoaiSP.getSelectedIndex())));
-//        } else {
-//            HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(), ListComboboxNCC.get(jcbbTimTheoNCC.getSelectedIndex()), ListComboboxLoaiSP.get(jcbbTimTheoLoaiSP.getSelectedIndex())));
-//        }
+        HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(), ""));
     }//GEN-LAST:event_jBtnTimKiemMouseClicked
 
     private void jBtnTimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnTimKiemMouseEntered
@@ -1286,12 +1283,12 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
 
     private void jTbDSSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbDSSPMouseClicked
         // TODO add your handling code here:
-        if(jTbDSSP.getSelectedRow()>=0&&jTbDSSP.isEnabled())
+        if (jTbDSSP.getSelectedRow() >= 0 && jTbDSSP.isEnabled()) {
             Binding();
+        }
     }//GEN-LAST:event_jTbDSSPMouseClicked
 
-    public void Reset()
-    {
+    public void Reset() {
         jtxtMaSP.setText(CtrlQLSP.LayMaSP());
         jtxtTenSP.setText("");
         jtxtGiaSi.setText("");
@@ -1300,9 +1297,9 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         jtxtDVT.setText("");
         jtxtMoTa.setText("");
         jcbbPhanLoai.setSelectedIndex(0);
-    }    
-    
-    public void Edit(boolean active){
+    }
+
+    public void Edit(boolean active) {
         //jtxtMaSP.setEditable(active);
         jtxtTenSP.setEditable(active);
         jtxtTenSP.setFocusable(active);
@@ -1319,19 +1316,19 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         jcbbPhanLoai.setEnabled(active);
         jTbDSSP.setEnabled(!active);
     }
-    
-    public void SetVisibleButton(boolean active){
+
+    public void SetVisibleButton(boolean active) {
         jBtnThem.setVisible(active);
         jBtnXoa.setVisible(active);
         jBtnSua.setVisible(active);
         jBtnLuu.setVisible(!active);
         jBtnHuy.setVisible(!active);
-        
+
     }
-    
+
     private void jBtnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThemMouseClicked
-        if(jBtnThem.isEnabled()){
-            flag=1;
+        if (jBtnThem.isEnabled()) {
+            flag = 1;
             Reset();
             Edit(true);
             SetVisibleButton(false);
@@ -1344,18 +1341,17 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnThemMouseClicked
 
     private void jBtnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoaMouseClicked
-        if(jBtnXoa.isEnabled()){
-            ObjSP = new ObjSanPham(jtxtMaSP.getText(),jtxtTenSP.getText());
+        if (jBtnXoa.isEnabled()) {
+            ObjSP = new ObjSanPham(jtxtMaSP.getText(), jtxtTenSP.getText());
             int i = JOptionPane.showConfirmDialog(this, "Bạn muốn xóa sản phẩm \"" + ObjSP.getTenSP() + "\"", "Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(i==0){
-                try{
-                if(ModSP.Delete(ObjSP.getMaSP()))
-                    {
-                        JOptionPane.showMessageDialog(this, "Xóa thành công." , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            if (i == 0) {
+                try {
+                    if (ModSP.Delete(ObjSP.getMaSP())) {
+                        JOptionPane.showMessageDialog(this, "Xóa thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         HienThiDanhSachSanPham(CtrlQLSP.LayDSSanPham());
                     }
 
-                }catch(Exception e){
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Xóa thất bại. Mã lỗi: " + e.getMessage(), "Thông báo ", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -1457,22 +1453,21 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
         Binding();
     }//GEN-LAST:event_jBtnHuyMouseClicked
 
-    
-    public void Input(ObjSanPham ObjSP){
+    public void Input(ObjSanPham ObjSP) {
         ObjSP.setMaSP(jtxtMaSP.getText());
         ObjSP.setTenSP(jtxtTenSP.getText());
         ObjSP.setDVT(jtxtDVT.getText());
         ObjSP.setGiaLe(Integer.parseInt(jtxtGiaLe.getText().replace(",", "")));
-        ObjSP.setGiaSi(Integer.parseInt(jtxtGiaSi.getText().replace(",","")));
-        ObjSP.setGiaNhap(Integer.parseInt(jtxtGiaNhap.getText().replace(",","")));
+        ObjSP.setGiaSi(Integer.parseInt(jtxtGiaSi.getText().replace(",", "")));
+        ObjSP.setGiaNhap(Integer.parseInt(jtxtGiaNhap.getText().replace(",", "")));
         ObjSP.setMaLoaiSP(ListComboboxLoaiSP.get(jcbbPhanLoai.getSelectedIndex()));
         ObjSP.setMoTa(jtxtMoTa.getText());
     }
-    
+
     private void jBtnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLuuMouseClicked
         // TODO add your handling code here:
         if (flag == 1) {
-            if (jtxtTenSP.getText().equals("") ||  jcbbPhanLoai.getSelectedIndex() == 0) {
+            if (jtxtTenSP.getText().equals("") || jcbbPhanLoai.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin bao gồm : Tên sản phẩm, Nhà cung cấp, Loại sản phẩm.", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 Input(ObjSP);
@@ -1482,15 +1477,15 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                     Edit(false);
                     SetVisibleButton(true);
                     HienThiDanhSachSanPham(CtrlQLSP.LayDSSanPham());
-                    jTbDSSP.changeSelection(jTbDSSP.getRowCount()-1,0, false, false);
+                    jTbDSSP.changeSelection(jTbDSSP.getRowCount() - 1, 0, false, false);
                     Binding();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Thêm thất bại. Lỗi: " + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         } else {
-            int index=jTbDSSP.getSelectedRow();
-            if (jtxtTenSP.getText().equals("") ||  jcbbPhanLoai.getSelectedIndex() == 0) {
+            int index = jTbDSSP.getSelectedRow();
+            if (jtxtTenSP.getText().equals("") || jcbbPhanLoai.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin bao gồm : Tên sản phẩm, Nhà cung cấp, Loại sản phẩm.", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 Input(ObjSP);
@@ -1500,7 +1495,7 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                     Edit(false);
                     SetVisibleButton(true);
                     jBtnTimKiemMouseClicked(null);
-                    jTbDSSP.changeSelection(index, 0, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
+                    jTbDSSP.changeSelection(index, 0, false, false);
                     Binding();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Cập nhật thất bại. Lỗi :" + ex.getMessage(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -1511,19 +1506,20 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
 
     private void jBtnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSuaMouseClicked
         // TODO add your handling code here:
-        flag=0;
+        flag = 0;
         Edit(true);
         SetVisibleButton(false);
     }//GEN-LAST:event_jBtnSuaMouseClicked
 
     private void jtxtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTimKiemKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jBtnTimKiemMouseClicked(null);
+        }
     }//GEN-LAST:event_jtxtTimKiemKeyPressed
 
-    int xx,yy;
-    
+    int xx, yy;
+
     private void jPanel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MousePressed
         // TODO add your handling code here:
         xx = evt.getX();
@@ -1539,22 +1535,20 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
 
     private void jtxtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtTimKiemActionPerformed
         // TODO add your handling code here:
-//        HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(),ListComboboxLoaiSP.get(jcbbTimTheoLoaiSP.getSelectedIndex())));
-          HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(),""));
+        HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(), ""));
     }//GEN-LAST:event_jtxtTimKiemActionPerformed
 
     private void jtxtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTimKiemKeyReleased
         // TODO add your handling code here:
-        HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(),ListComboboxLoaiSP.get(jcbbTimTheoLoaiSP.getSelectedIndex())));
+        HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(), ListComboboxLoaiSP.get(jcbbTimTheoLoaiSP.getSelectedIndex())));
     }//GEN-LAST:event_jtxtTimKiemKeyReleased
 
     private void jcbbTimTheoLoaiSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbTimTheoLoaiSPActionPerformed
         // TODO add your handling code here:
-        try{
-        HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(),ListComboboxLoaiSP.get(jcbbTimTheoLoaiSP.getSelectedIndex())));
-        }
-        catch(Exception ex){
-            System.out.println("Ngoại lệ tại FormQuanLiSanPham.jcbbTimTheoLoaiSPActionPerformed:"+ex.getMessage());
+        try {
+            HienThiDanhSachSanPham(CtrlQLSP.SearchByName(jtxtTimKiem.getText(), ListComboboxLoaiSP.get(jcbbTimTheoLoaiSP.getSelectedIndex())));
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormQuanLiSanPham.jcbbTimTheoLoaiSPActionPerformed:" + ex.getMessage());
         }
     }//GEN-LAST:event_jcbbTimTheoLoaiSPActionPerformed
 
@@ -1567,8 +1561,9 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 jtxtGiaSi.setText("0");
             }
+        } else {
+            jtxtGiaSi.setText("0");
         }
-        else jtxtGiaSi.setText("0");
     }//GEN-LAST:event_jtxtGiaSiKeyReleased
 
     private void jtxtGiaNhapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtGiaNhapKeyReleased
@@ -1580,8 +1575,9 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 jtxtGiaNhap.setText("0");
             }
+        } else {
+            jtxtGiaNhap.setText("0");
         }
-        else jtxtGiaNhap.setText("0");
     }//GEN-LAST:event_jtxtGiaNhapKeyReleased
 
     private void jtxtGiaLeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtGiaLeKeyReleased
@@ -1593,28 +1589,32 @@ public class FormQuanLiSanPham extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Số tiền nhập vào không hợp lệ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 jtxtGiaLe.setText("0");
             }
+        } else {
+            jtxtGiaLe.setText("0");
         }
-        else jtxtGiaLe.setText("0");
     }//GEN-LAST:event_jtxtGiaLeKeyReleased
 
     private void jTbDSSPMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbDSSPMouseDragged
         // TODO add your handling code here:
-        if(jTbDSSP.getSelectedRow()>=0&&jTbDSSP.isEnabled())
+        if (jTbDSSP.getSelectedRow() >= 0 && jTbDSSP.isEnabled()) {
             Binding();
+        }
     }//GEN-LAST:event_jTbDSSPMouseDragged
 
-    public void setColor(JPanel pn){
-        if(pn.isEnabled()){
-        pn.setSize(pn.getWidth()+1, pn.getHeight()+1);
-        pn.setBackground(new Color(60,209,127,50));
+    public void setColor(JPanel pn) {
+        if (pn.isEnabled()) {
+            pn.setSize(pn.getWidth() + 1, pn.getHeight() + 1);
+            pn.setBackground(new Color(60, 209, 127, 50));
         }
     }
-    public void resetColor(JPanel pn){
-        if(pn.isEnabled()){
-        pn.setSize(pn.getWidth()-1, pn.getHeight()-1);
-        pn.setBackground(new Color(153,153,153,180));
+
+    public void resetColor(JPanel pn) {
+        if (pn.isEnabled()) {
+            pn.setSize(pn.getWidth() - 1, pn.getHeight() - 1);
+            pn.setBackground(new Color(153, 153, 153, 180));
         }
     }
+
     /**
      * @param args the command line arguments
      */

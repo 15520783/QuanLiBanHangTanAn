@@ -45,7 +45,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     ModHoaDonLe modHDL = new ModHoaDonLe();
     ModHoaDonSi modHDS = new ModHoaDonSi();
     CtrlDanhSachHoaDon CtrlDSHD = new CtrlDanhSachHoaDon();
-    SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy      hh:mm:ss a");
+    SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy   hh:mm:ss a");
     FormLapHoaDonLe FrmLapHDL;
     FormLapHoaDonSi FrmLapHDS;
 
@@ -73,7 +73,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         editFrm.MakeTransparentPanel(ListPanelHDL);
 
         editFrm.MakeTransparentTable(jScrDSHDL, jTbDSHDL);
-        ((DefaultTableCellRenderer) jTbDSHDL.getDefaultRenderer(Object.class)).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        //((DefaultTableCellRenderer) jTbDSHDL.getDefaultRenderer(Object.class)).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
         editFrm.MakeTransparentTable(jScrCTHDL, jTbCTHDL);
 
         //Tab hóa đơn sỉ
@@ -87,7 +87,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
         editFrm.MakeTransparentTable(jScrCTHDS, jTbCTHDS);
         editFrm.MakeTransparentTable(jScrDSHDS, jTbDSHDS);
-        ((DefaultTableCellRenderer) jTbDSHDS.getDefaultRenderer(Object.class)).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        //((DefaultTableCellRenderer) jTbDSHDS.getDefaultRenderer(Object.class)).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 
         jtxtDiaChi.setLineWrap(true);
 
@@ -117,6 +117,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
                 Vector v = new Vector();
                 v.add(itemHDL.getSoHDL());
                 v.add(dt.format(itemHDL.getNgayDat()));
+                v.add(itemHDL.getTenKH());
                 model.addRow(v);
 
             }
@@ -142,6 +143,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
                 Vector v = new Vector();
                 v.add(itemHDS.getSoHDS());
                 v.add(dt.format(itemHDS.getNgayDat()));
+                v.add(itemHDS.getTenKH());
                 model.addRow(v);
             }
             jTbDSHDS.changeSelection(0, 0, false, false);
@@ -661,11 +663,11 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Số hóa đơn", "Ngày lập"
+                "Số hóa đơn", "Ngày lập", "Khách hàng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -691,6 +693,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jScrDSHDL.setViewportView(jTbDSHDL);
         if (jTbDSHDL.getColumnModel().getColumnCount() > 0) {
             jTbDSHDL.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTbDSHDL.getColumnModel().getColumn(2).setPreferredWidth(230);
         }
 
         jPnHDL.add(jScrDSHDL, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 313, 490, 300));
@@ -948,11 +951,11 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Số hóa đơn", "Ngày lập"
+                "Số hóa đơn", "Ngày lập", "Khách hàng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -983,6 +986,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jScrDSHDS.setViewportView(jTbDSHDS);
         if (jTbDSHDS.getColumnModel().getColumnCount() > 0) {
             jTbDSHDS.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTbDSHDS.getColumnModel().getColumn(2).setPreferredWidth(230);
         }
 
         jPnHDS.add(jScrDSHDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 313, 490, 300));

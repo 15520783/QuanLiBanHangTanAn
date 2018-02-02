@@ -485,9 +485,10 @@
                       <Font name="Monospaced" size="12" style="1"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="0">
+                      <Table columnCount="3" rowCount="0">
                         <Column editable="false" title="S&#x1ed1; h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y l&#x1ead;p" type="java.lang.Object"/>
+                        <Column editable="false" title="Kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -498,6 +499,11 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="200" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="230" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -1168,9 +1174,10 @@
                       <Font name="Monospaced" size="12" style="1"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="0">
+                      <Table columnCount="3" rowCount="0">
                         <Column editable="false" title="S&#x1ed1; h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y l&#x1ead;p" type="java.lang.Object"/>
+                        <Column editable="false" title="Kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1181,6 +1188,11 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="200" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="230" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>

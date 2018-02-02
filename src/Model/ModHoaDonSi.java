@@ -42,7 +42,7 @@ public class ModHoaDonSi extends Model{
     }
 
     public boolean Insert(ObjHoaDonSi TbHDS) {
-        String mySQL="INSERT INTO HOADONSI (SoHDS,MaKH,NgayDat,TongTien,SoTienDaThanhToan,SoNoHienTai) VALUES (?, ?, ?, ?, ?, ?);";
+        String mySQL="INSERT INTO HOADONSI (SoHDS,MaKH,NgayDat,SoTienDaThanhToan,TongTien,SoNoHienTai) VALUES (?, ?, ?, ?, ?, ?);";
         //System.out.println("INSERT INTO closer2_quanlicuahangson.HOADONSI (SoHDS,MaKH,NgayLap,NgayGiaoDuKien,TongTien,TinhTrangGiaoHang) VALUES ('"+TbHDS.getSoHDS()+"','"+TbHDS.getMaKH()+"','"+TbHDS.getNgayLap()+"','"+TbHDS.getNgayGiaoDuKien()+"','"+TbHDS.getTongTien()+"','"+TbHDS.getTinhTrangGiaoHang()+"')");
         try{
             if(DB.Connected()){

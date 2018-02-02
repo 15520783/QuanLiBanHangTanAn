@@ -541,6 +541,11 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jtbDSSP.setShowHorizontalLines(false);
         jtbDSSP.setShowVerticalLines(false);
         jtbDSSP.getTableHeader().setReorderingAllowed(false);
+        jtbDSSP.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jtbDSSPMouseDragged(evt);
+            }
+        });
         jtbDSSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jtbDSSPMousePressed(evt);
@@ -591,10 +596,10 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
 
         jtxtDonGia.setEditable(false);
         jtxtDonGia.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jtxtDonGiaInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel7.add(jtxtDonGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 195, -1));
@@ -1334,6 +1339,11 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
     private void jtbGioHangPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtbGioHangPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jtbGioHangPropertyChange
+
+    private void jtbDSSPMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbDSSPMouseDragged
+        // TODO add your handling code here:
+        Binding();
+    }//GEN-LAST:event_jtbDSSPMouseDragged
 
     public void setColor(JPanel pn) {
         if (pn.isEnabled()) {

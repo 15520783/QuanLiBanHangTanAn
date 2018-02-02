@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -151,7 +152,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setSize(new java.awt.Dimension(1366, 728));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1039,9 +1040,9 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
         );
 
+        jCbbTenKH.setEditable(true);
         jCbbTenKH.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jCbbTenKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCbbTenKH.setFocusable(false);
         jCbbTenKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCbbTenKHMouseClicked(evt);
@@ -1134,6 +1135,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         HienThiDanhSachPhieuThu(CtrlPT.LayDanhSachPhieuThu());
         LoadCbbKH();
         Binding();
+        AutoCompleteDecorator.decorate(jCbbTenKH);
         jDateTimeTuNgay.setDate(new Date());
         jDateTimeDenNgay.setDate(new Date());
         CtrlPT.CloseConnection();
@@ -1554,16 +1556,16 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         try {
             if (jBtnLuu.isEnabled()) {
                 if (flag == 0) {
-                    objPT = new ObjPhieuThu(jtxtMaPT.getText(), jtxtLyDoThu.getText(), Integer.parseInt(jtxtSoTienThu.getText().replace(",", "")), jDCNgayLap.getDate(), jtxtMaKH.getText());
+                    objPT = new ObjPhieuThu(CtrlPT.TaoMaPT(), jtxtLyDoThu.getText(), Integer.parseInt(jtxtSoTienThu.getText().replace(",", "")), jDCNgayLap.getDate(), jtxtMaKH.getText());
                     if (!objPT.getMaKH().equals("")) {
                         try {
                             if (modPT.Insert(objPT)) {
                                 JOptionPane.showMessageDialog(this, "Đã lưu.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                                 LoadCbbKH();
+                                EnableComponent(true);
                                 HienThiDanhSachPhieuThu(CtrlPT.LayDanhSachPhieuThu());
                                 jTbDSPT.changeSelection(0, 0, false, false);
                                 Binding();
-                                EnableComponent(true);
                             }
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(this, "Lưu thất bại. Error: " + e.getMessage(), "Thông báo ", JOptionPane.ERROR_MESSAGE);
@@ -1579,10 +1581,10 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
                             if (modPT.Update(objPT)) {
                                 JOptionPane.showMessageDialog(this, "Đã lưu.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                                 LoadCbbKH();
+                                EnableComponent(true);
                                 HienThiDanhSachPhieuThu(CtrlPT.LayDanhSachPhieuThu());
                                 jTbDSPT.changeSelection(index, 0, false, false);
                                 Binding();
-                                EnableComponent(true);
                             }
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(this, "Sửa phiếu thu \"" + objPT.getMaPT() + "\" thất bại. Mã: " + e.getMessage(), "Thông báo ", JOptionPane.ERROR_MESSAGE);

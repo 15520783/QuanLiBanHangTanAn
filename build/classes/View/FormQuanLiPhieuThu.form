@@ -2,7 +2,7 @@
 
 <Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="undecorated" type="boolean" value="true"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1366, 728]"/>
@@ -1397,6 +1397,7 @@
         </Container>
         <Component class="javax.swing.JComboBox" name="jCbbTenKH">
           <Properties>
+            <Property name="editable" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="12" style="0"/>
             </Property>
@@ -1408,7 +1409,6 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
-            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jCbbTenKHMouseClicked"/>
