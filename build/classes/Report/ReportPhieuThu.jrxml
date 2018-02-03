@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="421" pageHeight="595" columnWidth="381" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="49390f11-0d8a-48d7-997d-93940c46b3d5">
+	<property name="ireport.zoom" value="1.4641000000000035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="7e8eabff-84bd-4e7d-9ca2-b4c40fae57fe"/>
+	<subDataset name="dataset2" uuid="79882998-d1c8-445a-84d8-b6fc006f9d71"/>
+	<parameter name="MaPT" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TongTienThuBangChu" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     phieuthu.`MaPT` AS phieuthu_MaPT,
+     phieuthu.`LyDoThu` AS phieuthu_LyDoThu,
+     phieuthu.`TongTienThu` AS phieuthu_TongTienThu,
+     phieuthu.`NgayThu` AS phieuthu_NgayThu,
+     phieuthu.`MaKH` AS phieuthu_MaKH,
+     khachhang.`MaKH` AS khachhang_MaKH,
+     khachhang.`TenKH` AS khachhang_TenKH,
+     khachhang.`SDT` AS khachhang_SDT,
+     khachhang.`DiaChi` AS khachhang_DiaChi,
+     khachhang.`Email` AS khachhang_Email,
+     khachhang.`TienNo` AS khachhang_TienNo,
+     $P{TongTienThuBangChu} AS TienThuBangChu
+FROM
+     `khachhang` khachhang INNER JOIN `phieuthu` phieuthu ON khachhang.`MaKH` = phieuthu.`MaKH`
+WHERE phieuthu.`MaPT`=$P{MaPT}]]>
+	</queryString>
+	<field name="phieuthu_MaPT" class="java.lang.String"/>
+	<field name="phieuthu_LyDoThu" class="java.lang.String"/>
+	<field name="phieuthu_TongTienThu" class="java.math.BigDecimal"/>
+	<field name="phieuthu_NgayThu" class="java.sql.Timestamp"/>
+	<field name="phieuthu_MaKH" class="java.lang.String"/>
+	<field name="khachhang_MaKH" class="java.lang.String"/>
+	<field name="khachhang_TenKH" class="java.lang.String"/>
+	<field name="khachhang_SDT" class="java.lang.String"/>
+	<field name="khachhang_DiaChi" class="java.lang.String"/>
+	<field name="khachhang_Email" class="java.lang.String"/>
+	<field name="khachhang_TienNo" class="java.math.BigDecimal"/>
+	<field name="TienThuBangChu" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="404">
+			<staticText>
+				<reportElement x="210" y="10" width="171" height="36" uuid="7e6ee1f1-d30d-4175-9472-ac34d9443cd5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Constantia" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PHIẾU THU TIỀN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="83" y="132" width="284" height="14" uuid="7d8974af-c3c0-409e-9b77-2c5d57b38f89"/>
+				<textElement>
+					<font fontName="Constantia" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{khachhang_TenKH}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="158" width="83" height="14" uuid="b461b207-c0f2-4ae6-a3ed-7e20e4f0ed04"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Số điện thoại  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="67" width="87" height="20" uuid="9b5bb19c-d874-4de7-b3bd-e78d6437dc58"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập     :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="83" y="187" width="284" height="29" uuid="7d3d0b02-611c-4783-96ac-79de9d198ae3"/>
+				<textElement>
+					<font fontName="Constantia"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{khachhang_DiaChi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="62" y="0" width="63" height="20" uuid="8628a8c3-d6d2-4d4e-b07a-48bd7231cf16"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cửa hàng sơn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="187" width="83" height="14" uuid="04e6cf2e-cefa-40d9-9958-f19d0dc8f2d5"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="197" height="56" uuid="78faf2d3-a49a-4e37-ae23-f7bdae55cdbe"/>
+				<textElement>
+					<font fontName="Monospaced" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ : 67 Thủ Khoa Thuân, phường B, TP.Châu Đốc, An Giang
+Điện thoại: 029363566112- 02966260064
+Điện thoại di động: 0919566112]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="46" width="87" height="20" uuid="356fb49f-5ada-4f2c-94ee-0ac476df0e1f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã phiếu thu :]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="83" y="158" width="284" height="14" uuid="de3b9bd4-7965-4821-8d07-fa55a9b143d6"/>
+				<textElement>
+					<font fontName="Constantia"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{khachhang_SDT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="10" width="129" height="46" uuid="6b470ce1-994a-4d16-be81-6894e3b13ffd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Chiller" size="36" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tân An
+ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="31" width="181" height="25" uuid="b140a026-0cee-4119-bfd3-dd94ceed4266"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Palatino Linotype"/>
+				</textElement>
+				<text><![CDATA[-----------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="132" width="83" height="14" uuid="60fa14d1-6265-4930-a09f-aaefaa828944"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Tên khách hàng :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="297" y="46" width="84" height="20" uuid="ebb61eff-edbe-4db2-b8cf-9e90937efa53"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phieuthu_MaPT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="297" y="67" width="84" height="20" uuid="fe495a5b-7982-48cc-a5fb-9ff5a2c1e1c9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phieuthu_NgayThu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="216" width="83" height="14" uuid="d0c47837-dd7c-4337-914c-9760f7301912"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Lý do thu :]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="83" y="216" width="284" height="14" uuid="7c7d8121-8a9a-41c5-955f-08c3a92327cd"/>
+				<textElement>
+					<font fontName="Constantia"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phieuthu_LyDoThu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="247" width="83" height="14" uuid="23627496-1db9-4a70-925b-1fb78124a455"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Số tiền nợ :]]></text>
+			</staticText>
+			<textField pattern="#,##0;(#,##0)">
+				<reportElement x="83" y="247" width="70" height="14" uuid="cbb0288b-4410-4187-a2ac-7a14200c68fb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phieuthu_TongTienThu}.longValue()+$F{khachhang_TienNo}.longValue()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="277" width="83" height="14" uuid="a8c56238-93f9-4e3f-82e2-7d5388d2fc1d"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Số tiền đã thu :]]></text>
+			</staticText>
+			<textField pattern="#,##0;(#,##0)">
+				<reportElement x="83" y="277" width="70" height="14" uuid="6e4e36c1-f8ef-49dc-90bd-03d895916bd7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phieuthu_TongTienThu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="308" width="125" height="14" uuid="10f103d9-77be-4ee6-9ab3-08803951000a"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Số tiền đã thu (Bằng chữ) :]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="125" y="308" width="242" height="32" uuid="116a3923-3741-46a0-bd99-60852eae463b"/>
+				<textElement>
+					<font fontName="Constantia"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TienThuBangChu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="340" width="83" height="14" uuid="07b592f6-f8ae-434f-b52c-78f4164872c5"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Còn lại :]]></text>
+			</staticText>
+			<textField pattern="#,##0;(#,##0)">
+				<reportElement x="83" y="340" width="70" height="14" uuid="da423aea-5d22-407b-a7f7-0818c0aa186f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{khachhang_TienNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="153" y="277" width="44" height="14" uuid="b3ed0619-2c64-41f2-bfce-4844f26fc13e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[VNĐ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="340" width="44" height="14" uuid="3dfbd2bb-64d7-41c9-b062-0fee69b9cb49"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[VNĐ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="247" width="44" height="14" uuid="abfabe7e-f0ee-4a6b-86a5-d20da5bd0215"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[VNĐ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="372" width="83" height="14" uuid="4ca4cace-01eb-4af8-a1c5-98702e312f68"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Ghi chú :]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<summary>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="24" y="15" width="111" height="16" uuid="2b828a6a-07ee-4b94-b2c2-4b5ed9d6bcef"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người thu tiền
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="31" width="111" height="16" uuid="affe51e7-1805-49c5-93da-d5ce34ce8fcb"/>
+				<textElement textAlignment="Center">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[(Ký, Họ tên, Đóng dấu)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="15" width="111" height="16" uuid="f9f3c363-c3da-43dc-ba97-289a725b9912"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người trả tiền]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="31" width="111" height="16" uuid="699781db-9158-4493-9d73-6d99ffd72540"/>
+				<textElement textAlignment="Center">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[(Ký, Họ tên)]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

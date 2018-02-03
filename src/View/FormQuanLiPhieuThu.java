@@ -1,23 +1,30 @@
 package View;
 
+import Connect.Connect;
+import Control.ConvertCurrency;
 import Control.CtrlPhieuThu;
 import Edit.Edit;
 import Model.ModPhieuThu;
 import Object.ObjKhachHang;
 import Object.ObjPhieuThu;
 import java.awt.Color;
-import java.awt.event.ItemListener;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /*
@@ -40,7 +47,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     ModPhieuThu modPT = new ModPhieuThu();
     SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss a");
     SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
-
+    ConvertCurrency conCurrency =new ConvertCurrency();
     private int flag = 0;
 
     /**
@@ -1380,6 +1387,20 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
 
     private void jBtnXemPhieuInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXemPhieuInMouseClicked
         // TODO add your handling code here:
+         try {
+            Connect con = new Connect();
+            con.Connected();
+            HashMap hash = new HashMap();
+            InputStream is = null;
+            is = new FileInputStream("src/Report/ReportPhieuThu.jasper");
+            hash.put("MaPT", jtxtMaPT.getText());
+            hash.put("TongTienThuBangChu", conCurrency.numberToString(Double.parseDouble(jtxtSoTienThu.getText().replace(",",""))));
+            JasperPrint print = JasperFillManager.fillReport(is, hash, con.getConDB());
+            JasperViewer.viewReport(print, false);
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormQuanLiDonDatHang.jBtnXemPhieuInMouseClicked:" + ex.getMessage());
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jBtnXemPhieuInMouseClicked
 
     private void jBtnXemPhieuInMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXemPhieuInMouseEntered
@@ -1825,6 +1846,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         }
     }
 
+    
     /**
      * @param args the command line arguments
      */
@@ -1969,3 +1991,5 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtTimtheoMaPT;
     // End of variables declaration//GEN-END:variables
 }
+
+

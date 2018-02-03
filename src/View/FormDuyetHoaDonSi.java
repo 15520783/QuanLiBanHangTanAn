@@ -26,6 +26,9 @@ import java.util.Date;
 import java.util.Hashtable;
 
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -585,19 +588,19 @@ public class FormDuyetHoaDonSi extends javax.swing.JFrame {
 
     private void jBtnXemPhieuInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXemPhieuInMouseClicked
         // TODO add your handling code here:
-//        try {
-//            Connect con = new Connect();
-//            con.Connected();
-//            Hashtable hash = new Hashtable();
-//            InputStream is = null;          
-//            is = new FileInputStream("src/Report/ReportHoaDonSi.jasper");
-//            hash.put("SoHDS", jtxtSoHDS.getText());
-//            JasperPrint print = JasperFillManager.fillReport(is, hash, con.getConDB());
-//            JasperViewer.viewReport(print, false);
-//        } catch (Exception ex) {
-//            System.out.println("Ngoại lệ tại FormDuyetHoaDonSi.jBtnXemPhieuInMouseClicked:" + ex.getMessage());
-//            ex.printStackTrace();
-//        }
+        try {
+            Connect con = new Connect();
+            con.Connected();
+            Hashtable hash = new Hashtable();
+            InputStream is = null;          
+            is = new FileInputStream("src/Report/ReportHoaDonSi.jasper");
+            hash.put("SoHDS", jtxtSoHDS.getText());
+            JasperPrint print = JasperFillManager.fillReport(is, hash, con.getConDB());
+            JasperViewer.viewReport(print, false);
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormDuyetHoaDonSi.jBtnXemPhieuInMouseClicked:" + ex.getMessage());
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jBtnXemPhieuInMouseClicked
 
     private void jBtnXemPhieuInMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXemPhieuInMouseEntered

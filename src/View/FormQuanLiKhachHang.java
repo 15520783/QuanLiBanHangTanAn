@@ -648,6 +648,7 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
 
         getContentPane().add(jBtnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 95, 120, 65));
 
+        jtbDSKH.setAutoCreateRowSorter(true);
         jtbDSKH.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
         jtbDSKH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1163,7 +1164,6 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         if (jBtnThem.isEnabled()) {
             jtxtMaKH.setText(CtrlKH.TaoMaKH());
             jtxtTenKH.setText("");
-            jtxtTenKH.requestFocus();
             jtxtSDT.setText("");
             jtxtDiaChi.setText("");
             jtxtEmail.setText("");
@@ -1550,10 +1550,15 @@ public class FormQuanLiKhachHang extends javax.swing.JFrame {
         jBtnLuu.setVisible(!Active);
         jBtnHuy.setVisible(!Active);
         jtxtTenKH.setEditable(!Active);
+        jtxtTenKH.setFocusable(!Active);
         jtxtSDT.setEnabled(!Active);
+        jtxtSDT.setFocusable(!Active);
         jtxtDiaChi.setEditable(!Active);
+        jtxtDiaChi.setFocusable(!Active);
         jtxtEmail.setEditable(!Active);
+        jtxtEmail.setFocusable(!Active);
         jtxtTienNo.setEditable(!Active);
+        jtxtTienNo.setFocusable(!Active);
         jtbDSKH.setEnabled(Active);
     }
 }

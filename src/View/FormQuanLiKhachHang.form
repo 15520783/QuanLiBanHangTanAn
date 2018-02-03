@@ -679,6 +679,7 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="jtbDSKH">
           <Properties>
+            <Property name="autoCreateRowSorter" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Palatino Linotype" size="12" style="1"/>
             </Property>

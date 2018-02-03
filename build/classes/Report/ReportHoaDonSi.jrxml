@@ -63,21 +63,21 @@ WHERE hoadonsi.`SoHDS`=$P{SoHDS}]]>
 			<staticText>
 				<reportElement x="210" y="10" width="157" height="36" uuid="7e6ee1f1-d30d-4175-9472-ac34d9443cd5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="16" isBold="true"/>
+					<font fontName="Constantia" size="17" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HÓA ĐƠN BÁN LẺ]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="83" y="112" width="284" height="14" uuid="7d8974af-c3c0-409e-9b77-2c5d57b38f89"/>
 				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
+					<font fontName="Constantia" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{khachhang_TenKH}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="126" width="83" height="14" uuid="b461b207-c0f2-4ae6-a3ed-7e20e4f0ed04"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isItalic="false"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Số điện thoại  :]]></text>
 			</staticText>
@@ -91,21 +91,21 @@ WHERE hoadonsi.`SoHDS`=$P{SoHDS}]]>
 			<textField>
 				<reportElement x="83" y="140" width="284" height="29" uuid="7d3d0b02-611c-4783-96ac-79de9d198ae3"/>
 				<textElement>
-					<font fontName="Tahoma"/>
+					<font fontName="Constantia"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{khachhang_DiaChi}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="62" y="0" width="63" height="20" uuid="8628a8c3-d6d2-4d4e-b07a-48bd7231cf16"/>
 				<textElement verticalAlignment="Top">
-					<font fontName="Monospaced" size="8" isBold="true"/>
+					<font fontName="Constantia" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cửa hàng sơn]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="140" width="83" height="14" uuid="04e6cf2e-cefa-40d9-9958-f19d0dc8f2d5"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isItalic="false"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Địa chỉ :]]></text>
 			</staticText>
@@ -119,7 +119,7 @@ WHERE hoadonsi.`SoHDS`=$P{SoHDS}]]>
 Điện thoại di động: 0919566112]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy h.mm a">
-				<reportElement x="287" y="67" width="80" height="19" uuid="5c3dbb92-ec58-452b-ae7f-000c734bc203"/>
+				<reportElement x="287" y="67" width="80" height="20" uuid="5c3dbb92-ec58-452b-ae7f-000c734bc203"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Monospaced" size="10" isBold="true"/>
 				</textElement>
@@ -135,7 +135,7 @@ WHERE hoadonsi.`SoHDS`=$P{SoHDS}]]>
 			<textField>
 				<reportElement x="83" y="126" width="284" height="14" uuid="de3b9bd4-7965-4821-8d07-fa55a9b143d6"/>
 				<textElement>
-					<font fontName="Tahoma"/>
+					<font fontName="Constantia"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{khachhang_SDT}]]></textFieldExpression>
 			</textField>
@@ -156,8 +156,8 @@ WHERE hoadonsi.`SoHDS`=$P{SoHDS}]]>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="112" width="83" height="14" uuid="60fa14d1-6265-4930-a09f-aaefaa828944"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isItalic="false"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Constantia" size="10" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Tên khách hàng :]]></text>
 			</staticText>
@@ -167,22 +167,30 @@ WHERE hoadonsi.`SoHDS`=$P{SoHDS}]]>
 		<band height="24" splitType="Stretch">
 			<staticText>
 				<reportElement x="34" y="0" width="208" height="24" uuid="d8e49393-969a-493c-9359-ae558747862c"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Tên sản phẩm]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="322" y="0" width="59" height="24" uuid="d76a66b8-5804-4df1-9352-1b6bbf2f9e3c"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Thành tiền]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="242" y="0" width="27" height="24" uuid="1c972e8f-f200-4d51-92fc-eee49ae5ec89"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
 				<text><![CDATA[SL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="24" height="24" uuid="80c515af-3623-4ad7-9f19-9a865adb1e85"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
 				<text><![CDATA[STT]]></text>
 			</staticText>
 			<line>
@@ -190,7 +198,9 @@ WHERE hoadonsi.`SoHDS`=$P{SoHDS}]]>
 			</line>
 			<staticText>
 				<reportElement x="269" y="0" width="53" height="24" uuid="85f40995-6938-43e8-ab9a-7abca8c0357a"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Đơn giá]]></text>
 			</staticText>
 		</band>
