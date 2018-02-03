@@ -5,6 +5,7 @@
  */
 package View;
 
+import Connect.Connect;
 import Control.CtrlDanhSachHoaDon;
 import Edit.Edit;
 import Model.ModChiTietHDL;
@@ -16,16 +17,22 @@ import Object.ObjHoaDonSi;
 import Object.ObjChiTietHDL;
 import Object.ObjChiTietHDS;
 import java.awt.Color;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -1377,26 +1384,26 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
     private void jBtnXemPhieuInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXemPhieuInMouseClicked
         // TODO add your handling code here:
-//        try {
-//            Connect con = new Connect();
-//            con.Connected();
-//            Hashtable hash = new Hashtable();
-//            InputStream is = null;
-//            if (jTabbedPane1.getSelectedIndex() == 0) {
-//            // TODO add your handling code here: 
-//            is = new FileInputStream("src/Report/ReportHoaDonLe.jasper");
-//            hash.put("SoHDL", jtxtSoHDL.getText());
-//            }
-//            else{
-//            is = new FileInputStream("src/Report/ReportHoaDonSi.jasper");
-//            hash.put("SoHDS", jtxtSoHDS.getText());
-//            }
-//            JasperPrint print = JasperFillManager.fillReport(is, hash, con.getConDB());
-//            JasperViewer.viewReport(print, false);
-//        } catch (Exception ex) {
-//            System.out.println("Ngoại lệ tại FormDanhSachHoaDon.jBtnXemPhieuInMouseClicked:" + ex.getMessage());
-//            ex.printStackTrace();
-//        }
+        try {
+            Connect con = new Connect();
+            con.Connected();
+            Hashtable hash = new Hashtable();
+            InputStream is = null;
+            if (jTabbedPane1.getSelectedIndex() == 0) {
+            // TODO add your handling code here: 
+            is = new FileInputStream("src/Report/ReportHoaDonLe.jasper");
+            hash.put("SoHDL", jtxtSoHDL.getText());
+            }
+            else{
+            is = new FileInputStream("src/Report/ReportHoaDonSi.jasper");
+            hash.put("SoHDS", jtxtSoHDS.getText());
+            }
+            JasperPrint print = JasperFillManager.fillReport(is, hash, con.getConDB());
+            JasperViewer.viewReport(print, false);
+        } catch (Exception ex) {
+            System.out.println("Ngoại lệ tại FormDanhSachHoaDon.jBtnXemPhieuInMouseClicked:" + ex.getMessage());
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jBtnXemPhieuInMouseClicked
 
     private void jBtnXemPhieuInMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXemPhieuInMouseEntered
