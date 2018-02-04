@@ -933,6 +933,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jBtnThongtinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnThongtinMouseClicked
         // TODO add your handling code here:
+        new FormThongTin().setVisible(true);
     }//GEN-LAST:event_jBtnThongtinMouseClicked
 
 

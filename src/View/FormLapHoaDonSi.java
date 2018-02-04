@@ -1306,7 +1306,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
     private void jbtnDuyetGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnDuyetGioHangMouseClicked
         // TODO add your handling code here:
         try {
-            if (jcbbKH.getSelectedIndex() != 0) {
+            if (!listComboboxKH.get(jcbbKH.getSelectedIndex()).getMaKH().equals("")) {
                 if (ListGioHang.size() > 0) {
                     if (ChinhSua) {
                         frmDuyetHDS = new FormDuyetHoaDonSi(objectHDS, listComboboxKH.get(jcbbKH.getSelectedIndex()), ListGioHang, jtxtTongTien.getText());
@@ -1396,20 +1396,23 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
     private void jtxtTraKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTraKHKeyReleased
         // TODO add your handling code here:
         if (evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_ENTER) {
-            listComboboxKH.clear();
-            jcbbKH.removeAllItems();
             try {
-                ResultSet rs = CtrlHDL.TimKhachHang(jtxtTraKH.getText());
-                while (rs.next()) {
-                    jcbbKH.addItem(rs.getString("TenKH"));
-                    listComboboxKH.add(new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo")));
+                listComboboxKH.clear();
+                jcbbKH.removeAllItems();
+                try {
+                    ResultSet rs = CtrlHDL.TimKhachHang(jtxtTraKH.getText());
+                    while (rs.next()) {
+                        jcbbKH.addItem(rs.getString("TenKH"));
+                        listComboboxKH.add(new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo")));
+                    }
+                    jcbbKH.showPopup();
+                    jcbbKH.setSelectedIndex(0);
+                } catch (SQLException ex) {
+                    System.out.println("Ngoại lệ tại FormPhieuThu.LoadCbbKH: " + ex.getMessage());
+                } finally {
+                    CtrlHDL.CloseConnection();
                 }
-                jcbbKH.showPopup();
-                jcbbKH.setSelectedIndex(0);
-            } catch (SQLException ex) {
-                System.out.println("Ngoại lệ tại FormPhieuThu.LoadCbbKH: " + ex.getMessage());
-            } finally {
-                CtrlHDL.CloseConnection();
+            } catch (Exception ex) {
             }
         }
     }//GEN-LAST:event_jtxtTraKHKeyReleased

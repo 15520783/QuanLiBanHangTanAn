@@ -1425,10 +1425,10 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             InputStream is = null;
             if (jTabbedPane1.getSelectedIndex() == 0) {
                 // TODO add your handling code here: 
-                is = new FileInputStream("src/Report/ReportHoaDonLe.jasper");
+                is = new FileInputStream("C:/Users/ICAFE8/Documents/Report/ReportHoaDonLe.jasper");
                 hash.put("SoHDL", jtxtSoHDL.getText());
             } else {
-                is = new FileInputStream("src/Report/ReportHoaDonSi.jasper");
+                is = new FileInputStream("C:/Users/ICAFE8/Documents/Report/ReportHoaDonSi.jasper");
                 hash.put("SoHDS", jtxtSoHDS.getText());
             }
             JasperPrint print = JasperFillManager.fillReport(is, hash, con.getConDB());

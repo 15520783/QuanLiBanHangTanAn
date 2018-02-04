@@ -50,9 +50,8 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     ModPhieuThu modPT = new ModPhieuThu();
     SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss a");
     SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
-    ConvertCurrency conCurrency =new ConvertCurrency();
+    ConvertCurrency conCurrency = new ConvertCurrency();
     private int flag = 0;
-    
 
     /**
      * Creates new form frmQuanLiPhieuThu
@@ -75,7 +74,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         editFrm.MakeTransparentTable(jScrDSPT, jTbDSPT);
 
         jtxtMaPT.setText(CtrlPT.TaoMaPT());
-       
+
         LoadForm();
     }
 
@@ -1405,14 +1404,14 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
 
     private void jBtnXemPhieuInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXemPhieuInMouseClicked
         // TODO add your handling code here:
-         try {
+        try {
             Connect con = new Connect();
             con.Connected();
             HashMap hash = new HashMap();
             InputStream is = null;
             is = new FileInputStream("src/Report/ReportPhieuThu.jasper");
             hash.put("MaPT", jtxtMaPT.getText());
-            hash.put("TongTienThuBangChu", conCurrency.numberToString(Double.parseDouble(jtxtSoTienThu.getText().replace(",",""))));
+            hash.put("TongTienThuBangChu", conCurrency.numberToString(Double.parseDouble(jtxtSoTienThu.getText().replace(",", ""))));
             JasperPrint print = JasperFillManager.fillReport(is, hash, con.getConDB());
             JasperViewer.viewReport(print, false);
         } catch (Exception ex) {
@@ -1853,28 +1852,31 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
 
     private void jCbbTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCbbTenKHKeyReleased
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jCbbTenKHKeyReleased
 
     private void jtxtTraKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTraKHKeyReleased
         // TODO add your handling code here:
-        if(evt.getKeyCode()!=KeyEvent.VK_DOWN&&evt.getKeyCode()!=KeyEvent.VK_UP&&evt.getKeyCode()!=KeyEvent.VK_ENTER){
-        listCbbKH.clear();
-        jCbbTenKH.removeAllItems();
-        try {
-            ResultSet rs = CtrlPT.TimKhachHang(jtxtTraKH.getText());
-            while (rs.next()) {
-                jCbbTenKH.addItem(rs.getString("TenKH"));
-                jCbbTimTheoTenKH.addItem(rs.getString("TenKH"));
-                listCbbKH.add(new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo")));
-            }
-            jCbbTenKH.showPopup();
-            jCbbTenKH.setSelectedIndex(0);
-        } catch (SQLException ex) {
-            System.out.println("Ngoại lệ tại FormPhieuThu.LoadCbbKH: " + ex.getMessage());
-        } finally {
-            CtrlPT.CloseConnection();
-        }
+        if (evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_ENTER) {
+            try {
+                listCbbKH.clear();
+                jCbbTenKH.removeAllItems();
+                try {
+                    ResultSet rs = CtrlPT.TimKhachHang(jtxtTraKH.getText());
+                    while (rs.next()) {
+                        jCbbTenKH.addItem(rs.getString("TenKH"));
+                        jCbbTimTheoTenKH.addItem(rs.getString("TenKH"));
+                        listCbbKH.add(new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo")));
+                    }
+                    jCbbTenKH.showPopup();
+                    jCbbTenKH.setSelectedIndex(0);
+                } catch (SQLException ex) {
+                    System.out.println("Ngoại lệ tại FormPhieuThu.LoadCbbKH: " + ex.getMessage());
+                } finally {
+                    CtrlPT.CloseConnection();
+                }
+            } catch (Exception ex) {
+            };
         }
     }//GEN-LAST:event_jtxtTraKHKeyReleased
 
@@ -1891,15 +1893,16 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
 
     private void jtxtTraKHKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTraKHKeyPressed
         // TODO add your handling code here:
-        try{
-        if(evt.getKeyCode()==KeyEvent.VK_DOWN){
-            jCbbTenKH.setSelectedIndex(jCbbTenKH.getSelectedIndex()+1);
+        try {
+            if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+                jCbbTenKH.setSelectedIndex(jCbbTenKH.getSelectedIndex() + 1);
+            } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
+                jCbbTenKH.setSelectedIndex(jCbbTenKH.getSelectedIndex() - 1);
+            } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                jCbbTenKH.hidePopup();
+            }
+        } catch (Exception ex) {
         }
-        else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            jCbbTenKH.setSelectedIndex(jCbbTenKH.getSelectedIndex()-1);
-        }
-        else if(evt.getKeyCode()==KeyEvent.VK_ENTER) jCbbTenKH.hidePopup();
-        }catch(Exception ex){}
     }//GEN-LAST:event_jtxtTraKHKeyPressed
 
     public void setColor(JPanel pn) {
@@ -1916,7 +1919,6 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         }
     }
 
-    
     /**
      * @param args the command line arguments
      */
@@ -2065,5 +2067,3 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtTraKH;
     // End of variables declaration//GEN-END:variables
 }
-
-
