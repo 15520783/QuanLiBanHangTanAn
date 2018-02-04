@@ -60,6 +60,8 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jDateNgayLap.setDate(objHDS.getNgayDat());
         jcbbKH.setSelectedItem(objHDS.getTenKH());
         jcbbKH.setEnabled(false);
+        jlblTraKH.setVisible(false);
+        jtxtTraKH.setVisible(false);
         try {
             DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
             for (int i = 0; i < ListCT.size(); i++) {
@@ -89,7 +91,6 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jtxtSoHDS.setText(SoHDS);
         jDateNgayLap.setDate(NgayLap);
         jcbbKH.setSelectedItem(TenKH);
-        jcbbKH.setEnabled(false);
         try {
             DefaultTableModel Model = (DefaultTableModel) jtbGioHang.getModel();
             for (int i = 0; i < ListCT.size(); i++) {
@@ -151,6 +152,8 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jtxtTongTien = new javax.swing.JTextField();
         jPnThongtinHD = new javax.swing.JPanel();
         jcbbKH = new javax.swing.JComboBox<>();
+        jlblTraKH = new javax.swing.JLabel();
+        jtxtTraKH = new javax.swing.JTextField();
         jBtnTimKiem = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jBtnLamMoi = new javax.swing.JPanel();
@@ -212,11 +215,11 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jLabel1.setText("Thông tin hóa đơn :");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, -1, 20));
 
-        jLabel2.setText("Số hóa đơn  :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 54, -1, -1));
+        jLabel2.setText("Số hóa đơn        :");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 54, -1, -1));
 
-        jLabel3.setText("Khách hàng :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 95, -1, 20));
+        jLabel3.setText("Khách hàng       :");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 115, -1, 20));
 
         jtxtSoHDS.setEditable(false);
         jtxtSoHDS.addActionListener(new java.awt.event.ActionListener() {
@@ -233,11 +236,11 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jPanel1.add(jDateNgayLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 51, 190, -1));
 
         jLabel5.setText("Tổng tiền :");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(407, 101, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(407, 120, -1, -1));
 
         jtxtTongTien.setEditable(false);
         jtxtTongTien.setText("0");
-        jPanel1.add(jtxtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 98, 190, -1));
+        jPanel1.add(jtxtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 117, 190, -1));
 
         jPnThongtinHD.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -257,7 +260,17 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         jcbbKH.setEditable(true);
         jcbbKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbbKH.setAutoscrolls(true);
-        jPanel1.add(jcbbKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 90, 280, 30));
+        jPanel1.add(jcbbKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 110, 280, 30));
+
+        jlblTraKH.setText("Tra khách hàng  :");
+        jPanel1.add(jlblTraKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 83, -1, 24));
+
+        jtxtTraKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtTraKHKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jtxtTraKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 80, 280, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 689, 150));
 
@@ -596,10 +609,10 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
 
         jtxtDonGia.setEditable(false);
         jtxtDonGia.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jtxtDonGiaInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel7.add(jtxtDonGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 195, -1));
@@ -1209,7 +1222,8 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         int viewRow = jtbDSSP.getSelectedRow();
         int modelRow = jtbDSSP.convertRowIndexToModel(viewRow);
         Model = (DefaultTableModel) jtbGioHang.getModel();
-        String inputdialog = JOptionPane.showInputDialog(this, "Nhập số lượng:", "");
+        String inputdialog="";
+        inputdialog = JOptionPane.showInputDialog(this,"Nhập số lượng:","1");
         if (inputdialog != null) {
             try {
                 int SL = Integer.parseInt(inputdialog);
@@ -1345,6 +1359,26 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
         Binding();
     }//GEN-LAST:event_jtbDSSPMouseDragged
 
+    private void jtxtTraKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTraKHKeyReleased
+        // TODO add your handling code here:
+        listComboboxKH.clear();
+        jcbbKH.removeAllItems();
+        jcbbKH.addItem("");
+        listComboboxKH.add(new ObjKhachHang());
+        try {
+            ResultSet rs = CtrlHDL.TimKhachHang(jtxtTraKH.getText());
+            while (rs.next()) {
+                jcbbKH.addItem(rs.getString("TenKH"));
+                listComboboxKH.add(new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo")));
+            }
+            jcbbKH.showPopup();
+        } catch (SQLException ex) {
+            System.out.println("Ngoại lệ tại FormPhieuThu.LoadCbbKH: " + ex.getMessage());
+        } finally {
+            CtrlHDL.CloseConnection();
+        }
+    }//GEN-LAST:event_jtxtTraKHKeyReleased
+
     public void setColor(JPanel pn) {
         if (pn.isEnabled()) {
             pn.setSize(pn.getWidth() + 1, pn.getHeight() + 1);
@@ -1459,6 +1493,7 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jbtnDuyetGioHang;
     private javax.swing.JComboBox<String> jcbbKH;
+    private javax.swing.JLabel jlblTraKH;
     private javax.swing.JTable jtbDSSP;
     private javax.swing.JTable jtbGioHang;
     private javax.swing.JTextField jtxtDVT;
@@ -1468,5 +1503,6 @@ public class FormLapHoaDonSi extends javax.swing.JFrame {
     private javax.swing.JTextArea jtxtTenSP;
     private javax.swing.JTextField jtxtTimKiem;
     private javax.swing.JTextField jtxtTongTien;
+    private javax.swing.JTextField jtxtTraKH;
     // End of variables declaration//GEN-END:variables
 }

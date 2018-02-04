@@ -53,6 +53,10 @@ public class CtrlLapHoaDonLe {
         return modLSP.GetALL();
     } 
     
+    public ResultSet TimKhachHang(String TenKH){
+        String SQL="Select * from KhachHang where TenKH like '%"+TenKH+"%' order by TenKH ASC";
+        return DB.GetData(SQL);
+    }
     
     public String LaySoHDL(){
         String ID="HDL0001";

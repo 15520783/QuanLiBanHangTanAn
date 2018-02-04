@@ -27,22 +27,19 @@ public class CtrlPhieuThu {
         return DB.GetData(SQL);
     }
     public ResultSet Search(String MaKH,String MaPT){
-        String sql="SELECT * FROM PHIEUTHU PT,KHACHHANG KH WHERE PT.MaKH=KH.MaKH AND KH.MaKH like '%"+MaKH+"%' AND PT.MaPT like '%"+MaPT+"%'";
+        String sql="SELECT * FROM PHIEUTHU PT,KHACHHANG KH WHERE PT.MaKH=KH.MaKH AND KH.MaKH like '%"+MaKH+"%' AND PT.MaPT like '%"+MaPT+"%' order by PT.MaPT DESC";
         return DB.GetData(sql);
     }
     public ResultSet Search(Date tungay, Date denngay, String MaKH,String MaPT){
-        String sql="SELECT * FROM PHIEUTHU PT,KHACHHANG KH WHERE PT.MaKH=KH.MaKH AND KH.MaKH like '%"+MaKH+"%' AND PT.MaPT like '%"+MaPT+"%' AND  PT.NgayThu BETWEEN '"+dt.format(tungay)+"' and '"+dt.format(denngay)+"'";
+        String sql="SELECT * FROM PHIEUTHU PT,KHACHHANG KH WHERE PT.MaKH=KH.MaKH AND KH.MaKH like '%"+MaKH+"%' AND PT.MaPT like '%"+MaPT+"%' AND  PT.NgayThu BETWEEN '"+dt.format(tungay)+"' and '"+dt.format(denngay)+"' order by PT.MaPT DESC";
         return DB.GetData(sql);
     }
     
-    public ResultSet SearchTheoNgay(Date tungay, Date denngay){
-        String sql="SELECT * FROM PHIEUTHU,KHACHHANG WHERE PHIEUTHU.MaKH=KHACHHANG.MaKH AND PHIEUTHU.NgayThu BETWEEN '"+dt.format(tungay)+"' and '"+dt.format(denngay)+"'";
-        return DB.GetData(sql);
+    public ResultSet TimKhachHang(String TenKH){
+        String SQL="Select * from KhachHang where TenKH like '%"+TenKH+"%' order by TenKH ASC";
+        return DB.GetData(SQL);
     }
-    public ResultSet SearchTheoText(String TenKH, String MaPT, String LyDoThu){
-        String sql="SELECT * FROM PHIEUTHU,KHACHHANG WHERE PHIEUTHU.MaKH=KHACHHANG.MaKH AND TenKH like '%"+TenKH+"%' AND MaPT like '%"+MaPT+"%' AND LyDoThu like '%"+LyDoThu+"%'";
-        return DB.GetData(sql);
-    }
+
     
     
     public String TaoMaPT(){

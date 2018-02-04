@@ -55,7 +55,8 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy   hh:mm:ss a");
     FormLapHoaDonLe FrmLapHDL;
     FormLapHoaDonSi FrmLapHDS;
-    int index =0;
+    int index = 0;
+
     /**
      * Creates new form FormDanhSachHoaDon
      */
@@ -1311,15 +1312,14 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
                 } else {
                     HienThiDanhSachHoaDonSi(CtrlDSHD.TimKiemHDS(ListKH.get(jcbbKhachHang.getSelectedIndex()), jtxtTimKiemSoHDS.getText(), jDateTuNgayHDS.getDate(), jDateDenNgayHDS.getDate()));
                 }
-            }
-            else{
-                 if (jTabbedPane1.getSelectedIndex() == 0) {
+            } else {
+                if (jTabbedPane1.getSelectedIndex() == 0) {
                     HienThiDanhSachHoaDonLe(CtrlDSHD.TimKiemHDL(ListKH.get(jcbbKhachHang.getSelectedIndex()), jtxtTimKiemSoHDL.getText()));
                 } else {
                     HienThiDanhSachHoaDonSi(CtrlDSHD.TimKiemHDS(ListKH.get(jcbbKhachHang.getSelectedIndex()), jtxtTimKiemSoHDS.getText()));
                 }
             }
-                
+
         } catch (Exception ex) {
             System.out.println("Ngoại lệ tại FormDanhSachHoaDon.jBtnTimKiemMouseClicked: " + ex.getMessage());
         }
@@ -1375,7 +1375,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             //HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
         } else {
             jDateTuNgayHDS.setDate(new Date());
-            jDateDenNgayHDS.setDate(new Date()); 
+            jDateDenNgayHDS.setDate(new Date());
             jcbbKhachHang.setSelectedIndex(0);
             jtxtTimKiemSoHDS.setText("");
             //HienThiDanhSachHoaDonSi(CtrlDSHD.LayDanhSachHoaDonSi());
@@ -1390,13 +1390,12 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             Hashtable hash = new Hashtable();
             InputStream is = null;
             if (jTabbedPane1.getSelectedIndex() == 0) {
-            // TODO add your handling code here: 
-            is = new FileInputStream("src/Report/ReportHoaDonLe.jasper");
-            hash.put("SoHDL", jtxtSoHDL.getText());
-            }
-            else{
-            is = new FileInputStream("src/Report/ReportHoaDonSi.jasper");
-            hash.put("SoHDS", jtxtSoHDS.getText());
+                // TODO add your handling code here: 
+                is = new FileInputStream("src/Report/ReportHoaDonLe.jasper");
+                hash.put("SoHDL", jtxtSoHDL.getText());
+            } else {
+                is = new FileInputStream("src/Report/ReportHoaDonSi.jasper");
+                hash.put("SoHDS", jtxtSoHDS.getText());
             }
             JasperPrint print = JasperFillManager.fillReport(is, hash, con.getConDB());
             JasperViewer.viewReport(print, false);
@@ -1429,7 +1428,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
     private void jBtnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSuaMouseClicked
         // TODO add your handling code here:      
         if (jTabbedPane1.getSelectedIndex() == 0) {
-            index=jTbDSHDL.getSelectedRow();
+            index = jTbDSHDL.getSelectedRow();
             if (CtrlDSHD.KiemTraSoHDL(jtxtSoHDL.getText(), jtxtMaKHHDL.getText())) {
                 ChinhSuaHD = true;
                 FrmLapHDL = new FormLapHoaDonLe(ListHDL.get(jTbDSHDL.getSelectedRow()), ListCTHDL, jDateNgayLapHDL.getDate());
@@ -1439,7 +1438,7 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh sửa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            index=jTbDSHDS.getSelectedRow();
+            index = jTbDSHDS.getSelectedRow();
             if (CtrlDSHD.KiemTraSoHDS(jtxtSoHDS.getText(), jtxtMaKH.getText())) {
                 ChinhSuaHD = true;
                 FrmLapHDS = new FormLapHoaDonSi(ListHDS.get(jTbDSHDS.getSelectedRow()), ListCTHDS, jDateNgayLapHDS.getDate());
@@ -1473,30 +1472,34 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
     private void jBtnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnXoaMouseClicked
         // TODO add your handling code here:
-        int dialogButton = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
-        if (dialogButton == JOptionPane.YES_OPTION) {
-            if (jTabbedPane1.getSelectedIndex() == 0) {
-                if (CtrlDSHD.KiemTraSoHDL(jtxtSoHDL.getText(), jtxtMaKHHDL.getText())) {
+        int dialogButton = 0;
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            if (CtrlDSHD.KiemTraSoHDL(jtxtSoHDL.getText(), jtxtMaKHHDL.getText())) {
+                dialogButton = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+                if (dialogButton == JOptionPane.YES_OPTION) {
                     if (modCTHDL.Delete(jtxtSoHDL.getText()) && modHDL.Delete(jtxtSoHDL.getText())) {
                         JOptionPane.showMessageDialog(this, "Đã xoá.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         HienThiDanhSachHoaDonLe(CtrlDSHD.LayDanhSachHoaDonLe());
                     } else {
                         JOptionPane.showMessageDialog(this, "Đã xoá.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh xoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
-                if (CtrlDSHD.KiemTraSoHDS(jtxtSoHDS.getText(), jtxtMaKH.getText())) {
+                JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh xoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            if (CtrlDSHD.KiemTraSoHDS(jtxtSoHDS.getText(), jtxtMaKH.getText())) {
+                dialogButton = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+                if (dialogButton == JOptionPane.YES_OPTION) {
                     if (modCTHDS.Delete(jtxtSoHDS.getText()) && modHDS.Delete(jtxtSoHDS.getText())) {
                         JOptionPane.showMessageDialog(this, "Đã xoá.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         HienThiDanhSachHoaDonSi(CtrlDSHD.LayDanhSachHoaDonSi());
                     } else {
                         JOptionPane.showMessageDialog(this, "Đã xoá.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh xoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Hoá đơn cũ không thể chỉnh xoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_jBtnXoaMouseClicked

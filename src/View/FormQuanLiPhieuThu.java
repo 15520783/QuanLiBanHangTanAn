@@ -41,6 +41,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     Edit editFrm = new Edit();
     ArrayList<ObjPhieuThu> listPT = new ArrayList<>();
     ArrayList<ObjKhachHang> listCbbKH = new ArrayList<>();
+    ArrayList<ObjKhachHang> listCbbTimTheoKH = new ArrayList<>();
     CtrlPhieuThu CtrlPT = new CtrlPhieuThu();
     ObjKhachHang objKH = new ObjKhachHang();
     ObjPhieuThu objPT = new ObjPhieuThu();
@@ -49,6 +50,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
     ConvertCurrency conCurrency =new ConvertCurrency();
     private int flag = 0;
+    
 
     /**
      * Creates new form frmQuanLiPhieuThu
@@ -71,6 +73,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         editFrm.MakeTransparentTable(jScrDSPT, jTbDSPT);
 
         jtxtMaPT.setText(CtrlPT.TaoMaPT());
+       
         LoadForm();
     }
 
@@ -156,6 +159,8 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         jCbbTenKH = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         jtxtTienNo = new javax.swing.JTextField();
+        jtxtTraKH = new javax.swing.JTextField();
+        jlblTraKH = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
 
@@ -1005,20 +1010,27 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 420, 500, 290));
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Tên khách hàng :");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 64, -1, -1));
 
         jLabel3.setText("Mã khách hàng :");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 113, -1, -1));
 
         jLabel4.setText("Địa chỉ :");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 164, -1, -1));
 
         jLabel5.setText("Số điện thoại :");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 259, -1, -1));
 
         jtxtMaKH.setEditable(false);
         jtxtMaKH.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jPanel3.add(jtxtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 108, 322, -1));
 
         jtxtSDT.setEditable(false);
         jtxtSDT.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jPanel3.add(jtxtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 254, 322, -1));
 
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -1028,6 +1040,8 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         jtxtDiaChi.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jtxtDiaChi.setRows(5);
         jScrollPane4.setViewportView(jtxtDiaChi);
+
+        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 164, 322, 58));
 
         jPnThongtinKH.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -1048,6 +1062,8 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
         );
 
+        jPanel3.add(jPnThongtinKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
+
         jCbbTenKH.setEditable(true);
         jCbbTenKH.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jCbbTenKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -1061,60 +1077,29 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
                 jCbbTenKHActionPerformed(evt);
             }
         });
+        jCbbTenKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCbbTenKHKeyReleased(evt);
+            }
+        });
+        jPanel3.add(jCbbTenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 59, 322, -1));
 
         jLabel18.setText("Số tiền nợ :");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 312, -1, -1));
 
         jtxtTienNo.setEditable(false);
         jtxtTienNo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jPanel3.add(jtxtTienNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 307, 322, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPnThongtinKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel18))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jtxtTienNo)
-                    .addComponent(jtxtMaKH, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtSDT, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                    .addComponent(jCbbTenKH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jPnThongtinKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jCbbTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtxtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtxtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jtxtTienNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
-        );
+        jtxtTraKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtTraKHKeyReleased(evt);
+            }
+        });
+        jPanel3.add(jtxtTraKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 38, 322, -1));
+
+        jlblTraKH.setText("Tra khách hàng :");
+        jPanel3.add(jlblTraKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 41, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 60, 500, 350));
 
@@ -1237,6 +1222,9 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     private void EnableComponent(boolean Active) {
         jBtnLuu.setVisible(!Active);
         jBtnHuy.setVisible(!Active);
+        jlblTraKH.setVisible(!Active);
+        jtxtTraKH.setText("");
+        jtxtTraKH.setVisible(!Active);
         jCbbTenKH.setEnabled(!Active);
 
         jTbDSPT.setEnabled(Active);
@@ -1567,6 +1555,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
             jtxtMaPT.setText("");
             jtxtSoTienThu.setText("");
             jtxtLyDoThu.setText("");
+            LoadCbbKH();
             EnableComponent(true);
             flag = 1;
             Binding();
@@ -1832,6 +1821,30 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         jBtnTimKiemMouseClicked(null);
     }//GEN-LAST:event_jtxtTimtheoMaPTKeyReleased
 
+    private void jCbbTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCbbTenKHKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jCbbTenKHKeyReleased
+
+    private void jtxtTraKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTraKHKeyReleased
+        // TODO add your handling code here:
+        listCbbKH.clear();
+        jCbbTenKH.removeAllItems();
+        try {
+            ResultSet rs = CtrlPT.TimKhachHang(jtxtTraKH.getText());
+            while (rs.next()) {
+                jCbbTenKH.addItem(rs.getString("TenKH"));
+                jCbbTimTheoTenKH.addItem(rs.getString("TenKH"));
+                listCbbKH.add(new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo")));
+            }
+            jCbbTenKH.showPopup();
+        } catch (SQLException ex) {
+            System.out.println("Ngoại lệ tại FormPhieuThu.LoadCbbKH: " + ex.getMessage());
+        } finally {
+            CtrlPT.CloseConnection();
+        }
+    }//GEN-LAST:event_jtxtTraKHKeyReleased
+
     public void setColor(JPanel pn) {
         if (pn.isEnabled()) {
             pn.setSize(pn.getWidth() + 1, pn.getHeight() + 1);
@@ -1979,6 +1992,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     private javax.swing.JLabel jlblSua1;
     private javax.swing.JLabel jlblThem;
     private javax.swing.JLabel jlblThem1;
+    private javax.swing.JLabel jlblTraKH;
     private javax.swing.JLabel jlblXoa;
     private javax.swing.JLabel jlblXoa1;
     private javax.swing.JTextArea jtxtDiaChi;
@@ -1989,6 +2003,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtSoTienThu;
     private javax.swing.JTextField jtxtTienNo;
     private javax.swing.JTextField jtxtTimtheoMaPT;
+    private javax.swing.JTextField jtxtTraKH;
     // End of variables declaration//GEN-END:variables
 }
 

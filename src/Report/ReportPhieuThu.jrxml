@@ -147,7 +147,7 @@ WHERE phieuthu.`MaPT`=$P{MaPT}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{phieuthu_MaPT}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="MM/dd/yyyy">
 				<reportElement x="297" y="67" width="84" height="20" uuid="fe495a5b-7982-48cc-a5fb-9ff5a2c1e1c9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Monospaced" isBold="true"/>
