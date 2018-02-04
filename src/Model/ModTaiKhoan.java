@@ -63,7 +63,7 @@ public class ModTaiKhoan extends Model{
     
     public boolean Update(ObjTaiKhoan TbTaiKhoan) {
        String SQL="Update TAIKHOAN set " + 
-       "MatKhau='" + TbTaiKhoan.getPass()+
+       "Pass='" + TbTaiKhoan.getPass()+
        "' where ID='"+ TbTaiKhoan.getID()+"';";
        try{
            if(DB.Connected()){

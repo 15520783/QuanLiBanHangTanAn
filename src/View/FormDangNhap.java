@@ -10,6 +10,7 @@ import Control.CtrlDangNhap;
 import Object.ObjTaiKhoan;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -61,8 +62,9 @@ public class FormDangNhap extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jBtnClose = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jBtnMinimize = new javax.swing.JLabel();
+        jBtnClose = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,18 +189,18 @@ public class FormDangNhap extends javax.swing.JFrame {
         jPanel2.add(jLabel17);
         jLabel17.setBounds(887, 11, 29, 33);
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Monospaced", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Login Here");
+        jLabel2.setText("Đăng nhập");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(10, 0, 174, 50);
+        jLabel2.setBounds(10, 0, 220, 50);
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Admin Login Panel");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(40, 50, 186, 24);
+        jLabel3.setBounds(30, 50, 190, 25);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_User_50px.png"))); // NOI18N
@@ -222,7 +224,7 @@ public class FormDangNhap extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Get Managed");
+        jLabel14.setText(" Tân An Store");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, -1, 30));
 
         jLabel15.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
@@ -232,31 +234,51 @@ public class FormDangNhap extends javax.swing.JFrame {
 
         jLabel19.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Design, Create By Closer Group");
+        jLabel19.setText("Design, Create By Thái Nguyễn");
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 580, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+
+        jBtnMinimize.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jBtnMinimize.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-minimize-window-48.png"))); // NOI18N
+        jBtnMinimize.setText("-");
+        jBtnMinimize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnMinimizeMouseClicked(evt);
+            }
+        });
 
         jBtnClose.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jBtnClose.setForeground(new java.awt.Color(255, 255, 255));
-        jBtnClose.setText("X");
+        jBtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-close-window-48.png"))); // NOI18N
         jBtnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBtnCloseMouseClicked(evt);
             }
         });
-        getContentPane().add(jBtnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 10, 20, 30));
-
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1010, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(900, Short.MAX_VALUE)
+                .addComponent(jBtnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(jBtnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(559, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 610));
@@ -328,11 +350,6 @@ public class FormDangNhap extends javax.swing.JFrame {
         this.setLocation(x-xx,y-yy);
     }//GEN-LAST:event_formMouseDragged
 
-    private void jBtnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCloseMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jBtnCloseMouseClicked
-
     private void jBtnDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnDangNhapMouseClicked
         // TODO add your handling code here:
         if(jtxtUser.getText().equals("")||jtxtPass.getText().equals("")){
@@ -354,7 +371,6 @@ public class FormDangNhap extends javax.swing.JFrame {
     private void jtxtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtUserKeyPressed
         // TODO add your handling code here:
         jtxtPass.setFocusable(true);
-
     }//GEN-LAST:event_jtxtUserKeyPressed
 
     private void jtxtPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPassFocusGained
@@ -376,6 +392,17 @@ public class FormDangNhap extends javax.swing.JFrame {
         if(jtxtUser.getText().equals("Tên đăng nhập...")) jtxtUser.setText("");
         jtxtUser.requestFocus();
     }//GEN-LAST:event_jtxtUserFocusGained
+
+    private void jBtnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnMinimizeMouseClicked
+        // TODO add your handling code here:
+        setExtendedState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jBtnMinimizeMouseClicked
+
+    private void jBtnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCloseMouseClicked
+        // TODO add your handling code here:
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jBtnCloseMouseClicked
     
     public void setColor(JPanel pn){
         pn.setSize(pn.getWidth()+1, pn.getHeight()+1);
@@ -431,6 +458,7 @@ public class FormDangNhap extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jBtnClose;
     private javax.swing.JPanel jBtnDangNhap;
+    private javax.swing.JLabel jBtnMinimize;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;

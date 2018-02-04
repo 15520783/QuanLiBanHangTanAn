@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Vector;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -391,6 +392,8 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jBtnBack = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jBtnMinimize = new javax.swing.JLabel();
+        jBtnClose = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1258,15 +1261,46 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
             }
         });
 
+        jBtnMinimize.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jBtnMinimize.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-minimize-window-48.png"))); // NOI18N
+        jBtnMinimize.setText("-");
+        jBtnMinimize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnMinimizeMouseClicked(evt);
+            }
+        });
+
+        jBtnClose.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jBtnClose.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-close-window-48.png"))); // NOI18N
+        jBtnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnCloseMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1330, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(1220, Short.MAX_VALUE)
+                .addComponent(jBtnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(jBtnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(669, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, 720));
@@ -1604,6 +1638,17 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
         jBtnTimKiemMouseClicked(null);
     }//GEN-LAST:event_jcbbKhachHangActionPerformed
 
+    private void jBtnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnMinimizeMouseClicked
+        // TODO add your handling code here:
+        setExtendedState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jBtnMinimizeMouseClicked
+
+    private void jBtnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCloseMouseClicked
+        // TODO add your handling code here:
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jBtnCloseMouseClicked
+
     public void setColor(JPanel pn) {
         if (pn.isEnabled()) {
             pn.setSize(pn.getWidth() + 1, pn.getHeight() + 1);
@@ -1686,7 +1731,9 @@ public class FormDanhSachHoaDon extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jBtnBack;
+    private javax.swing.JLabel jBtnClose;
     private javax.swing.JPanel jBtnLamMoi;
+    private javax.swing.JLabel jBtnMinimize;
     private javax.swing.JPanel jBtnSua;
     private javax.swing.JPanel jBtnTimKiem;
     private javax.swing.JPanel jBtnXemPhieuIn;

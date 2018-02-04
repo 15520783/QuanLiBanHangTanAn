@@ -8,6 +8,7 @@ import Model.ModPhieuThu;
 import Object.ObjKhachHang;
 import Object.ObjPhieuThu;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import java.util.Vector;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -162,6 +164,8 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         jtxtTraKH = new javax.swing.JTextField();
         jlblTraKH = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
+        jBtnMinimize = new javax.swing.JLabel();
+        jBtnClose = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1064,9 +1068,9 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
 
         jPanel3.add(jPnThongtinKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
 
-        jCbbTenKH.setEditable(true);
         jCbbTenKH.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jCbbTenKH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCbbTenKH.setFocusable(false);
         jCbbTenKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCbbTenKHMouseClicked(evt);
@@ -1092,6 +1096,9 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         jPanel3.add(jtxtTienNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 307, 322, -1));
 
         jtxtTraKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtTraKHKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtxtTraKHKeyReleased(evt);
             }
@@ -1115,6 +1122,30 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
             }
         });
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jBtnMinimize.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jBtnMinimize.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-minimize-window-48.png"))); // NOI18N
+        jBtnMinimize.setText("-");
+        jBtnMinimize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnMinimizeMouseClicked(evt);
+            }
+        });
+        jPanel9.add(jBtnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 10, 48, 40));
+
+        jBtnClose.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jBtnClose.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-close-window-48.png"))); // NOI18N
+        jBtnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnCloseMouseClicked(evt);
+            }
+        });
+        jPanel9.add(jBtnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 10, 50, 40));
+
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 720));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pexels-photo-530024.jpeg"))); // NOI18N
@@ -1128,7 +1159,6 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
         HienThiDanhSachPhieuThu(CtrlPT.LayDanhSachPhieuThu());
         LoadCbbKH();
         Binding();
-        AutoCompleteDecorator.decorate(jCbbTenKH);
         jDateTimeTuNgay.setDate(new Date());
         jDateTimeDenNgay.setDate(new Date());
         CtrlPT.CloseConnection();
@@ -1828,6 +1858,7 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
 
     private void jtxtTraKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTraKHKeyReleased
         // TODO add your handling code here:
+        if(evt.getKeyCode()!=KeyEvent.VK_DOWN&&evt.getKeyCode()!=KeyEvent.VK_UP&&evt.getKeyCode()!=KeyEvent.VK_ENTER){
         listCbbKH.clear();
         jCbbTenKH.removeAllItems();
         try {
@@ -1838,12 +1869,38 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
                 listCbbKH.add(new ObjKhachHang(rs.getString("MaKH"), rs.getString("TenKH"), rs.getString("SDT"), rs.getString("DiaChi"), rs.getString("Email"), rs.getInt("TienNo")));
             }
             jCbbTenKH.showPopup();
+            jCbbTenKH.setSelectedIndex(0);
         } catch (SQLException ex) {
             System.out.println("Ngoại lệ tại FormPhieuThu.LoadCbbKH: " + ex.getMessage());
         } finally {
             CtrlPT.CloseConnection();
         }
+        }
     }//GEN-LAST:event_jtxtTraKHKeyReleased
+
+    private void jBtnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnMinimizeMouseClicked
+        // TODO add your handling code here:
+        setExtendedState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jBtnMinimizeMouseClicked
+
+    private void jBtnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCloseMouseClicked
+        // TODO add your handling code here:
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jBtnCloseMouseClicked
+
+    private void jtxtTraKHKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTraKHKeyPressed
+        // TODO add your handling code here:
+        try{
+        if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+            jCbbTenKH.setSelectedIndex(jCbbTenKH.getSelectedIndex()+1);
+        }
+        else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            jCbbTenKH.setSelectedIndex(jCbbTenKH.getSelectedIndex()-1);
+        }
+        else if(evt.getKeyCode()==KeyEvent.VK_ENTER) jCbbTenKH.hidePopup();
+        }catch(Exception ex){}
+    }//GEN-LAST:event_jtxtTraKHKeyPressed
 
     public void setColor(JPanel pn) {
         if (pn.isEnabled()) {
@@ -1928,11 +1985,13 @@ public class FormQuanLiPhieuThu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jBtnBack;
+    private javax.swing.JLabel jBtnClose;
     private javax.swing.JPanel jBtnHuy;
     private javax.swing.JPanel jBtnHuy1;
     private javax.swing.JPanel jBtnLamMoi;
     private javax.swing.JPanel jBtnLuu;
     private javax.swing.JPanel jBtnLuu1;
+    private javax.swing.JLabel jBtnMinimize;
     private javax.swing.JPanel jBtnSua;
     private javax.swing.JPanel jBtnSua1;
     private javax.swing.JPanel jBtnThem;
